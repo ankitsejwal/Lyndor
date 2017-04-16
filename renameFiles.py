@@ -1,21 +1,24 @@
-import os, sys, message
+import os
+import sys
+import message
 
 def write(msg):
+    '''prints out any message'''
     sys.stdout.write(str(msg) + '\n')
     sys.stdout.flush()
 
-def askContinue():
-    write(message.ifcontinue)
+def ask_continue():
+    write(message.IF_CONTINUE)
     answer = raw_input().lower()
     return answer
 
-def assignFolder(tempFolder):
+def assign_folder(tempFolder):
     os.chdir(tempFolder)
     path = os.getcwd()
     return path
 
 
-def listFiles(path):
+def list_files(path):
     for f in os.listdir(path):
         if not (f.endswith('.txt') or f.startswith('.')):
             f_name, f_ext = os.path.splitext(f)
@@ -38,5 +41,6 @@ def rename(path):
     write('\n'+str(counter)+' files renamed !!!\n')
 
 def execute(path):
-    listFiles(path)
+    '''lists file to be renamed and rename files'''
+    list_files(path)
     rename(path)

@@ -1,8 +1,8 @@
 import os
 
 #change this tempfolder path on every computer
-tempFolderPath = "C:/Users/vipin/Videos/Lynda/temp/"
-os.chdir(tempFolderPath)
+temp_folder_path = "C:/Users/vipin/Videos/Lynda/temp/"
+os.chdir(temp_folder_path)
 path = os.getcwd()
 
 for f in os.listdir(path):

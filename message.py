@@ -1,21 +1,12 @@
 
-enterUrl = "***** Enter the url of Lynda course >>>"
+ENTER_URL = "***** Enter the url of Lynda course >>>"
 
-error = """
-    The file name after this printed file has more than one - (dash),
-    please remove the first dash, leaving just one dash near the numbers like
-    abc-sda-2313.mp4 make it abc sda-2313.mp4\n\n\n"""
+NETSCAPE = '# Netscape HTTP Cookie File\n'
 
-netscapeLine = '# Netscape HTTP Cookie File\n'
+IF_CONTINUE = '\n\nDo you wish to continue ??? (y/n): '
 
-prompt = '''
-    Where are your downloaded files ???
-    1) if in temp folder, type: temp
-    2) else copy paste the path of the folder where files are:\n'''
+MOVING_ERROR = '''There was error in moving files,
+please move files yourself from 
+lynda/temp folder - to -> course folder !!!'''
 
-error = """
-    The file name after this printed file has more than one - (dash),
-    please remove the first dash, leaving just one dash near the numbers like
-    abc-sda-2313.mp4 make it abc sda-2313.mp4\n\n\n"""
-
-ifcontinue = '\n\nDo you wish to continue ??? (y/n): '
+RENAMING_ERROR = "Error in renaming file !!!"
