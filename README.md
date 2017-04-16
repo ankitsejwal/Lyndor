@@ -5,8 +5,8 @@ Lynda Video Downloader.
 ### What is this repository for? ###
 
 * This software can download any Lynda.com course
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Version 1
+* [Lynda](https://www.lynda.com) is an online Video library to help train learners for various skills
 
 ### Dependencies ###
 
