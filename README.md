@@ -6,7 +6,7 @@ Lynda Video Downloader.
 
 * This software can download any Lynda.com course
 * Version 1
-* [Lynda](https://www.lynda.com) is an online Video library to help train learners for various skills
+* [**Lynda**](https://www.lynda.com) is an online video library to help train learners for various skills
 
 ### Dependencies ###
 
