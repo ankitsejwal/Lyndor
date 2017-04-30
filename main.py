@@ -4,6 +4,7 @@ import chapters
 import cookies
 import download
 import renameFiles
+import install
 
 
 if __name__ == '__main__':
@@ -15,7 +16,9 @@ if __name__ == '__main__':
     url = url[:url.find(".html")+5]
 
     #change this lyndafolder path on your computer
-    lynda_folder_path = "/Volumes/750 GB/Movies/Lynda-collection/"
+    video_folder = install.set_path()
+    lynda_folder_path = video_folder + '/Lynda/'
+    #lynda_folder_path = "/Volumes/750 GB/Movies/Lynda-collection/"
 
     #temp folder path - the folder should be inside lynda folder
     temp_folder_path = lynda_folder_path + "temp/"

@@ -37,3 +37,4 @@ if __name__ == '__main__':
     set_path()
     create_folder()
     install_dependencies()
+    
