@@ -9,6 +9,7 @@ def check_os():
         return 'windows'
     else:
         sys.exit('unknown operating system.')
+        
 def set_path():
     '''Set path for saving lynda folder'''
     if check_os() == 'macos':

@@ -15,7 +15,7 @@ if __name__ == '__main__':
     #strip any extra text after .html in the url
     url = url[:url.find(".html")+5]
 
-    #change this lyndafolder path on your computer
+    #change this lyndafolder path on your computer if you want your videos to save at some other place
     video_folder = install.set_path()
     lynda_folder_path = video_folder + '/Lynda/'
     #lynda_folder_path = "/Volumes/750 GB/Movies/Lynda-collection/"
