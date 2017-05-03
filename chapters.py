@@ -6,8 +6,6 @@ import re
 import message
 from bs4 import BeautifulSoup
 
-course_title = ''
-
 def create_soup(urlink):
     url = urllib2.urlopen(urlink)
     pg_content = url.read()

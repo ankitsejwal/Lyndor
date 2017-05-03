@@ -36,6 +36,15 @@ def create_folder():
     else:
         print 'Lynda folder already exists'
 
+def create_aliases():
+    '''Create aliases file'''
+    if check_os() == 'win32':
+        run_path = 'doskey lynda= py '+os.getcwd()+'/run.py'
+        alias = open('aliases.bat', 'w')
+        alias.write(run_path)
+        alias.close()
+    print 'aliases.bat file created'
+
 def install_dependencies():
     '''install required softwares'''
     os.system('pip install youtube-dl')
@@ -46,5 +55,6 @@ def install_dependencies():
 if __name__ == '__main__':
     set_path()
     create_folder()
+    create_aliases()
     install_dependencies()
     
