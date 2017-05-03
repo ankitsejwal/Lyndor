@@ -9,7 +9,7 @@ def check_os():
         return 'windows'
     else:
         sys.exit('unknown operating system.')
-        
+
 def set_path():
     '''Set path for saving lynda folder'''
     if check_os() == 'macos':
@@ -17,6 +17,15 @@ def set_path():
         return os.getcwd()
     elif check_os() == 'windows':
         os.chdir(os.path.expanduser('~/Videos'))
+        return os.getcwd()
+
+def desktop_path():
+    '''Set path for desktop folder'''
+    if check_os() == 'macos':
+        os.chdir(os.path.expanduser('~/Desktop'))
+        return os.getcwd()
+    elif check_os() == 'windows':
+        os.chdir(os.path.expanduser('~/Desktop'))
         return os.getcwd()
 
 def create_folder():

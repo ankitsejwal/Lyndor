@@ -20,7 +20,7 @@ def assign_folder(tempFolder):
 
 def list_files(path):
     for f in os.listdir(path):
-        if not (f.endswith('.txt') or f.startswith('.')):
+        if f.endswith('.mp4'):
             f_name, f_ext = os.path.splitext(f)
             f_no = f_name[-3:]
             f_title = f_name[:-7]
@@ -31,7 +31,7 @@ def list_files(path):
 def rename(path):
     counter = 0
     for f in os.listdir(path):
-        if not (f.endswith('.txt') or f.startswith('.')):
+        if f.endswith('.mp4'):
             f_name, f_ext = os.path.splitext(f)
             f_no = f_name[-3:]
             f_title = f_name[:-7]
