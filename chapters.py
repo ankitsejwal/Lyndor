@@ -33,16 +33,17 @@ def save_chapters(urlink, course_folder_path):
         chapter = h.text
         chapter = re.sub('[^a-zA-Z0-9.]', ' ', chapter)
 
-        if chapter[1] == '.' or chapter[2] == '.':
-            for c in range(len(chapter)):
-                if chapter[c] == '.':
-                    chapter_name = chapter[c+2:]
-                    chapter = str(chapter_no) + '. ' + chapter_name
-                    chapter_no += 1
+        if chapter[1] == '.':
+            chapter_name = chapter[3:]
+            chapter = str(chapter_no) + '. ' + chapter_name
+            chapter_no += 1
+        elif chapter[2] == '.':
+            chapter_name = chapter[4:]
+            chapter = str(chapter_no) + '. ' + chapter_name
+            chapter_no += 1
         else:
             chapter = str(chapter_no) + '. ' + chapter
             chapter_no += 1
-
         print course_folder_path + "/" + chapter
         os.mkdir(course_folder_path + "/" + chapter)
 

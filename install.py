@@ -7,6 +7,8 @@ def check_os():
         return 'macos'
     elif sys.platform.lower() == 'win32':
         return 'windows'
+    elif sys.platform.lower() == 'linux2':
+        return 'linux'
     else:
         sys.exit('unknown operating system.')
 
@@ -38,11 +40,11 @@ def create_folder():
 
 def create_aliases():
     '''Create aliases file'''
-    if check_os() == 'windows':
-        run_path = 'doskey lynda= py '+os.getcwd()+'/run.py'
-        alias = open('aliases.bat', 'w')
-        alias.write(run_path)
-        alias.close()
+    # if check_os() == 'windows':
+    run_path = 'doskey lynda= py '+os.getcwd()+'/run.py'
+    alias = open('aliases.bat', 'w')
+    alias.write(run_path)
+    alias.close()
     print 'aliases.bat file created'
 
 def install_dependencies():
