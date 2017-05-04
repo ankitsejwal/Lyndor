@@ -24,7 +24,7 @@ def list_files(path):
             f_name, f_ext = os.path.splitext(f)
             f_no = f_name[-3:]
             f_title = f_name[:-7]
-            f_title = re.sub('[^a-zA-Z0-9.]', ' ', f_title)
+            f_title = re.sub('[^a-zA-Z0-9.,-]', ' ', f_title)
             new_file = '{}-{}{}'.format(f_no, f_title, f_ext)
             write(new_file)
 
@@ -35,7 +35,7 @@ def rename(path):
             f_name, f_ext = os.path.splitext(f)
             f_no = f_name[-3:]
             f_title = f_name[:-7]
-            f_title = re.sub('[^a-zA-Z0-9.]', ' ', f_title)
+            f_title = re.sub('[^a-zA-Z0-9.,-]', ' ', f_title)
             new_file = '{}-{}{}'.format(f_no, f_title, f_ext)
             os.rename(f, new_file)
             write(new_file)

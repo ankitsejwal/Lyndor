@@ -16,7 +16,7 @@ def course_path(urlink, lynda_folder_path):
     course_title = soup.find('h1', {"class": "default-title"})
     course_title = course_title.text
     #remove non-alphanumeric characters
-    course_title = re.sub('[^a-zA-Z0-9.]', ' ', course_title)
+    course_title = re.sub('[^a-zA-Z0-9.,-]', ' ', course_title)
     course_path = lynda_folder_path + course_title
     return course_path
 
@@ -31,7 +31,7 @@ def save_chapters(urlink, course_folder_path):
 
     for h in heading4:
         chapter = h.text
-        chapter = re.sub('[^a-zA-Z0-9.]', ' ', chapter)
+        chapter = re.sub('[^a-zA-Z0-9.,-]', ' ', chapter)
 
         if chapter[1] == '.':
             chapter_name = chapter[3:]
