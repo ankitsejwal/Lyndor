@@ -38,7 +38,7 @@ def create_folder():
 
 def create_aliases():
     '''Create aliases file'''
-    if check_os() == 'win32':
+    if check_os() == 'windows':
         run_path = 'doskey lynda= py '+os.getcwd()+'/run.py'
         alias = open('aliases.bat', 'w')
         alias.write(run_path)
