@@ -29,6 +29,8 @@ def save_chapters(urlink, course_folder_path):
     heading4 = soup.find_all('h4', {"class": "ga"})
     chapter_no = 0
 
+    print "-> Creating Chapters:\n" 
+
     for h in heading4:
         chapter = h.text
         chapter = re.sub('[^a-zA-Z0-9.,-]', ' ', chapter)
@@ -47,4 +49,4 @@ def save_chapters(urlink, course_folder_path):
         print course_folder_path + "/" + chapter
         os.mkdir(course_folder_path + "/" + chapter)
 
-    print '\n'+str(chapter_no)+' chapters created!!!'
+    print '\n-> '+str(chapter_no)+' chapters created!!\n'

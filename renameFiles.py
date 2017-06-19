@@ -8,11 +8,6 @@ def write(msg):
     sys.stdout.write(str(msg) + '\n')
     sys.stdout.flush()
 
-def ask_continue():
-    write(message.IF_CONTINUE)
-    answer = raw_input().lower()
-    return answer
-
 def assign_folder(tempFolder):
     os.chdir(tempFolder)
     path = os.getcwd()
@@ -40,7 +35,7 @@ def rename(path):
             os.rename(f, new_file)
             write(new_file)
             counter += 1
-    write('\n'+str(counter)+' files renamed !!!\n')
+    write('\n-> '+str(counter)+' files downloaded and renamed to course folder !!\n')
 
 def execute(path):
     '''lists file to be renamed and rename files'''

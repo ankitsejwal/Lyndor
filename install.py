@@ -21,19 +21,19 @@ def set_path():
         os.chdir(os.path.expanduser('~/Videos'))
         return os.getcwd()
 
-def desktop_path():
+def folder_path(folder):
     '''Set path for desktop folder'''
     if check_os() == 'macos':
-        os.chdir(os.path.expanduser('~/Desktop'))
+        os.chdir(os.path.expanduser('~/'+folder))
         return os.getcwd()
     elif check_os() == 'windows':
-        os.chdir(os.path.expanduser('~/Desktop'))
+        os.chdir(os.path.expanduser('~/'+folder))
         return os.getcwd()
 
 def create_folder():
     ''' Create lynda folder '''
     if not os.path.exists('Lynda'):
-        os.makedirs('Lynda/temp')
+        os.makedirs('Lynda')
         print '\n\t >>> Your Lynda videos will be saved at -> '+set_path()+'Lynda (folder)'
     else:
         print 'Lynda folder already exists'
