@@ -21,6 +21,7 @@ def list_files(path):
             f_title = f_name[:-7]
             f_title = re.sub('[^a-zA-Z0-9.,-]', ' ', f_title)
             new_file = '{}-{}{}'.format(f_no, f_title, f_ext)
+            print '\n-> Renaming videos to arrange them beautifully:\n'
             write(new_file)
 
 def rename(path):
@@ -35,7 +36,13 @@ def rename(path):
             os.rename(f, new_file)
             write(new_file)
             counter += 1
-    write('\n-> '+str(counter)+' files downloaded and renamed to course folder !!\n')
+    write('\n-> '+str(counter)+' files downloaded and renamed to course folder !!')
+
+def hms_string(sec_elapsed):
+    h = int(sec_elapsed / (60 * 60))
+    m = int((sec_elapsed % (60 * 60)) / 60)
+    s = sec_elapsed % 60.
+    return "{}:{:>02}:{:>05.2f}".format(h, m, s)
 
 def execute(path):
     '''lists file to be renamed and rename files'''

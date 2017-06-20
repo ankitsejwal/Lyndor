@@ -31,14 +31,14 @@ def find_cookie(desktop_folder, download_folder):
         if f1 == "cookies.txt":
             found = True
         if found:
-            print "\ncookie file found at Desktop folder\n"
+            print "\nCookie file found at Desktop folder\n"
             return desktop_folder + '/cookies.txt'
         else:
             for f2 in os.listdir(download_folder):
                 if f2 == "cookies.txt":
                     found = True
                 if found:
-                    print "\ncookie file found at Download folder\n"
+                    print "\nCookie file found at Download folder\n"
                     return download_folder + '/cookies.txt'
                 # else:
                 #     print "cookie not found"

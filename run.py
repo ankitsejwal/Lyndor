@@ -6,7 +6,7 @@ import cookies
 import download
 import renameFiles
 import install
-
+import time
 
 if __name__ == '__main__':
 
@@ -15,6 +15,9 @@ if __name__ == '__main__':
 
     #strip any extra text after .html in the url
     url = url[:url.find(".html")+5]
+    
+    #start time counter begins
+    start_time = time.time()
 
     #lynda folder path
     lynda_folder_path = install.read_location_file() + '/'
@@ -44,5 +47,7 @@ if __name__ == '__main__':
         sys.exit('error in assigning path')
     try:
         renameFiles.execute(path)
+        end_time = time.time()
+        print "\n>>> Awesome!! Your course is downloaded, the whole process took {}\n".format(renameFiles.hms_string(end_time - start_time))
     except:
         sys.exit(message.RENAMING_ERROR)
