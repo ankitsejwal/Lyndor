@@ -1,4 +1,5 @@
 import sys
+import os
 import message
 import chapters
 import cookies
@@ -16,9 +17,7 @@ if __name__ == '__main__':
     url = url[:url.find(".html")+5]
 
     #lynda folder path
-    video_folder = install.set_path()
-    lynda_folder_path = video_folder + '/Lynda/'
-    #lynda_folder_path = "/Volumes/750 GB/Movies/Lynda-collection/"
+    lynda_folder_path = install.read_location_file() + '/'
 
     course_folder_path = chapters.course_path(url, lynda_folder_path)
     desktop_folder_path = install.folder_path("Desktop")
@@ -47,5 +46,3 @@ if __name__ == '__main__':
         renameFiles.execute(path)
     except:
         sys.exit(message.RENAMING_ERROR)
-
-    

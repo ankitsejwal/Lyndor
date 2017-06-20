@@ -1,6 +1,10 @@
 import os
 import sys
 
+real_path = os.path.realpath(__file__)
+real_path = real_path[:real_path.find('install.py')]
+RESET_PATH = real_path
+
 def check_os():
     '''Check operating system'''
     if sys.platform.lower() == 'darwin':
@@ -34,29 +38,47 @@ def create_folder():
     ''' Create lynda folder '''
     if not os.path.exists('Lynda'):
         os.makedirs('Lynda')
-        print '\n\t >>> Your Lynda videos will be saved at -> '+set_path()+'Lynda (folder)'
+        print '>>> Your Lynda videos will be saved at -> '+set_path()+'Lynda (folder)\n'
     else:
-        print 'Lynda folder already exists'
+        print '\nLynda folder already exists\n'
 
 def create_aliases():
     '''Create aliases file'''
-    # if check_os() == 'windows':
-    run_path = 'doskey lynda= py '+os.getcwd()+'/run.py'
-    alias = open('aliases.bat', 'w')
-    alias.write(run_path)
-    alias.close()
-    print 'aliases.bat file created'
+    os.chdir(RESET_PATH)
+    if check_os() == 'windows':
+        run_path = 'doskey lynda= python "'+os.getcwd()+'/run.py"'
+        alias = open('aliases.bat', 'w')
+        alias.write(run_path)
+        alias.close()
+        print '-> aliases.bat file created\n'
+
+def create_location_file():
+    '''create file that tells the program where to save the new course'''
+    os.chdir(RESET_PATH)
+    loc_file = open('location.txt', 'w')
+    loc_file.write(set_path()+'/Lynda')
+    loc_file.close()
+    print '-> location.txt file created\n'
+
+def read_location_file():
+    '''read the content of location.txt'''
+    os.chdir(RESET_PATH)
+    loc_file = open('location.txt')
+    content = loc_file.read()
+    loc_file.close()
+    return content
 
 def install_dependencies():
     '''install required softwares'''
     os.system('pip install youtube-dl')
     os.system('pip install lxml')
     os.system('pip install beautifulsoup4')
-    print '\n\t >>> All the required softwares are installed '
+    print '\n>>> All the required softwares are installed\n'
 
 if __name__ == '__main__':
     set_path()
     create_folder()
     create_aliases()
+    create_location_file()
     install_dependencies()
     

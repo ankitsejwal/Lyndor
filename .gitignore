@@ -1,3 +1,6 @@
 *.pyc
 .DS_Store
 .idea
+aliases.bat
+test.py
+location.txt

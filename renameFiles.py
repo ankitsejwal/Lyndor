@@ -8,8 +8,8 @@ def write(msg):
     sys.stdout.write(str(msg) + '\n')
     sys.stdout.flush()
 
-def assign_folder(tempFolder):
-    os.chdir(tempFolder)
+def assign_folder(folder):
+    os.chdir(folder)
     path = os.getcwd()
     return path
 
