@@ -14,6 +14,7 @@ def assign_folder(folder):
     return path
 
 def list_files(path):
+    print '\n-> Renaming videos to arrange them beautifully:\n'
     for f in os.listdir(path):
         if f.endswith('.mp4'):
             f_name, f_ext = os.path.splitext(f)
@@ -21,7 +22,6 @@ def list_files(path):
             f_title = f_name[:-7]
             f_title = re.sub('[^a-zA-Z0-9.,-]', ' ', f_title)
             new_file = '{}-{}{}'.format(f_no, f_title, f_ext)
-            print '\n-> Renaming videos to arrange them beautifully:\n'
             write(new_file)
 
 def rename(path):
