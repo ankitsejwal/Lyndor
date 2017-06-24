@@ -9,11 +9,13 @@ def write(msg):
     sys.stdout.flush()
 
 def assign_folder(folder):
+    ''' return folder path '''
     os.chdir(folder)
     path = os.getcwd()
     return path
 
 def list_files(path):
+    ''' print all video files in current directory '''
     print '\n-> Renaming videos to arrange them beautifully:\n'
     for f in os.listdir(path):
         if f.endswith('.mp4'):
@@ -25,6 +27,7 @@ def list_files(path):
             write(new_file)
 
 def rename(path):
+    ''' rename all video files '''
     counter = 0
     for f in os.listdir(path):
         if f.endswith('.mp4'):
@@ -39,6 +42,7 @@ def rename(path):
     write('\n-> '+str(counter)+' files downloaded and renamed to course folder !!')
 
 def hms_string(sec_elapsed):
+    ''' format elapsed time '''
     h = int(sec_elapsed / (60 * 60))
     m = int((sec_elapsed % (60 * 60)) / 60)
     s = sec_elapsed % 60.

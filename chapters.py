@@ -1,17 +1,16 @@
 import os
-import sys
 import urllib2
-import shutil
 import re
-import message
 from bs4 import BeautifulSoup
 
 def create_soup(urlink):
+    ''' create soup object '''
     url = urllib2.urlopen(urlink)
     pg_content = url.read()
     return BeautifulSoup(pg_content, 'lxml')
 
 def course_path(urlink, lynda_folder_path):
+    ''' finding course path '''
     soup = create_soup(urlink)
     course_title = soup.find('h1', {"class": "default-title"})
     course_title = course_title.text
@@ -21,15 +20,17 @@ def course_path(urlink, lynda_folder_path):
     return course_path
 
 def save_course(urlink, lynda_folder_path):
+    ''' create course folder '''
     course = course_path(urlink, lynda_folder_path)
     os.mkdir(course)
 
 def save_chapters(urlink, course_folder_path):
+    ''' create chapters folder '''
     soup = create_soup(urlink)
     heading4 = soup.find_all('h4', {"class": "ga"})
     chapter_no = 0
 
-    print "-> Creating Chapters:\n" 
+    print "-> Creating Chapters:\n"
 
     for h in heading4:
         chapter = h.text

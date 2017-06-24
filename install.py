@@ -73,6 +73,7 @@ def install_dependencies():
     os.system('pip install youtube-dl')
     os.system('pip install lxml')
     os.system('pip install beautifulsoup4')
+    os.system('pip install termdown')
     print '\n>>> All the required softwares are installed\n'
 
 if __name__ == '__main__':
