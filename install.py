@@ -70,10 +70,12 @@ def read_location_file():
 
 def install_dependencies():
     '''install required softwares'''
-    os.system('pip install youtube-dl')
-    os.system('pip install lxml')
-    os.system('pip install beautifulsoup4')
-    os.system('pip install termdown')
+    os.chdir(RESET_PATH)
+    requirements = open('requirements.txt')
+    line = requirements.readline()
+    for module in requirements:
+        os.system('pip install '+ module)
+    requirements.close()
     print '\n>>> All the required softwares are installed\n'
 
 if __name__ == '__main__':

@@ -8,7 +8,6 @@ import download
 import renameFiles
 import install
 import draw
-import termdown
 
 if __name__ == '__main__':
 
@@ -45,8 +44,8 @@ if __name__ == '__main__':
         sys.exit()
 
     #flash counter
-    time.sleep(2)
-    os.system('termdown 5 -f digital -T "Preparing to Download" -c 1')
+    # time.sleep(2)
+    # os.system('termdown 5 -f digital -T "Preparing to Download" -c 1')
 
     #create chapters inside course folder
     chapters.save_chapters(url, course_folder_path)

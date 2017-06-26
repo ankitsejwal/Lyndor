@@ -43,8 +43,3 @@ import threading
 #     spin.stop()
 # Spinning cursor
 
-animals = ['dog', 'cat', 'mouse', 'elephant', 'giraffe']
-
-for animal in animals:
-    if animal == 'mouse':
-        print 'found mouse at position:' + animal
