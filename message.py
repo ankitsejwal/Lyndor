@@ -7,7 +7,11 @@ NETSCAPE = '# Netscape HTTP Cookie File\n'
 
 RENAMING_ERROR = "\nError in renaming file !!!"
 
-COOKIE_FOUND_DESKTOP = "\n-> Great!! cookies.txt file found inside DESKTOP folder\n"
+CREATING_CHAPTERS = "\n-> Creating Chapters:\n"
+
+INFO_FILE_CREATED = "\n-> info.txt file created\n"
+
+COOKIE_FOUND_DESKTOP = "\n-> Great!! cookies.txt file found inside DESKTOP folder\n\n"
 
 COOKIE_FOUND_DOWNLOAD = "\n-> Great!! cookies.txt file found inside DOWNLOADS folder\n"
 
@@ -33,3 +37,7 @@ def spinning_cursor():
             sys.stdout.flush()
         flag = False
 
+def write(description, value):
+    '''prints out any message'''
+    sys.stdout.write(str(description) + '\t' + str(value) + '\n')
+    sys.stdout.flush()

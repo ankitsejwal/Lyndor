@@ -2,6 +2,6 @@
 .DS_Store
 .idea
 aliases.bat
-test.py
+testfile.py
 location.txt
 venv

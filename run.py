@@ -43,14 +43,13 @@ if __name__ == '__main__':
         message.animate_characters(draw.NOPE, 0.02)
         sys.exit()
 
-    #flash counter
-    # time.sleep(2)
-    # os.system('termdown 5 -f digital -T "Preparing to Download" -c 1')
+    # Gather information
+    chapters.gather_info(url, course_folder_path)
 
     #create chapters inside course folder
     chapters.save_chapters(url, course_folder_path)
 
-    #downloading lynda videos to tempFolder
+    #downloading lynda videos to course folder
     download.download_files(url, cookie_path, course_folder_path)
 
     #renaming files
@@ -60,8 +59,14 @@ if __name__ == '__main__':
         sys.exit('error in assigning path')
     try:
         renameFiles.execute(path)
-        end_time = time.time()
-        message.animate_characters(draw.DOWNLOADED2, 0.1)
-        print "\n>>> Awesome!! Your course is downloaded, the whole process took {}\n".format(renameFiles.hms_string(end_time - start_time))
     except:
         sys.exit(message.RENAMING_ERROR)
+    
+    try:
+        end_time = time.time()
+        message.animate_characters(draw.DOWNLOADED2, 0.1)
+    except:
+        pass
+    finally:
+        print "\n>>> Awesome!! Your course is downloaded, the whole process took {}\n".format(renameFiles.hms_string(end_time - start_time))
+    

@@ -2,20 +2,50 @@ import os
 import urllib2
 import re
 from bs4 import BeautifulSoup
+import message
 
-def create_soup(urlink):
+def create_soup(url):
     ''' create soup object '''
-    url = urllib2.urlopen(urlink)
+    url = urllib2.urlopen(url)
     pg_content = url.read()
     return BeautifulSoup(pg_content, 'lxml')
+
+def gather_info(url, course_path):
+    ''' gather course information. '''
+    soup = create_soup(url)
+    course_title = soup.find('h1', {"class": "default-title"}).text
+    author_name = soup.find('cite', {"data-ga-label": "author-name"}).text
+    release_date = soup.find('span', {"id": "release-date"}).text
+    duration = soup.find('div', {"class": "duration"}).find('span').text
+    if soup.find('span', {"id": "update-date"}) != None:
+        update_date = soup.find('span', {"id": "update-date"}).text
+    else:
+        update_date = release_date
+
+    message.write("Course Name", course_title)
+    message.write("Author Name", author_name)
+    message.write("Duration", duration)
+    message.write("Release Date", release_date)
+    message.write("Updated On", update_date)
+
+    os.chdir(course_path)
+
+    with open('info.txt', 'a') as info_file:
+        info_file.writelines('Course Name' + '\t\t' + course_title + '\n')
+        info_file.writelines('Author Name' + '\t\t' + author_name + '\n')
+        info_file.writelines('Duration' + '\t\t' + duration + '\n')
+        info_file.writelines('Release Date' + '\t\t' + release_date + '\n')
+        info_file.writelines('Updated On' + '\t\t' + update_date + '\n')
+    info_file.close()
+
+    print message.INFO_FILE_CREATED
 
 def course_path(urlink, lynda_folder_path):
     ''' finding course path '''
     soup = create_soup(urlink)
-    course_title = soup.find('h1', {"class": "default-title"})
-    course_title = course_title.text
+    course_title = soup.find('h1', {"class": "default-title"}).text
     #remove non-alphanumeric characters
-    course_title = re.sub('[^a-zA-Z0-9.,-]', ' ', course_title)
+    course_title = re.sub('[^ a-zA-Z0-9.,-]', '-', course_title)
     course_path = lynda_folder_path + course_title
     return course_path
 
@@ -30,7 +60,7 @@ def save_chapters(urlink, course_folder_path):
     heading4 = soup.find_all('h4', {"class": "ga"})
     chapter_no = 0
 
-    print "-> Creating Chapters:\n"
+    print message.CREATING_CHAPTERS
 
     for h in heading4:
         chapter = h.text
