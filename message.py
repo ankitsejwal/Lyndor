@@ -1,7 +1,7 @@
 import time
 import sys
 
-ENTER_URL = "\n***** Paste the url of Lynda course >>>\n"
+ENTER_URL = "\n***** Paste the url of a Lynda course >>>\n"
 
 NETSCAPE = '# Netscape HTTP Cookie File\n'
 
@@ -40,4 +40,9 @@ def spinning_cursor():
 def write(description, value):
     '''prints out any message'''
     sys.stdout.write(str(description) + '\t' + str(value) + '\n')
+    sys.stdout.flush()
+
+def print_line(value):
+    ''' prints out any string '''
+    sys.stdout.write(str(value) + '\n')
     sys.stdout.flush()

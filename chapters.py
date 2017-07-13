@@ -1,4 +1,5 @@
 import os
+import time
 import urllib2
 import re
 from bs4 import BeautifulSoup
@@ -17,6 +18,7 @@ def gather_info(url, course_path):
     author_name = soup.find('cite', {"data-ga-label": "author-name"}).text
     release_date = soup.find('span', {"id": "release-date"}).text
     duration = soup.find('div', {"class": "duration"}).find('span').text
+    download_date = time.strftime("%d/%m/%y")   # todays date
     if soup.find('span', {"id": "update-date"}) != None:
         update_date = soup.find('span', {"id": "update-date"}).text
     else:
@@ -36,9 +38,11 @@ def gather_info(url, course_path):
         info_file.writelines('Duration' + '\t\t' + duration + '\n')
         info_file.writelines('Release Date' + '\t\t' + release_date + '\n')
         info_file.writelines('Updated On' + '\t\t' + update_date + '\n')
+        info_file.writelines('Downloaded On' + '\t\t' + download_date + '\n')
     info_file.close()
 
-    print message.INFO_FILE_CREATED
+    # print message
+    message.print_line(message.INFO_FILE_CREATED)
 
 def course_path(urlink, lynda_folder_path):
     ''' finding course path '''
@@ -60,7 +64,8 @@ def save_chapters(urlink, course_folder_path):
     heading4 = soup.find_all('h4', {"class": "ga"})
     chapter_no = 0
 
-    print message.CREATING_CHAPTERS
+    # print message
+    message.print_line(message.CREATING_CHAPTERS)
 
     for h in heading4:
         chapter = h.text
@@ -77,7 +82,8 @@ def save_chapters(urlink, course_folder_path):
         else:
             chapter = str(chapter_no) + '. ' + chapter
             chapter_no += 1
-        print course_folder_path + "/" + chapter
+        message.print_line(course_folder_path + "/" + chapter)
         os.mkdir(course_folder_path + "/" + chapter)
 
-    print '\n-> '+str(chapter_no)+' chapters created!!\n'
+    message.print_line('\n-> '+str(chapter_no)+' chapters created!!\n')
+ 
