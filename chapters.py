@@ -29,6 +29,7 @@ def gather_info(url, course_path):
     message.write("Duration", duration)
     message.write("Release Date", release_date)
     message.write("Updated On", update_date)
+    message.write("Course URL", url)
 
     os.chdir(course_path)
 
@@ -39,6 +40,7 @@ def gather_info(url, course_path):
         info_file.writelines('Release Date' + '\t\t' + release_date + '\n')
         info_file.writelines('Updated On' + '\t\t' + update_date + '\n')
         info_file.writelines('Downloaded On' + '\t\t' + download_date + '\n')
+        info_file.writelines('Course URL' + '\t\t' + url + '\n')
     info_file.close()
 
     # print message
