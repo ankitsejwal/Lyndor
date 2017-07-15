@@ -50,7 +50,17 @@ def create_aliases():
         alias = open('aliases.bat', 'w')
         alias.write(run_path)
         alias.close()
-        print '-> aliases.bat file created\n'
+        print '-> aliases.bat file created.\n'
+
+def create_lynda_bat():
+    ''' create lynda.bat in windows '''
+    if check_os() == 'windows':
+        run_path = 'python "'+os.getcwd()+'/run.py"'
+        lynda = open('Lynda.bat', 'w')
+        lynda.write(run_path)
+        lynda.close()
+        print '-> Lynda.bat file created.\n'
+        os.rename('Lynda.bat', read_location_file() + '/Lynda.bat')
 
 def create_location_file():
     '''create file that tells the program where to save the new course'''
@@ -58,7 +68,7 @@ def create_location_file():
     loc_file = open('location.txt', 'w')
     loc_file.write(set_path()+'/Lynda')
     loc_file.close()
-    print '-> location.txt file created\n'
+    print '-> location.txt file created.\n'
 
 def read_location_file():
     '''read the content of location.txt'''
@@ -82,6 +92,7 @@ if __name__ == '__main__':
     set_path()
     create_folder()
     create_aliases()
+    create_lynda_bat()
     create_location_file()
     install_dependencies()
     
