@@ -54,10 +54,15 @@ def create_aliases():
 
 def create_lynda_bat():
     ''' create lynda.bat in windows '''
+    os.chdir(RESET_PATH)
     if check_os() == 'windows':
         run_path = 'python "'+os.getcwd()+'/run.py"'
-        lynda = open('Lynda.bat', 'w')
-        lynda.write(run_path)
+        lynda = open('Lynda.bat', 'a')
+        lynda.writelines('@ECHO OFF\n')
+        lynda.writelines('REM Batch file to execute run.py\n')
+        lynda.writelines('SET PATH=%PATH%;C:\Python27;C:\Python27\Scripts\n')
+        lynda.writelines(run_path+'\n')
+        lynda.writelines('pause')
         lynda.close()
         print '-> Lynda.bat file created.\n'
         os.rename('Lynda.bat', read_location_file() + '/Lynda.bat')
