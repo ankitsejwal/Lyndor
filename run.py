@@ -8,17 +8,18 @@ import download
 import renameFiles
 import install
 import draw
+from colorama import *
 
 if __name__ == '__main__':
-
-    message.animate_characters(draw.COW, 0.05)
+    init()
+    message.animate_characters(Fore.LIGHTYELLOW_EX, draw.COW, 0.05)
     print message.ENTER_URL
     message.spinning_cursor()
     url = raw_input()
 
     #check for a valid url
     if url.find('.html') == -1:
-        message.animate_characters(draw.ANONYMOUS, 0.02)
+        message.animate_characters(Fore.LIGHTRED_EX, draw.ANONYMOUS, 0.02)
         sys.exit()
 
     #strip any extra text after .html in the url
@@ -40,7 +41,7 @@ if __name__ == '__main__':
     try:
         chapters.save_course(url, lynda_folder_path)
     except:
-        message.animate_characters(draw.NOPE, 0.02)
+        message.animate_characters(Fore.LIGHTRED_EX, draw.NOPE, 0.02)
         sys.exit()
 
     # Gather information
@@ -64,7 +65,7 @@ if __name__ == '__main__':
     
     try:
         end_time = time.time()
-        message.animate_characters(draw.DOWNLOADED2, 0.1)
+        message.animate_characters(Fore.LIGHTCYAN_EX, draw.DOWNLOADED2, 0.1)
     except:
         pass
     finally:

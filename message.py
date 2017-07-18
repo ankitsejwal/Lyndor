@@ -1,5 +1,6 @@
 import time
 import sys
+from colorama import *
 
 ENTER_URL = "\n***** Paste the url of a Lynda course >>>\n"
 
@@ -17,11 +18,11 @@ COOKIE_FOUND_DOWNLOAD = "\n-> Great!! cookies.txt file found inside DOWNLOADS fo
 
 COOKIE_NOT_FOUND_ERROR = "\n-> Oops!! Did you forget to put cookies.txt \
 file inside Desktop or Downloads folder ??\n"
-
-def animate_characters(string, speed):
+    
+def animate_characters(color, string, speed):
     '''printing ASCII arts line by line'''
     for line in string.splitlines():
-        print line
+        print color + line + Fore.RESET
         time.sleep(speed)
 
 def spinning_cursor():
@@ -46,3 +47,6 @@ def print_line(value):
     ''' prints out any string '''
     sys.stdout.write(str(value) + '\n')
     sys.stdout.flush()
+
+def colored_message(color, message):
+    print(color + message + Fore.RESET)
