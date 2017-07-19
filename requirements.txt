@@ -2,3 +2,4 @@
 youtube-dl
 lxml
 beautifulsoup4
+colorama
