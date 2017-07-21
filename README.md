@@ -4,7 +4,7 @@
 * You will need a Lynda.com Standard or Organisation account inorder to download courses.
 * On providing course url, the program will download - Course Folder, Chapters and Videos, sometimes there over 100 videos and arranging them takes time, to solve the issue, the program grabs each video and renames it to arrange all videos in correct order.
 * info.txt file is created, containing additional info about the course.
-* Your can download multiple courses at one time.
+* You can download multiple courses at one time.
 
 ### Platforms
 
@@ -30,7 +30,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 
 ### Folder Structure
 ```
-- Tutorial Folder
+- Course Folder
 ---- info.txt
 ---- 0 - Chapter A
 -------- 1 - Video A
@@ -45,19 +45,19 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 ```
 
 ### Usage
-* extract cookies from browser after login to Lynda.com by addon [cookies.txt](https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg) extension
-* Your cookies.txt file should be downloaded either in Downloads or Desktop folder.
+* Extract cookies from browser after login to Lynda.com by addon [cookies.txt](https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg) extension
+* Your cookies.txt file must be present in either Downloads or Desktop folder.
 ```bash
 # open terminal or commandline
 $ cd path/to/lyndor-folder
 $ python run.py
 ```
-* **Windows** users can simply double click **Lynda.bat** to run the program. Lynda.bat file should be located in Lynda folder where all courses are downloaded.
+* **Windows** users can simply double click **Lynda.bat** to run the program. Lynda.bat file should be located in (Lynda) folder where all courses are downloaded.
 ```
 # Linux and MacOS users can add Lynda keyword as alias
 # to launch the program by just typing Lynda in terminal.
 $ alias lynda='python2.7/path-to/lyndor/run.py'
 ```
-* [How to create alias ?](https://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)
+* [**How to create alias?**](https://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)
 
-* The program will ask now for Course Url, just paste a url to the Terminal/CMD - and the download will begin.
+* The program will ask now for Url, just paste a course url in the Terminal/CMD - and the download will begin.
