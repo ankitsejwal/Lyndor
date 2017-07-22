@@ -13,9 +13,8 @@ from colorama import *
 if __name__ == '__main__':
     init()
     message.animate_characters(Fore.LIGHTYELLOW_EX, draw.COW, 0.05)
-    print message.ENTER_URL
     message.spinning_cursor()
-    url = raw_input()
+    url = raw_input(message.ENTER_URL)
 
     #check for a valid url
     if url.find('.html') == -1:

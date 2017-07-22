@@ -2,7 +2,7 @@ import time
 import sys
 from colorama import *
 
-ENTER_URL = "\n***** Paste the url of a Lynda course >>>\n"
+ENTER_URL = " Paste the url of a Lynda course >>> "
 
 NETSCAPE = '# Netscape HTTP Cookie File\n'
 
