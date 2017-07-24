@@ -16,7 +16,9 @@
 
 * **Python 2.7**
 * Python is free and comes pre-installed in MacOS, Windows users can install python from official [**python**](https://www.python.org/download/releases/2.7/) website
-* **NOTE:** Windows users must add python.exe to path ![**Windows installer**](https://www.howtogeek.com/wp-content/uploads/2017/05/ximg_591a09e55df0e.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.Sy31NTwaIO.png)
+* **NOTE:** Windows users must add python.exe to path 
+
+![**Windows installer**](https://www.howtogeek.com/wp-content/uploads/2017/05/ximg_591a09e55df0e.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.Sy31NTwaIO.png)
 
 ### Install
 ```bash
@@ -60,4 +62,4 @@ $ alias lynda='python2.7/path-to/lyndor/run.py'
 ```
 * [**How to create alias?**](https://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)
 
-* The program will ask now for Url, just paste a course url in the Terminal/CMD - and the download will begin.
+* The program will ask now for Url, just paste a course url in the Terminal/CMD - and the download should begin.
