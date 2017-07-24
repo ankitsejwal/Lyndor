@@ -62,4 +62,4 @@ $ alias lynda='python2.7/path-to/lyndor/run.py'
 ```
 * [**How to create alias?**](https://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)
 
-* The program will ask now for Url, just paste a course url in the Terminal/CMD - and the download should begin.
+* The program will ask now for URL, just paste a course url in the Terminal/CMD - and the download should begin.
