@@ -10,7 +10,7 @@ import install
 import draw
 from colorama import *
 
-if __name__ == '__main__':
+def main():
     init()
     message.animate_characters(Fore.LIGHTYELLOW_EX, draw.COW, 0.05)
     message.spinning_cursor()
@@ -70,3 +70,10 @@ if __name__ == '__main__':
     finally:
         print "\n>>> Awesome!! Your course is downloaded, the whole process took {}\n".format(renameFiles.hms_string(end_time - start_time))
     
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        message.colored_message(Fore.LIGHTRED_EX, "\n- Program successfully stopped!!\n")
+        sys.exit(0)

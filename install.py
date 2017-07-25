@@ -38,7 +38,7 @@ def create_folder():
     ''' Create lynda folder '''
     if not os.path.exists('Lynda'):
         os.makedirs('Lynda')
-        print '>>> Your Lynda videos will be saved at -> '+set_path()+'Lynda (folder)\n'
+        print '>>> Your Lynda videos will be saved at -> '+ set_path() +'/Lynda (folder)\n'
     else:
         print '\nLynda folder already exists\n'
 
@@ -94,10 +94,16 @@ def install_dependencies():
     print '\n>>> All the required softwares are installed\n'
 
 if __name__ == '__main__':
-    set_path()
-    create_folder()
-    create_aliases()
-    create_location_file()
-    create_lynda_bat()
-    install_dependencies()
-    
+    try:
+        set_path()
+        create_folder()
+        create_aliases()
+        create_location_file()
+        create_lynda_bat()
+        install_dependencies()
+    except KeyboardInterrupt:
+        print "Program execution cancelled through keyboard!"
+        try:
+            sys.exit(0)
+        except:
+            os._exit(0)
