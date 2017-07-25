@@ -97,7 +97,7 @@ if __name__ == '__main__':
     set_path()
     create_folder()
     create_aliases()
-    create_lynda_bat()
     create_location_file()
+    create_lynda_bat()
     install_dependencies()
     
