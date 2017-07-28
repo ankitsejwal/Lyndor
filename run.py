@@ -12,68 +12,62 @@ from colorama import *
 
 def main():
     init()
-    message.animate_characters(Fore.LIGHTYELLOW_EX, draw.COW, 0.05)
+    message.animate_characters(Fore.LIGHTYELLOW_EX, draw.ROCKET, 0.05)
     message.spinning_cursor()
     url = raw_input(message.ENTER_URL)
 
     #check for a valid url
     if url.find('.html') == -1:
-        message.animate_characters(Fore.LIGHTRED_EX, draw.ANONYMOUS, 0.02)
-        sys.exit()
+        sys.exit(message.animate_characters(Fore.LIGHTRED_EX, draw.ANONYMOUS, 0.02))
 
-    #strip any extra text after .html in the url
-    url = url[:url.find(".html")+5]
+    url = url[:url.find(".html")+5] #strip any extra text after .html in the url
+    start_time = time.time() #start time counter begins
 
-    #start time counter begins
-    start_time = time.time()
-
-    #lynda folder path
+    # Folder/File paths
     lynda_folder_path = install.read_location_file() + '/'
-
     course_folder_path = chapters.course_path(url, lynda_folder_path)
     desktop_folder_path = install.folder_path("Desktop")
     download_folder_path = install.folder_path("Downloads")
     cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
-    cookies.edit_cookie(cookie_path, message.NETSCAPE)
+    
+    cookies.edit_cookie(cookie_path, message.NETSCAPE)  # Edit cookie file
 
     #create course folder
     try:
         chapters.save_course(url, lynda_folder_path)
+    except KeyboardInterrupt:
+        sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
     except:
-        message.animate_characters(Fore.LIGHTRED_EX, draw.NOPE, 0.02)
-        sys.exit()
+        sys.exit(message.animate_characters(Fore.LIGHTWHITE_EX, draw.NOPE, 0.02))
 
-    # Gather information
-    chapters.gather_info(url, course_folder_path)
+    try:
+        chapters.gather_info(url, course_folder_path)   # Gather information
+        chapters.save_chapters(url, course_folder_path) # Create chapters inside course folder
+        download.download_files(url, cookie_path, course_folder_path) # Downloading lynda videos to course folder
+    except KeyboardInterrupt:
+        sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
 
-    #create chapters inside course folder
-    chapters.save_chapters(url, course_folder_path)
-
-    #downloading lynda videos to course folder
-    download.download_files(url, cookie_path, course_folder_path)
-
-    #renaming files
+    # Renaming files
     try:
         path = renameFiles.assign_folder(course_folder_path)
+    except KeyboardInterrupt:
+        sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
     except:
         sys.exit('error in assigning path')
     try:
         renameFiles.execute(path)
+    except KeyboardInterrupt:
+        sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
     except:
         sys.exit(message.RENAMING_ERROR)
-    
     try:
         end_time = time.time()
         message.animate_characters(Fore.LIGHTCYAN_EX, draw.DOWNLOADED2, 0.1)
+        message.print_line("\n>>> Awesome!! Your course is downloaded, the whole process took {}\n".format(renameFiles.hms_string(end_time - start_time)))
+    except KeyboardInterrupt:
+        sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
     except:
         pass
-    finally:
-        print "\n>>> Awesome!! Your course is downloaded, the whole process took {}\n".format(renameFiles.hms_string(end_time - start_time))
-    
 
 if __name__ == '__main__':
-    try:
-        main()
-    except KeyboardInterrupt:
-        message.colored_message(Fore.LIGHTRED_EX, "\n- Program successfully stopped!!\n")
-        sys.exit(0)
+    main()
