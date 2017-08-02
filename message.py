@@ -12,12 +12,7 @@ CREATING_CHAPTERS = "\n-> Creating Chapters:\n"
 
 INFO_FILE_CREATED = "\n-> info.txt file created\n"
 
-COOKIE_FOUND_DESKTOP = "\n-> Great!! cookies.txt file found inside DESKTOP folder\n\n"
-
-COOKIE_FOUND_DOWNLOAD = "\n-> Great!! cookies.txt file found inside DOWNLOADS folder\n"
-
-COOKIE_NOT_FOUND_ERROR = "\n-> Oops!! Did you forget to put cookies.txt \
-file inside Desktop or Downloads folder ??\n"
+COOKIE_NOT_FOUND_ERROR = "\n-> Oops!! Did you forget to put cookies.txt inside Downloads folder ??\n"
     
 def animate_characters(color, string, speed):
     '''printing ASCII arts line by line'''
