@@ -8,8 +8,6 @@ NETSCAPE = '# Netscape HTTP Cookie File\n'
 
 RENAMING_ERROR = "\nError in renaming file !!!"
 
-CREATING_CHAPTERS = "\n-> Creating Chapters:\n"
-
 INFO_FILE_CREATED = "\n-> info.txt file created\n"
 
 COOKIE_NOT_FOUND_ERROR = "\n-> Oops!! Did you forget to put cookies.txt inside Downloads folder ??\n"

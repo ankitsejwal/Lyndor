@@ -2,6 +2,7 @@ import os
 import re
 import sys
 import message
+from colorama import *
 
 def write(msg):
     '''prints out any message'''
@@ -16,7 +17,7 @@ def assign_folder(folder):
 
 def list_files(path):
     ''' print all video files in current directory '''
-    print '\n-> Renaming videos to arrange them beautifully:\n'
+    message.colored_message(Fore.LIGHTYELLOW_EX, '\nRenaming videos to arrange them in correct order:\n')
     for f in os.listdir(path):
         if f.endswith('.mp4'):
             f_name, f_ext = os.path.splitext(f)
@@ -27,8 +28,7 @@ def list_files(path):
             write(new_file)
 
 def rename(path):
-    ''' rename all video files '''
-    counter = 0
+    ''' Rename all video files '''
     for f in os.listdir(path):
         if f.endswith('.mp4'):
             f_name, f_ext = os.path.splitext(f)
@@ -38,8 +38,6 @@ def rename(path):
             new_file = '{}-{}{}'.format(f_no, f_title, f_ext)
             os.rename(f, new_file)
             write(new_file)
-            counter += 1
-    write('\n-> '+str(counter)+' files downloaded and renamed to course folder !!')
 
 def hms_string(sec_elapsed):
     ''' format elapsed time '''

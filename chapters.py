@@ -4,6 +4,7 @@ import urllib2
 import re
 from bs4 import BeautifulSoup
 import message
+from colorama import *
 
 def create_soup(url):
     ''' create soup object '''
@@ -66,8 +67,7 @@ def save_chapters(urlink, course_folder_path):
     heading4 = soup.find_all('h4', {"class": "ga"})
     chapter_no = 0
 
-    # print message
-    message.print_line(message.CREATING_CHAPTERS)
+    message.colored_message(Fore.LIGHTYELLOW_EX, "Creating Chapters:\n") # Print message
 
     for h in heading4:
         chapter = h.text
@@ -84,8 +84,8 @@ def save_chapters(urlink, course_folder_path):
         else:
             chapter = str(chapter_no) + '. ' + chapter
             chapter_no += 1
-        message.print_line(course_folder_path + "/" + chapter)
+        message.print_line(chapter)
         os.mkdir(course_folder_path + "/" + chapter)
 
-    message.print_line('\n-> '+str(chapter_no)+' chapters created!!\n')
+    message.colored_message(Fore.LIGHTGREEN_EX, '\n-> '+str(chapter_no)+' chapters created!!\n')
  

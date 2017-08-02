@@ -62,8 +62,8 @@ def main():
         sys.exit(message.RENAMING_ERROR)
     try:
         end_time = time.time()
-        message.animate_characters(Fore.LIGHTCYAN_EX, draw.DOWNLOADED2, 0.1)
-        message.print_line("\n>>> Awesome!! Your course is downloaded, the whole process took {}\n".format(renameFiles.hms_string(end_time - start_time)))
+        message.animate_characters(Fore.LIGHTGREEN_EX, draw.COW, 0.1)
+        message.colored_message(Fore.LIGHTGREEN_EX, "\nThe whole process took {}\n".format(renameFiles.hms_string(end_time - start_time)))
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
     except:
