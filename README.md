@@ -42,7 +42,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 -------- 1 - Video A
 -------- 2 - Video B
 -------- 3 - Video C
--------- 1 - Video D
+-------- 4 - Video D
 ---- 2 - Chapter C
 ```
 
