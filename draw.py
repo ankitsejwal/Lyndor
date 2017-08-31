@@ -40,7 +40,7 @@ NOPE = u"""\
 ▌──▓█░░░░░░░░░░░░░░░░░░░░░░░▓█▓───▐
 ▌──██░░░░░░░░░░░░░░░░░░░░░░░░█▓───▐
                                  
-░THIS COURSE IS ALREADY DOWNLOADED░
+░  COURSE   ALREADY  DOWNLOADED   ░
 
 """
 
@@ -68,9 +68,9 @@ COW = u"""\
 
  ----------------------------
               ^__^
- Course       (oo)\_______
- Downloaded   (__)\       )\/\\
- Successfully     ||----w |
+              (oo)\_______
+ Download     (__)\       )\/\\
+ Successful.      ||----w |
                   ||     ||
 """
 
@@ -79,10 +79,10 @@ ROCKET = u"""\
            .d$ .
            d$$  :
           .$$$
-          :$$$   :  
-          $$$$   :  
-          $$$$   :  
-         .$$$$
+          :$$$   :        You can download multiple
+          $$$$   :        courses at one time, just
+          $$$$   :        paste all the urls in the 
+         .$$$$                Bulk Download.txt
          :$$$$    :
          $$$$$    :
          :    $$$$$
