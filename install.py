@@ -2,7 +2,6 @@ import os
 import sys
 import message
 import shutil
-from colorama import *
 
 real_path = os.path.realpath(__file__)
 real_path = real_path[:real_path.find('install.py')]
@@ -105,7 +104,7 @@ def install_dependencies():
         os.system('pip install '+ module)
     requirements.close()
     message.print_line('\n>>> All the required softwares are installed\n')
-    message.colored_message(Fore.LIGHTGREEN_EX, 'If you wish to download your courses to some other FOLDER,'+
+    message.print_line( 'If you wish to download your courses to some other FOLDER,'+
     ' paste the folder path in location.txt file\n')
 
 if __name__ == '__main__':
