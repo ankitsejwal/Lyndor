@@ -65,7 +65,7 @@ def save_chapters(urlink, course_folder_path):
     ''' create chapters folder '''
     soup = create_soup(urlink)
     heading4 = soup.find_all('h4', {"class": "ga"})
-    chapter_no = 0
+    chapter_no = 00
 
     message.colored_message(Fore.LIGHTYELLOW_EX, "Creating Chapters:\n") # Print message
 
