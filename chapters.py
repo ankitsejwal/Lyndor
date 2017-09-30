@@ -19,6 +19,17 @@ def gather_info(url, course_path):
     course_ids = soup.findAll('div', {"data-course-id":True}) # find all course id attributes
     course_id = course_ids[0]['data-course-id'] # select the first course id attribute value
     author_name = soup.find('cite', {"data-ga-label": "author-name"}).text
+    #topic tags
+    topic_tags = soup.findAll('a', {"data-ga-label": "topic-tag"})
+    topic_tag = '\t'
+    for tag in topic_tags:
+        topic_tag += '#' + tag.text + '\t'
+    #software tags
+    software_tags = soup.findAll('a', {"data-ga-label": "software-tag"})
+    software_tag = ''
+    for tag in software_tags:
+        software_tag += '#' + tag.text + '\t'
+
     release_date = soup.find('span', {"id": "release-date"}).text
     duration = soup.find('div', {"class": "duration"}).find('span').text
     download_date = time.strftime("%d/%m/%y")   # todays date
@@ -30,6 +41,8 @@ def gather_info(url, course_path):
     message.write("Course Name", course_title)
     message.write("Course id", course_id)
     message.write("Author Name", author_name)
+    message.write("Topics", topic_tag)
+    message.write("Softwares", software_tag)
     message.write("Duration", duration)
     message.write("Release Date", release_date)
     message.write("Updated On", update_date)
@@ -41,6 +54,8 @@ def gather_info(url, course_path):
         info_file.writelines('Course Name' + '\t\t' + course_title + '\n')
         info_file.writelines('Course id' + '\t\t' + course_id + '\n')
         info_file.writelines('Author Name' + '\t\t' + author_name + '\n')
+        info_file.writelines('Topics' + '\t\t' + topic_tag + '\n')
+        info_file.writelines('Softwares' + '\t\t' + software_tag + '\n')
         info_file.writelines('Duration' + '\t\t' + duration + '\n')
         info_file.writelines('Release Date' + '\t\t' + release_date + '\n')
         info_file.writelines('Updated On' + '\t\t' + update_date + '\n')
