@@ -16,6 +16,8 @@ def gather_info(url, course_path):
     ''' gather course information. '''
     soup = create_soup(url)
     course_title = soup.find('h1', {"class": "default-title"}).text
+    course_ids = soup.findAll('div', {"data-course-id":True}) # find all course id attributes
+    course_id = course_ids[0]['data-course-id'] # select the first course id attribute value
     author_name = soup.find('cite', {"data-ga-label": "author-name"}).text
     release_date = soup.find('span', {"id": "release-date"}).text
     duration = soup.find('div', {"class": "duration"}).find('span').text
@@ -26,6 +28,7 @@ def gather_info(url, course_path):
         update_date = release_date
 
     message.write("Course Name", course_title)
+    message.write("Course id", course_id)
     message.write("Author Name", author_name)
     message.write("Duration", duration)
     message.write("Release Date", release_date)
@@ -36,6 +39,7 @@ def gather_info(url, course_path):
 
     with open('info.txt', 'a') as info_file:
         info_file.writelines('Course Name' + '\t\t' + course_title + '\n')
+        info_file.writelines('Course id' + '\t\t' + course_id + '\n')
         info_file.writelines('Author Name' + '\t\t' + author_name + '\n')
         info_file.writelines('Duration' + '\t\t' + duration + '\n')
         info_file.writelines('Release Date' + '\t\t' + release_date + '\n')
