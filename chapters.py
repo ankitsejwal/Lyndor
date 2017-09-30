@@ -65,7 +65,7 @@ def save_chapters(urlink, course_folder_path):
     ''' create chapters folder '''
     soup = create_soup(urlink)
     heading4 = soup.find_all('h4', {"class": "ga"})
-    chapter_no = 00
+    chapter_no = 0
 
     message.colored_message(Fore.LIGHTYELLOW_EX, "Creating Chapters:\n") # Print message
 
@@ -75,14 +75,14 @@ def save_chapters(urlink, course_folder_path):
 
         if chapter[1] == '.':
             chapter_name = chapter[3:]
-            chapter = str(chapter_no) + '. ' + chapter_name
+            chapter = str(chapter_no).zfill(2) + '. ' + chapter_name
             chapter_no += 1
         elif chapter[2] == '.':
             chapter_name = chapter[4:]
-            chapter = str(chapter_no) + '. ' + chapter_name
+            chapter = str(chapter_no).zfill(2) + '. ' + chapter_name
             chapter_no += 1
         else:
-            chapter = str(chapter_no) + '. ' + chapter
+            chapter = str(chapter_no).zfill(2) + '. ' + chapter
             chapter_no += 1
         message.print_line(chapter)
         os.mkdir(course_folder_path + "/" + chapter)
