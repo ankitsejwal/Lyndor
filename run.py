@@ -48,7 +48,8 @@ def download_course(url):
     download_folder_path = install.folder_path("Downloads")
     cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
     
-    cookies.edit_cookie(cookie_path, message.NETSCAPE)  # Edit cookie file
+    # Edit cookie file
+    cookies.edit_cookie(cookie_path, message.NETSCAPE)
 
     #create course folder
     try:
@@ -57,7 +58,8 @@ def download_course(url):
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
     except:
         sys.exit(message.animate_characters(Fore.LIGHTWHITE_EX, draw.NOPE, 0.02))
-
+    
+    #save chapters and videos
     try:
         chapters.gather_info(url, course_folder_path)   # Gather information
         chapters.save_chapters(url, course_folder_path) # Create chapters inside course folder
@@ -65,7 +67,7 @@ def download_course(url):
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
 
-    # Renaming files
+    # Rename files
     try:
         path = renameFiles.assign_folder(course_folder_path)
     except KeyboardInterrupt:

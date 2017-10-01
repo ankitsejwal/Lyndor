@@ -39,6 +39,15 @@ def rename(path):
             os.rename(f, new_file)
             write(new_file)
 
+def write_content_md(path):
+    ''' write the saved videos to content_md files '''
+    with open('CONTENT.md', 'a') as content_md:
+        for f in os.listdir(path):
+            if f.endswith('.mp4'):
+                content_md.writelines('* ' + f + '\n')
+    content_md.close()
+    print("\n-> CONTENT.md is created.")
+
 def hms_string(sec_elapsed):
     ''' format elapsed time '''
     h = int(sec_elapsed / (60 * 60))
@@ -50,3 +59,4 @@ def execute(path):
     '''lists file to be renamed and rename files'''
     list_files(path)
     rename(path)
+    write_content_md(path)

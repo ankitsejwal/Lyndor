@@ -63,6 +63,11 @@ def gather_info(url, course_path):
         info_file.writelines('Course URL' + '\t\t' + url + '\n')
     info_file.close()
 
+    with open('CONTENT.md','a') as content_md:
+        content_md.writelines("# " + course_title + " with " + author_name + " on lynda.com \n\n")
+        content_md.writelines("## Chapters:\n\n") # next heading
+    content_md.close()
+
     # print message
     message.print_line(message.INFO_FILE_CREATED)
 
@@ -88,23 +93,29 @@ def save_chapters(urlink, course_folder_path):
 
     message.colored_message(Fore.LIGHTYELLOW_EX, "Creating Chapters:\n") # Print message
 
-    for h in heading4:
-        chapter = h.text
-        chapter = re.sub('[^a-zA-Z0-9.,-]', ' ', chapter)
+    with open('CONTENT.md', 'a') as content_md:
+        for h in heading4:
+            chapter = h.text
+            chapter = re.sub('[^a-zA-Z0-9.,-]', ' ', chapter)
 
-        if chapter[1] == '.':
-            chapter_name = chapter[3:]
-            chapter = str(chapter_no).zfill(2) + '. ' + chapter_name
-            chapter_no += 1
-        elif chapter[2] == '.':
-            chapter_name = chapter[4:]
-            chapter = str(chapter_no).zfill(2) + '. ' + chapter_name
-            chapter_no += 1
-        else:
-            chapter = str(chapter_no).zfill(2) + '. ' + chapter
-            chapter_no += 1
-        message.print_line(chapter)
-        os.mkdir(course_folder_path + "/" + chapter)
+            if chapter[1] == '.':
+                chapter_name = chapter[3:]
+                chapter = str(chapter_no).zfill(2) + '. ' + chapter_name
+                chapter_no += 1
+            elif chapter[2] == '.':
+                chapter_name = chapter[4:]
+                chapter = str(chapter_no).zfill(2) + '. ' + chapter_name
+                chapter_no += 1
+            else:
+                chapter = str(chapter_no).zfill(2) + '. ' + chapter
+                chapter_no += 1
+            message.print_line(chapter)
+
+            os.mkdir(course_folder_path + "/" + chapter) # create folders (chapters)
+            content_md.writelines('* ' + chapter + '\n') # writelines to content_md
+
+        content_md.writelines('\n## Video files:\n\n') # next heading
+    content_md.close() # close content_md
 
     message.colored_message(Fore.LIGHTGREEN_EX, '\n-> '+str(chapter_no)+' chapters created!!\n')
  
