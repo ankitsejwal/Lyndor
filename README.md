@@ -34,11 +34,11 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 
 ### Lynda Folder Structure
 ```
-- Lynda Folder (Here goes all your downloaded courses)
+- Lynda Folder          (Here goes all your downloaded courses)
 ---- Course1
 ---- Course2
 ---- Course3
----- Course 4
+---- Course4
 -- Bulk Download.txt    (Paste multiple urls for bulk download)
 -- Run-Lyndor.bat       (For windows user only, double click to launch program)
 ```
@@ -78,4 +78,4 @@ $ alias lynda='python2.7 /path-to/lyndor/run.py'
 * The program will ask now for URL, just paste a course url in the Terminal/CMD - and the download should begin.
 
 ### Reporting Issues
-* Each release of the program is well tested on MacOS, feedback and bug reporting for Windows and Linux operating system is needed and is greatly appreciated.
+* Each release of the program is well tested on MacOS, feedback and bug reporting for Windows and Linux operating system is needed and will be greatly appreciated.
