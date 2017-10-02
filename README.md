@@ -4,9 +4,9 @@
 * You will need a Lynda.com Basic, Premium or Organisation account inorder to download courses.
 * On providing course url, the program will download - Course Folder, Chapters, Videos and info files, and will arrange all the videos in correct order by renaming them in a sequence.
 * info.txt and CONTENT.md file is created, containing additional info about the course.
-* You can download multiple courses at one time by pasting several urls in **bulk download.txt**
+* You can download multiple courses at one time by pasting several urls in **Bulk Download.txt**
 
-* **NOTE:** The Basic and Premium account costs about $20 and $30 USD respectively once the 30 day free trial ends, which is not much considering you are investing your career or passion and may get exponential returns from this investment.
+* **NOTE:** The Basic and Premium account costs about $20 and $30 USD respectively once the 30 day free trial ends, which is not much considering you are investing in your career or following your passion, thus you may get exponential returns from this investment.
 
 ### Platforms
 
@@ -32,9 +32,20 @@
 ```
 Note: **Windows** users can simply double click **install.bat** file to run install.py file alternatively.
 
+### Lynda Folder Structure
+```
+- Lynda Folder (Here goes all your downloaded courses)
+---- Course1
+---- Course2
+---- Course3
+---- Course 4
+-- Bulk Download.txt    (Paste multiple urls for bulk download)
+-- Run-Lyndor.bat       (For windows user only, double click to launch program)
+```
+
 ### Course Folder Structure
 ```
-- Course Folder
+- Course1 Folder
 ---- CONTENT.md
 ---- info.txt
 ---- 00 - Chapter A
@@ -47,17 +58,6 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 -- 5 - Video E
 -- 6 - Video F
 -- 7 - Video G
-```
-
-### Lynda Folder Structure
-```
-- Lynda Folder (Here goes all your downloaded courses)
----- Course1
----- Course2
----- Course3
----- Course 4
--- bulk download.txt    (Paste multiple urls for bulk download)
--- Run-Lyndor.bat            (For windows user only, double click to launch program)
 ```
 
 ### Usage
@@ -76,3 +76,6 @@ $ alias lynda='python2.7 /path-to/lyndor/run.py'
 * [**How to create alias?**](https://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)
 
 * The program will ask now for URL, just paste a course url in the Terminal/CMD - and the download should begin.
+
+### Reporting Issues
+* Each release of the program is well tested on MacOS, feedback and bug reporting for Windows and Linux operating system is needed and is greatly appreciated.
