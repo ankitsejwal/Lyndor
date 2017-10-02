@@ -55,7 +55,7 @@ def create_aliases():
         print '-> aliases.bat file created.\n'
 
 def lynda_folder_files():
-    ''' create lynda.bat in windows '''
+    ''' create Run-Lyndor.bat in windows '''
     os.chdir(RESET_PATH)
     bulk_download = open('Bulk Download.txt','w')
     bulk_download.close()
@@ -63,15 +63,15 @@ def lynda_folder_files():
     print '-> Bulk Download.txt file created successfully.\n'
     if check_os() == 'windows':
         run_path = 'python "'+os.getcwd()+'/run.py"'
-        lynda = open('Lynda.bat', 'a')
+        lynda = open('Run-Lyndor.bat', 'a')
         lynda.writelines('@ECHO OFF\n')
         lynda.writelines('REM Batch file to execute run.py\n')
         lynda.writelines('SET PATH=%PATH%;C:\Python27;C:\Python27\Scripts\n')
         lynda.writelines(run_path+'\n')
         lynda.writelines('pause')
         lynda.close()
-        print '-> Lynda.bat file created.\n'
-        os.rename('Lynda.bat', read_location_file() + '/Lynda.bat')
+        print '-> Run-Lyndor.bat file created.\n'
+        os.rename('Run-Lyndor.bat', read_location_file() + '/Run-Lyndor.bat')
 
 def create_location_file():
     '''create file that tells the program where to save the new course'''

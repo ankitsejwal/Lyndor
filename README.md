@@ -1,10 +1,12 @@
 ## Lyndor #
 
 * This software can download any [**Lynda.com**](https://www.lynda.com) course
-* You will need a Lynda.com Standard or Organisation account inorder to download courses.
-* On providing course url, the program will download - Course Folder, Chapters and Videos, sometimes there over 100 videos and arranging them takes time, to solve the issue, the program grabs each video and renames it to arrange all videos in correct order.
-* info.txt file is created, containing additional info about the course.
-* You can download multiple courses at one time.
+* You will need a Lynda.com Basic, Premium or Organisation account inorder to download courses.
+* On providing course url, the program will download - Course Folder, Chapters, Videos and info files, and will arrange all the videos in correct order by renaming them in a sequence.
+* info.txt and CONTENT.md file is created, containing additional info about the course.
+* You can download multiple courses at one time by pasting several urls in **bulk download.txt**
+
+* **NOTE:** The Basic and Premium account costs about $20 and $30 USD respectively once the 30 day free trial ends, which is not much considering you are investing your career or passion and may get exponential returns from this investment.
 
 ### Platforms
 
@@ -30,35 +32,46 @@
 ```
 Note: **Windows** users can simply double click **install.bat** file to run install.py file alternatively.
 
-### Folder Structure
+### Course Folder Structure
 ```
 - Course Folder
+---- CONTENT.md
 ---- info.txt
----- 0 - Chapter A
--------- 1 - Video A
--------- 2 - Video B
--------- 3 - Video C
----- 1 - Chapter B
--------- 1 - Video A
--------- 2 - Video B
--------- 3 - Video C
--------- 4 - Video D
----- 2 - Chapter C
+---- 00 - Chapter A
+---- 01 - Chapter B
+---- 02 - Chapter C
+-- 1 - Video A
+-- 2 - Video B
+-- 3 - Video C
+-- 4 - Video D
+-- 5 - Video E
+-- 6 - Video F
+-- 7 - Video G
+```
+
+### Lynda Folder Structure
+```
+- Lynda Folder (Here goes all your downloaded courses)
+---- Course1
+---- Course2
+---- Course3
+---- Course 4
+-- bulk download.txt    (Paste multiple urls for bulk download)
+-- Run-Lyndor.bat            (For windows user only, double click to launch program)
 ```
 
 ### Usage
 * Extract cookies from browser after login to Lynda.com by addon [cookies.txt](https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg) extension
-* Your cookies.txt file must be present in either Downloads or Desktop folder.
+* Your cookies.txt file must be downloaded in either Downloads or Desktop folder.
 ```bash
 # open terminal or commandline
 $ cd path/to/lyndor-folder
 $ python run.py
 ```
-* **Windows** users can simply double click **Lynda.bat** to run the program. Lynda.bat file should be located in (Lynda) folder where all courses are downloaded.
+* **Windows** users can simply double click **Run-Lyndor.bat** to run the program. Run-Lyndor.bat file should be located in (Lynda) folder where all courses are downloaded.
 ```
-# Linux and MacOS users can add Lynda keyword as alias
-# to launch the program by just typing Lynda in terminal.
-$ alias lynda='python2.7/path-to/lyndor/run.py'
+# Linux and MacOS users can add Lynda keyword as alias to launch the program by just typing Lynda in terminal.
+$ alias lynda='python2.7 /path-to/lyndor/run.py'
 ```
 * [**How to create alias?**](https://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)
 
