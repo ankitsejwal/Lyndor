@@ -70,8 +70,10 @@ def lynda_folder_files():
         lynda.writelines(run_path+'\n')
         lynda.writelines('pause')
         lynda.close()
-        print '-> Run-Lyndor.bat file created.\n'
-        os.rename('Run-Lyndor.bat', read_location_file() + '/Run-Lyndor.bat')
+        try:
+            os.rename('Run-Lyndor.bat', read_location_file() + '/Run-Lyndor.bat')
+        finally:
+            print '-> Run-Lyndor.bat file created.\n'
 
 def create_location_file():
     '''create file that tells the program where to save the new course'''
@@ -112,16 +114,13 @@ def install_dependencies():
 
 if __name__ == '__main__':
     try:
+        install_dependencies()
         set_path()
         create_location_file()
         create_folder()
         create_aliases()
         lynda_folder_files()
-        install_dependencies()
     except KeyboardInterrupt:
         print "Program execution cancelled through keyboard!"
-        try:
-            sys.exit(0)
-        except:
-            os._exit(0)
+        sys.exit(0)
             
