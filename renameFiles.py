@@ -15,28 +15,31 @@ def assign_folder(folder):
     path = os.getcwd()
     return path
 
-def list_files(path):
-    ''' print all video files in current directory '''
+def rename(path):
+    ''' Rename files '''
+    
     message.colored_message(Fore.LIGHTYELLOW_EX, '\nRenaming videos to arrange them in correct order:\n')
-    for f in os.listdir(path):
-        if f.endswith('.mp4'):
-            f_name, f_ext = os.path.splitext(f)
-            f_no = f_name[-3:]
-            f_title = f_name[:-7]
-            f_title = re.sub('[^a-zA-Z0-9.,-]', ' ', f_title)
-            new_file = '{}-{}{}'.format(f_no, f_title, f_ext)
+    # Rename video files
+    for vid in os.listdir(path):
+        if vid.endswith('.mp4'):
+            vid_name, vid_ext = os.path.splitext(vid)
+            vid_no = vid_name[-4:]
+            vid_title = vid_name[:-7]
+            vid_title = re.sub('[^a-zA-Z0-9.,-]', ' ', vid_title)
+            new_file = '{}-{}{}'.format(vid_no, vid_title, vid_ext)
+            os.rename(vid, new_file)
             write(new_file)
 
-def rename(path):
-    ''' Rename all video files '''
-    for f in os.listdir(path):
-        if f.endswith('.mp4'):
-            f_name, f_ext = os.path.splitext(f)
-            f_no = f_name[-3:]
-            f_title = f_name[:-7]
-            f_title = re.sub('[^a-zA-Z0-9.,-]', ' ', f_title)
-            new_file = '{}-{}{}'.format(f_no, f_title, f_ext)
-            os.rename(f, new_file)
+    message.colored_message(Fore.LIGHTYELLOW_EX, '\nRenaming subtitles to match them with videos:\n')    
+    # Rename subtitle files
+    for sub in os.listdir(path):
+        if sub.endswith('.srt'):
+            sub_name, sub_ext = os.path.splitext(sub)
+            sub_no = sub_name[-7:-3]
+            sub_title = sub_name[:-10]
+            sub_title = re.sub('[^a-zA-Z0-9.,-]', ' ', sub_title)
+            new_file = '{}-{}{}'.format(sub_no, sub_title, sub_ext)
+            os.rename(sub, new_file)
             write(new_file)
 
 def write_content_md(path):
@@ -56,7 +59,6 @@ def hms_string(sec_elapsed):
     return "{}:{:>02}:{:>05.2f}".format(h, m, s)
 
 def execute(path):
-    '''lists file to be renamed and rename files'''
-    list_files(path)
+    '''execute functions'''
     rename(path)
     write_content_md(path)
