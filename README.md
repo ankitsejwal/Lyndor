@@ -82,4 +82,4 @@ $ alias lynda='python2.7 /path-to/lyndor/run.py'
 
 ### Requesting Features
 * New features are being requested constantly, you are encourage to ask for a new feature from the Issues tab on GitHub.
-![**octocat**](https://assets-cdn.github.com/favicon.ico)
+<img src="https://assets-cdn.github.com/favicon.ico" alt="octocat icon" width="50")
