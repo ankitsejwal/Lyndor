@@ -81,5 +81,4 @@ $ alias lynda='python2.7 /path-to/lyndor/run.py'
 * Each release of the program is well tested on MacOS, feedback and bug reporting for Windows and Linux operating system is needed and will be greatly appreciated.
 
 ### Requesting Features
-* New features are being requested constantly, you are encourage to ask for a new feature from the Issues tab on GitHub.
-<img src="https://assets-cdn.github.com/favicon.ico" alt="octocat icon" width="18">
+* New features are being requested constantly, you are encourage to ask for a new feature from the Issues tab on GitHub. <img src="https://assets-cdn.github.com/favicon.ico" alt="octocat icon" width="18">
