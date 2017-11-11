@@ -42,7 +42,7 @@ def download_course(url):
     url = url[:url.find(".html")+5] #strip any extra text after .html in the url
 
     # Folder/File paths
-    lynda_folder_path = install.read_location_file() + '/'
+    lynda_folder_path = install.get_lynda_folder_location() + '/'
     course_folder_path = chapters.course_path(url, lynda_folder_path)
     desktop_folder_path = install.folder_path("Desktop")
     download_folder_path = install.folder_path("Downloads")

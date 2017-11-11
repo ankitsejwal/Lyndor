@@ -11,7 +11,7 @@ def download_files(url, cookie_path, course_folder):
         sys.exit('Program Interrupted')
 
 def read_bulk_download():
-    os.chdir(install.read_location_file())
+    os.chdir(install.get_lynda_folder_location())
     bulk_download = open('Bulk Download.txt', 'r')
     urls = bulk_download.readlines()
     return urls
