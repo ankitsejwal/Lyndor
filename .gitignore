@@ -4,6 +4,6 @@
 .idea
 aliases.bat
 testfile.py
-location.txt
+settings.json
 venv
 test.py

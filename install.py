@@ -1,10 +1,11 @@
 import os
 import sys
 import shutil
+import json
 
 real_path = os.path.realpath(__file__)
 real_path = real_path[:real_path.find('install.py')]
-RESET_PATH = real_path
+LYNDOR_PATH = real_path
 
 def check_os():
     '''Check operating system'''
@@ -37,16 +38,16 @@ def folder_path(folder):
 
 def create_folder():
     ''' Create lynda folder '''
-    path = read_location_file()
+    path = get_lynda_folder_location()
     if not os.path.exists(path):
         os.makedirs(path)
-        print '-> Lynda folder created at: ' + read_location_file()
+        print '-> Lynda folder created at: ' + get_lynda_folder_location()
     else:
         print '>>> Lynda folder already exists\n'
 
 def create_aliases():
     '''Create aliases file'''
-    os.chdir(RESET_PATH)
+    os.chdir(LYNDOR_PATH)
     if check_os() == 'windows':
         run_path = 'doskey lynda= python "'+os.getcwd()+'/run.py"'
         alias = open('aliases.bat', 'w')
@@ -56,10 +57,10 @@ def create_aliases():
 
 def lynda_folder_files():
     ''' create Run-Lyndor.bat in windows '''
-    os.chdir(RESET_PATH)
+    os.chdir(LYNDOR_PATH)
     bulk_download = open('Bulk Download.txt','w')
     bulk_download.close()
-    shutil.move('Bulk Download.txt', read_location_file()+'/Bulk Download.txt')
+    shutil.move('Bulk Download.txt', get_lynda_folder_location()+'/Bulk Download.txt')
     print '-> Bulk Download.txt file created successfully.\n'
     if check_os() == 'windows':
         run_path = 'python "'+os.getcwd()+'/run.py"'
@@ -71,40 +72,48 @@ def lynda_folder_files():
         lynda.writelines('pause')
         lynda.close()
         try:
-            os.rename('Run-Lyndor.bat', read_location_file() + '/Run-Lyndor.bat')
+            os.rename('Run-Lyndor.bat', get_lynda_folder_location() + '/Run-Lyndor.bat')
         finally:
             print '-> Run-Lyndor.bat file created.\n'
 
-def create_location_file():
-    '''create file that tells the program where to save the new course'''
-    os.chdir(RESET_PATH)
+def create_settings_json():
+    ''' Create settings_json file '''
+    os.chdir(LYNDOR_PATH)
     files = os.listdir(os.getcwd())
-    try:
-        for content in files:
-            if content == 'location.txt':
-                #Prevent existing location.txt file from overwriting
-                print '\n>>> location.txt file already exists, will use the same path inside it.'
-                return
-        loc_file = open('location.txt', 'w')
-        loc_file.write(set_path()+'/Lynda')
-        loc_file.close()
-        print '-> location.txt file created.\n'
-    finally:
-        print '>>> (To download videos to a different folder, replace the folder path in location.txt)'
-        print '>>> Your Lynda videos will be saved at -> '+ read_location_file() +'\n'
-                
+    for f in files:
+        if f == 'settings.json':
+            #Prevent existing settings.json file from overwriting
+            print '>>> settings.json file already exists, will use the same path inside it.\n'
+            return
+    settings_dict = {
+        "credentials":{
+            "username" : "",
+            "password" : "",
+            },
+        "preferences":{
+            "location" : set_path()+'/Lynda',
+            "download_subtitles" : True
+        }
+    }
+    out_file = open(LYNDOR_PATH+'/settings.json', 'w')
+    json.dump(settings_dict, out_file, indent=4)
+    out_file.close()
+    print '-> settings.json file created.\
+ (To download videos to a different folder, replace the folder path in settings.json)'
+    print '\n>>> Your Lynda videos will be saved at -> '+ get_lynda_folder_location() +'\n'
 
-def read_location_file():
-    '''read the content of location.txt'''
-    os.chdir(RESET_PATH)
-    loc_file = open('location.txt')
-    content = loc_file.read()
-    loc_file.close()
-    return content
+def get_lynda_folder_location():
+    ''' Read settings.json '''
+    os.chdir(LYNDOR_PATH)
+
+    in_file = open('settings.json', 'r')
+    data = json.load(in_file)
+    in_file.close()
+    return data['preferences']['location']
 
 def install_dependencies():
     '''install required softwares'''
-    os.chdir(RESET_PATH)
+    os.chdir(LYNDOR_PATH)
     requirements = open('requirements.txt')
     line = requirements.readline()
     for module in requirements:
@@ -116,7 +125,7 @@ if __name__ == '__main__':
     try:
         install_dependencies()
         set_path()
-        create_location_file()
+        create_settings_json()
         create_folder()
         create_aliases()
         lynda_folder_files()
