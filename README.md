@@ -27,7 +27,7 @@
    $ cd path/to/lyndor
    $ python install.py
    # Apart from many other processes, install.py creates a Lynda folder inside your Videos or Movies folder
-   # all the courses will be downloaded to this (Lynda) folder
+   # all the courses will be downloaded to Lynda folder
    # to change path later, paste your desired path into location.txt
 ```
 Note: **Windows** users can simply double click **install.bat** file to run install.py file alternatively.
@@ -79,3 +79,7 @@ $ alias lynda='python2.7 /path-to/lyndor/run.py'
 
 ### Reporting Issues
 * Each release of the program is well tested on MacOS, feedback and bug reporting for Windows and Linux operating system is needed and will be greatly appreciated.
+
+### Requesting Features
+* New features are being requested constantly, you are encourage to ask for a new feature from the Issues tab on GitHub.
+![**octocat**](https://assets-cdn.github.com/favicon.ico)
