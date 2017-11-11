@@ -2,7 +2,7 @@
 
 * This software can download any [**Lynda.com**](https://www.lynda.com) course
 * You will need a Lynda.com Basic, Premium or Organisation account inorder to download courses.
-* On providing course url, the program will download - Course Folder, Chapters, Videos and info files, and will arrange all the videos in correct order by renaming them in a sequence.
+* On providing course url, the program will download - Course Folder, Chapters, Videos, Subtitles and Info files, and will arrange all the videos in correct order by renaming them in a sequence.
 * info.txt and CONTENT.md file is created, containing additional info about the course.
 * You can download multiple courses at one time by pasting several urls in **Bulk Download.txt**
 
