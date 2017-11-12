@@ -7,7 +7,6 @@ import message
 def download_files(url, cookie_path, course_folder):
     ''' This function downloads all the videos in course folder'''
     os.chdir(course_folder)
-    print 'course folder path yeh h bhai -' + os.getcwd()
     try:
         # Checking subtitle preferences
         if install.read_settings_json('preferences', 'download_subtitles'):
@@ -25,7 +24,6 @@ def download_files(url, cookie_path, course_folder):
             username = ' -u ' + install.read_settings_json('credentials', 'username')
             password = ' -p ' + install.read_settings_json('credentials', 'password')
             output = ' -o ' +'"'+ course_folder + "/%(playlist_index)s - %(title)s.%(ext)s" + '"'
-            print ('youtube-dl' + username + password + output + subtitles + url)
             os.system('youtube-dl' + username + password + output + subtitles + url)
     except KeyboardInterrupt:
         sys.exit('Program Interrupted')
