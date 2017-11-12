@@ -60,6 +60,20 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 -- 7 - Video G
 ```
 
+### Lyndor Folder Structure
+```
+- Lyndor
+---- LICENSE
+---- settings.json
+-- run.py
+-- chapters.py
+-- download.py
+-- ...
+-- ...
+-- ...
+-- install.py
+```
+
 ### Usage
 
 * Lynda course can be downloaded in two ways, either with username + password combination or with cookies.txt file
