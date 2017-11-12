@@ -62,11 +62,11 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 
 ### Usage
 
-* You can download lynda videos in two ways, either with username + password combination or with cookies.txt file
+* Lynda course can be downloaded in two ways, either with username + password combination or with cookies.txt file
 * Add your username and password to settings.json and set "use_cookie_for_download": false
 * For organization login - use cookie method('No need to set username/password'), just edit settings.json to set "use_cookie_for_download": true
 
-```json
+```javascript
 // settings.json - File
 
 {
@@ -85,6 +85,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 }
 ```
 
+#### To run the program:
 
 ```bash
 # open terminal or commandline
