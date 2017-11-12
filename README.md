@@ -8,6 +8,15 @@
 
 * **NOTE:** The Basic and Premium account costs about $20 and $30 USD respectively once the 30 day free trial ends, which is not much considering you are investing in your career or following your passion, thus you may get exponential returns from this investment.
 
+```
+Features:
+
+- Bulk Download,                        - chapters download
+- subtitles download,                   - videos and subtitles renaming
+- username + password combination,      - adjust preferences (settings.json)
+- cookies.txt(Organizational login)
+```
+
 ### Platforms
 
 * Windows
@@ -77,8 +86,8 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 ### Usage
 
 * Lynda course can be downloaded in two ways, either with username + password combination or with cookies.txt file
-* Add your username and password to settings.json and set "use_cookie_for_download": false
-* For organization login - use cookie method, set "use_cookie_for_download": true in settings.json
+* Add your username and password to settings.json and set ["use_cookie_for_download": false]
+* For organization login - use cookie method, set ["use_cookie_for_download": true] in settings.json
 
 ```javascript
 // settings.json - File
@@ -122,4 +131,4 @@ $ alias lynda='python2.7 /path-to/lyndor/run.py'
 * Each release of the program is well tested on MacOS, feedback and bug reporting for Windows and Linux operating system is needed and will be greatly appreciated.
 
 ### Requesting Features
-* New features are being requested constantly, you are encourage to ask for a new feature from the Issues tab on GitHub. <img src="https://assets-cdn.github.com/favicon.ico" alt="octocat icon" width="18">
+* New features are being requested constantly, you are encouraged to ask for a new feature from the Issues tab <img src="https://assets-cdn.github.com/favicon.ico" alt="octocat icon" width="18">
