@@ -6,10 +6,10 @@
 * info.txt and CONTENT.md file is created, containing additional info about the course.
 * You can download multiple courses at one time by pasting several urls in **Bulk Download.txt**
 
-* **NOTE:** The Basic and Premium account costs about $20 and $30 USD respectively once the 30 day free trial ends, which is not much considering you are investing in your career or following your passion, thus you may get exponential returns from this investment.
+* **NOTE:** The Basic and Premium account costs about $20 and $30 USD respectively once the 30 day free trial ends, which is not much considering you are investing in your career or following your passion, thus you may get exponential returns.
 
 ```
-Features:
+  Features:
 
 - Bulk Download,                        - chapters download
 - subtitles download,                   - videos and subtitles renaming
@@ -19,9 +19,9 @@ Features:
 
 ### Platforms
 
-* Windows
-* MacOS
-* Linux
+- Windows :wink
+- MacOS
+- Linux
 
 ### Requirements
 
