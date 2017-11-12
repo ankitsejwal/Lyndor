@@ -38,10 +38,10 @@ def folder_path(folder):
 
 def create_folder():
     ''' Create lynda folder '''
-    path = get_lynda_folder_location()
+    path = read_settings_json('preferences', 'location')
     if not os.path.exists(path):
         os.makedirs(path)
-        print '-> Lynda folder created at: ' + get_lynda_folder_location()
+        print '-> Lynda folder created at: ' + read_settings_json('preferences', 'location')
     else:
         print '>>> Lynda folder already exists\n'
 
@@ -60,7 +60,7 @@ def lynda_folder_files():
     os.chdir(LYNDOR_PATH)
     bulk_download = open('Bulk Download.txt','w')
     bulk_download.close()
-    shutil.move('Bulk Download.txt', get_lynda_folder_location()+'/Bulk Download.txt')
+    shutil.move('Bulk Download.txt', read_settings_json('preferences', 'location')+'/Bulk Download.txt')
     print '-> Bulk Download.txt file created successfully.\n'
     if check_os() == 'windows':
         run_path = 'python "'+os.getcwd()+'/run.py"'
@@ -72,7 +72,7 @@ def lynda_folder_files():
         lynda.writelines('pause')
         lynda.close()
         try:
-            os.rename('Run-Lyndor.bat', get_lynda_folder_location() + '/Run-Lyndor.bat')
+            os.rename('Run-Lyndor.bat', read_settings_json('preferences', 'location') + '/Run-Lyndor.bat')
         finally:
             print '-> Run-Lyndor.bat file created.\n'
 
@@ -100,16 +100,16 @@ def create_settings_json():
     out_file.close()
     print '-> settings.json file created.\
  (To download videos to a different folder, replace the folder path in settings.json)'
-    print '\n>>> Your Lynda videos will be saved at -> '+ get_lynda_folder_location() +'\n'
+    print '\n>>> Your Lynda videos will be saved at -> '+ read_settings_json('preferences','location') +'\n'
 
-def get_lynda_folder_location():
+def read_settings_json(section, key):
     ''' Read settings.json '''
     os.chdir(LYNDOR_PATH)
 
     in_file = open('settings.json', 'r')
     data = json.load(in_file)
     in_file.close()
-    return data['preferences']['location']
+    return data[section][key]
 
 def install_dependencies():
     '''install required softwares'''

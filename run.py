@@ -42,12 +42,12 @@ def download_course(url):
     url = url[:url.find(".html")+5] #strip any extra text after .html in the url
 
     # Folder/File paths
-    lynda_folder_path = install.get_lynda_folder_location() + '/'
+    lynda_folder_path = install.read_settings_json('preferences', 'location') + '/'
     course_folder_path = chapters.course_path(url, lynda_folder_path)
     desktop_folder_path = install.folder_path("Desktop")
     download_folder_path = install.folder_path("Downloads")
     cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
-    
+
     # Edit cookie file
     cookies.edit_cookie(cookie_path, message.NETSCAPE)
 
@@ -58,7 +58,7 @@ def download_course(url):
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
     except:
         sys.exit(message.animate_characters(Fore.LIGHTWHITE_EX, draw.NOPE, 0.02))
-    
+
     #save chapters and videos
     try:
         chapters.gather_info(url, course_folder_path)   # Gather information
