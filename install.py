@@ -79,18 +79,14 @@ def lynda_folder_files():
 def create_settings_json():
     ''' Create settings_json file '''
     os.chdir(LYNDOR_PATH)
-    files = os.listdir(os.getcwd())
-    for f in files:
-        if f == 'settings.json':
-            #Prevent existing settings.json file from overwriting
-            print '>>> settings.json file already exists, will use the same path inside it.\n'
-            return
+
     settings_dict = {
         "credentials":{
             "username" : "",
             "password" : "",
             },
         "preferences":{
+            "use_cookie_for_download": True, #if false then username & password will be used
             "location" : set_path()+'/Lynda',
             "download_subtitles" : True
         }
@@ -98,10 +94,11 @@ def create_settings_json():
     out_file = open(LYNDOR_PATH+'/settings.json', 'w')
     json.dump(settings_dict, out_file, indent=4)
     out_file.close()
-    print '-> settings.json file created.\
- (To download videos to a different folder, replace the folder path in settings.json)'
-    print '\n>>> Your Lynda videos will be saved at -> '+ read_settings_json('preferences','location') +'\n'
 
+    print '>>> Courses will be saved at -> '+ read_settings_json('preferences', 'location') +'\n'
+    print '-> settings.json file created in Lyndor folder.\
+ (Have a look at this file, you can edit settings here.)\n'
+    
 def read_settings_json(section, key):
     ''' Read settings.json '''
     os.chdir(LYNDOR_PATH)
