@@ -41,7 +41,7 @@ def create_folder():
     path = read_settings_json('preferences', 'location')
     if not os.path.exists(path):
         os.makedirs(path)
-        print '-> Lynda folder created at: ' + read_settings_json('preferences', 'location')
+        print '-> Lynda folder created at: ' + read_settings_json('preferences', 'location') +'\n'
     else:
         print '>>> Lynda folder already exists\n'
 
@@ -89,13 +89,16 @@ def create_settings_json():
             "use_cookie_for_download": True, #if false then username & password will be used
             "location" : set_path()+'/Lynda',
             "download_subtitles" : True
+        },
+        "requirements":{
+            "dependencies": ['youtube-dl', 'lxml', 'beautifulsoup4', 'colorama']
         }
     }
     out_file = open(LYNDOR_PATH+'/settings.json', 'w')
     json.dump(settings_dict, out_file, indent=4)
     out_file.close()
 
-    print '>>> Courses will be saved at -> '+ read_settings_json('preferences', 'location') +'\n'
+    print '\n>>> Courses will be saved at -> '+ read_settings_json('preferences', 'location') +'\n'
     print '-> settings.json file created in Lyndor folder.\
  (Have a look at this file, you can edit settings here.)\n'
     
@@ -111,21 +114,27 @@ def read_settings_json(section, key):
 def install_dependencies():
     '''install required softwares'''
     os.chdir(LYNDOR_PATH)
-    requirements = open('requirements.txt')
-    line = requirements.readline()
-    for module in requirements:
+
+    in_file = open('settings.json', 'r')
+    requirements = json.load(in_file)
+    in_file.close()
+
+    dependencies = requirements['requirements']['dependencies']
+    
+    for module in dependencies:
         os.system('pip install '+ module)
-    requirements.close()
-    print '\n>>> All the required softwares are installed\n'
+
+    print '\n>>> All the required softwares are installed, \
+Don\'t forget to give a look at settings.json\n'
 
 if __name__ == '__main__':
     try:
-        install_dependencies()
         set_path()
         create_settings_json()
         create_folder()
         create_aliases()
         lynda_folder_files()
+        install_dependencies()
     except KeyboardInterrupt:
         print "Program execution cancelled through keyboard!"
         sys.exit(0)
