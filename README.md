@@ -19,9 +19,9 @@
 
 ### Platforms
 
-- Windows :wink
-- MacOS
-- Linux
+* Windows
+* MacOS
+* Linux
 
 ### Requirements
 
@@ -57,24 +57,23 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 - Course1 Folder
 ---- CONTENT.md
 ---- info.txt
----- 00 - Chapter A
----- 01 - Chapter B
+---- 00 - Chapter A     // chapter folder
+---- 01 - Chapter B     // ...
 ---- 02 - Chapter C
--- 1 - Video A
--- 2 - Video B
--- 3 - Video C
--- 4 - Video D
--- 5 - Video E
--- 6 - Video F
--- 7 - Video G
+-- 1 - Video A          // video file
+-- 2 - Video B          // video file
+-- 3 - Video C          // ...
+-- 1 - Video A.srt      // subtitle file
+-- 2 - Video B.srt      // subtitle file
+-- 3 - Video C.srt      // ...
 ```
 
 ### Lyndor Folder Structure
 ```
 - Lyndor Folder
 ---- LICENSE
----- settings.json
--- run.py
+---- settings.json      (edit settings here)
+-- run.py               (main file - execute the file, to run the program)
 -- chapters.py
 -- download.py
 -- ...
