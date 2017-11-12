@@ -61,8 +61,31 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 ```
 
 ### Usage
-* Extract cookies from browser after login to Lynda.com by addon [cookies.txt](https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg) extension
-* Your cookies.txt file must be downloaded in either Downloads or Desktop folder.
+
+* You can download lynda videos in two ways, either with username + password combination or with cookies.txt file
+* Add your username and password to settings.json and set "use_cookie_for_download": false
+* For organization login - use cookie method('No need to set username/password'), just edit settings.json to set "use_cookie_for_download": true
+
+```json
+// settings.json - File
+
+{
+    "credentials": {
+        "username": "",                     // username and password combination will 
+        "password": ""                      // only work when "use_cookie_for_download": false
+    },
+    "requirements": {
+        "dependencies": ["youtube-dl", "lxml", "beautifulsoup4", "colorama"]
+    },
+    "preferences": {
+        "download_subtitles": true,         // if false, subtitles won't be downloaded
+        "location": "/path/to/Movies/Lynda",
+        "use_cookie_for_download": true     // if false, username + password will be used instead
+    }
+}
+```
+
+
 ```bash
 # open terminal or commandline
 $ cd path/to/lyndor-folder
@@ -76,6 +99,10 @@ $ alias lynda='python2.7 /path-to/lyndor/run.py'
 * [**How to create alias?**](https://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)
 
 * The program will ask now for URL, just paste a course url in the Terminal/CMD - and the download should begin.
+
+#### If you wish to download via cookies (Recommended for Organizational login):
+* Extract cookies from browser after login to Lynda.com by addon [cookies.txt](https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg) extension
+* Your cookies.txt file must be downloaded in either Downloads or Desktop folder.
 
 ### Reporting Issues
 * Each release of the program is well tested on MacOS, feedback and bug reporting for Windows and Linux operating system is needed and will be greatly appreciated.
