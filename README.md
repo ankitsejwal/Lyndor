@@ -62,7 +62,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 
 ### Lyndor Folder Structure
 ```
-- Lyndor
+- Lyndor Folder
 ---- LICENSE
 ---- settings.json
 -- run.py
@@ -78,7 +78,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 
 * Lynda course can be downloaded in two ways, either with username + password combination or with cookies.txt file
 * Add your username and password to settings.json and set "use_cookie_for_download": false
-* For organization login - use cookie method('No need to set username/password'), just edit settings.json to set "use_cookie_for_download": true
+* For organization login - use cookie method, set "use_cookie_for_download": true in settings.json
 
 ```javascript
 // settings.json - File
@@ -103,8 +103,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 
 ```bash
 # open terminal or commandline
-$ cd path/to/lyndor-folder
-$ python run.py
+$ python path/to/lyndor-folder/run.py
 ```
 * **Windows** users can simply double click **Run-Lyndor.bat** to run the program. Run-Lyndor.bat file should be located in (Lynda) folder where all courses are downloaded.
 ```
