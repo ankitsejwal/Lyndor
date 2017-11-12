@@ -32,9 +32,10 @@ def main():
         message.animate_characters(Fore.LIGHTGREEN_EX, draw.COW, 0.1)
         message.colored_message(Fore.LIGHTGREEN_EX, "\nThe whole process took {}\n".format(renameFiles.hms_string(end_time - start_time)))
     except KeyboardInterrupt:
-        sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))        
+        sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
 
 def download_course(url):
+    ''' download course '''
     #check for a valid url
     if url.find('.html') == -1:
         sys.exit(message.animate_characters(Fore.LIGHTRED_EX, draw.ANONYMOUS, 0.02))
@@ -46,11 +47,12 @@ def download_course(url):
     course_folder_path = chapters.course_path(url, lynda_folder_path)
     desktop_folder_path = install.folder_path("Desktop")
     download_folder_path = install.folder_path("Downloads")
-    cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
-
-    # Edit cookie file
-    cookies.edit_cookie(cookie_path, message.NETSCAPE)
-
+    if install.read_settings_json('preferences','use_cookie_for_download'):
+        cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
+    else:
+        cookie_path = ''
+        message.colored_message(Fore.LIGHTGREEN_EX, '\nUsing username and password combination for download\n')
+        
     #create course folder
     try:
         chapters.save_course(url, lynda_folder_path)
