@@ -17,11 +17,13 @@
 - cookies.txt(Organizational login)     - Info files for each course
 ```
 
-### Platforms
-
-* Windows
-* MacOS
-* Linux
+```python
+#supports multiple platforms
+def platforms():
+    Windows = true
+    MacOS   = true
+    Linux   = true
+```
 
 ### Requirements
 
