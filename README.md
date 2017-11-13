@@ -19,7 +19,8 @@
 
 ```python
 #supports multiple platforms
-def platforms():
+
+def Operating_Systems():
     Windows = true
     MacOS   = true
     Linux   = true
