@@ -18,12 +18,14 @@
 ```
 
 ```python
-#supports multiple platforms
-
+#supports multiple platforms :)
 def Operating_Systems():
     Windows = true
     MacOS   = true
     Linux   = true
+
+    if Windows or MacOs or Linux:
+        print 'Have fun!!!'
 ```
 
 ### Requirements
