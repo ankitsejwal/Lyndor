@@ -29,7 +29,8 @@ def gather_info(url, course_path):
     software_tag = ''
     for tag in software_tags:
         software_tag += '#' + tag.text + '\t'
-
+    if software_tag == '':
+        software_tag += 'None'
     release_date = soup.find('span', {"id": "release-date"}).text
     duration = soup.find('div', {"class": "duration"}).find('span').text
     download_date = time.strftime("%d/%h/%Y")   # todays date
