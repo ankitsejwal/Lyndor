@@ -32,7 +32,7 @@ def gather_info(url, course_path):
 
     release_date = soup.find('span', {"id": "release-date"}).text
     duration = soup.find('div', {"class": "duration"}).find('span').text
-    download_date = time.strftime("%d-%h-%Y")   # todays date
+    download_date = time.strftime("%d/%h/%Y")   # todays date
 
     message.write("Course Name", course_title)
     message.write("Course id", course_id)
