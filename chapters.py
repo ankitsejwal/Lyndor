@@ -33,10 +33,6 @@ def gather_info(url, course_path):
     release_date = soup.find('span', {"id": "release-date"}).text
     duration = soup.find('div', {"class": "duration"}).find('span').text
     download_date = time.strftime("%d-%h-%Y")   # todays date
-    if soup.find('span', {"id": "update-date"}) != None:
-        update_date = soup.find('span', {"id": "update-date"}).text
-    else:
-        update_date = release_date
 
     message.write("Course Name", course_title)
     message.write("Course id", course_id)
@@ -45,7 +41,6 @@ def gather_info(url, course_path):
     message.write("Softwares", software_tag)
     message.write("Duration", duration)
     message.write("Release Date", release_date)
-    message.write("Updated On", update_date)
     message.write("Downloaded On", download_date)
     message.write("Course URL", url)
 
@@ -59,7 +54,6 @@ def gather_info(url, course_path):
         info_file.writelines('Softwares' + '\t\t' + software_tag + '\n')
         info_file.writelines('Duration' + '\t\t' + duration + '\n')
         info_file.writelines('Release Date' + '\t\t' + release_date + '\n')
-        info_file.writelines('Updated On' + '\t\t' + update_date + '\n')
         info_file.writelines('Downloaded On' + '\t\t' + download_date + '\n')
         info_file.writelines('Course URL' + '\t\t' + url + '\n')
     info_file.close()
