@@ -11,6 +11,7 @@ import draw
 from colorama import *
 
 def main():
+    ''' Main function '''
     init()
     message.animate_characters(Fore.LIGHTYELLOW_EX, draw.ROCKET, 0.05)
     message.spinning_cursor()
@@ -24,15 +25,36 @@ def main():
         if not urls:
             sys.exit(message.colored_message(Fore.LIGHTRED_EX, 'Please paste urls in Bulk Download.txt\n'))
         for url in urls:
-            download_course(url)
+            schedule_download(url)
     else:
-        download_course(url)
+        schedule_download(url)
     try:
         end_time = time.time()
         message.animate_characters(Fore.LIGHTGREEN_EX, draw.COW, 0.1)
         message.colored_message(Fore.LIGHTGREEN_EX, "\nThe whole process took {}\n".format(renameFiles.hms_string(end_time - start_time)))
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
+
+def schedule_download(url):
+    ''' Look for the scheduled time in settings.json '''
+    scheduled_time = install.read_settings_json('preferences', 'download_later_at')
+    if scheduled_time == '':
+        print '\nTip: You can schedule download time in settings.json to start download at midnight[00:00] or any other time.'
+        download_course(url)
+        return
+    else:
+        counter = True
+        message.colored_message(Fore.LIGHTGREEN_EX, 'Download time set to: ' + scheduled_time + '\
+ in settings.json, you can change or remove this time in settings.json\n')
+        try:
+            while counter:
+                if time.strftime("%H:%M") == scheduled_time:
+                    download_course(url)
+                    return
+                print 'Download will start at: ' + scheduled_time + ', leave this window open.'
+                time.sleep(60)
+        except(KeyboardInterrupt):
+            sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
 
 def download_course(url):
     ''' download course '''
@@ -47,7 +69,7 @@ def download_course(url):
     course_folder_path = chapters.course_path(url, lynda_folder_path)
     desktop_folder_path = install.folder_path("Desktop")
     download_folder_path = install.folder_path("Downloads")
-    if install.read_settings_json('preferences','use_cookie_for_download'):
+    if install.read_settings_json('preferences', 'use_cookie_for_download'):
         cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
     else:
         cookie_path = ''
