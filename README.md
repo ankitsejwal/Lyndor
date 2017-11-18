@@ -11,7 +11,7 @@
 ```
   Features:
 
-- Bulk Download,                        - Creates Course & Chapters folders
+- Bulk Download,                        - Creates Course & Chapter folders
 - subtitles download,                   - videos and subtitles renaming
 - username + password combination,      - adjust preferences (settings.json)
 - cookies.txt(Organizational login)     - Info files for each course
