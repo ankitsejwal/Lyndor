@@ -86,7 +86,7 @@ def save_course(urlink, lynda_folder_path):
     for course in courses:
         if (lynda_folder_path + course) == current_course:
         
-            QUESTION = '\nThis course already exists: Do you wish to delete it and download again? (Y/N): '
+            QUESTION = '\nCourse already exists: Do you wish to delete it and download again? (Y/N): '
             sys.stdout.write(Fore.LIGHTBLUE_EX + QUESTION + Fore.RESET)
             while answer != 'y':
                 answer = raw_input().lower()

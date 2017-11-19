@@ -39,7 +39,8 @@ def schedule_download(url):
     ''' Look for the scheduled time in settings.json '''
     scheduled_time = install.read_settings_json('preferences', 'download_later_at')
     if scheduled_time == '':
-        print '\nTip: You can schedule download time in settings.json.'
+        tip = 'Tip: You can schedule download time in settings.json.'
+        message.carriage_return_animate(tip)
         download_course(url)
         return
     else:
@@ -73,8 +74,8 @@ def download_course(url):
         cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
     else:
         cookie_path = ''
-        message.colored_message(Fore.LIGHTGREEN_EX, '\nUsing username and password combination for download\n')
-        
+        usr_pass_message = message.colored_message(Fore.LIGHTGREEN_EX, 'Using username and password combination for download\n')
+        message.carriage_return_animate(usr_pass_message)
     #create course folder
     try:
         chapters.save_course(url, lynda_folder_path)

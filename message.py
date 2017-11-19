@@ -42,4 +42,13 @@ def print_line(value):
     sys.stdout.flush()
 
 def colored_message(color, message):
-    print(color + message + Fore.RESET)
+    return color + message + Fore.RESET
+
+def carriage_return_animate(line):
+    for x in line:
+        sys.stdout.write(x)
+        time.sleep(0.02)
+        sys.stdout.flush()
+    sys.stdout.write('\r')
+    time.sleep(0.4)
+    
