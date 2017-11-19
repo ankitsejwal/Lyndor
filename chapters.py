@@ -82,23 +82,25 @@ def save_course(urlink, lynda_folder_path):
     current_course = course_path(urlink, lynda_folder_path)
     courses = os.listdir(lynda_folder_path)
     
+    answer = None
     for course in courses:
         if (lynda_folder_path + course) == current_course:
         
             QUESTION = '\nThis course already exists: Do you wish to delete it and download again? (Y/N): \n'
             message.colored_message(Fore.LIGHTBLUE_EX, QUESTION)
-            answer = None
             while answer != 'y' or answer != 'n':
                 answer = raw_input().lower()
                 if answer == 'y':
                     shutil.rmtree(current_course)
-                    message.colored_message(Fore.LIGHTRED_EX, "\n- Course deleted!!\n")
+                    message.colored_message(Fore.LIGHTRED_EX, "\n- Existing course folder deleted!!\n")
+                    time.sleep(2)
+                    message.colored_message(Fore.LIGHTGREEN_EX, "\n- re-downloading the course.")
                 elif answer == 'n':
-                    sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Ended!!\n"))
+                    sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n-> Program Ended!!\n"))
                 else:
-                    print 'oops! that\'s not a valid choice, type: Y or N'
+                    message.colored_message(Fore.LIGHTRED_EX, "\n- oops!! that's not a valid choice, type Y or N: ")
     os.mkdir(current_course)
-    
+
     # os.mkdir(current_course)
 def save_chapters(urlink, course_folder_path):
     ''' create chapters folder '''
