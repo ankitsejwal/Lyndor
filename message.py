@@ -42,6 +42,9 @@ def print_line(value):
     sys.stdout.flush()
 
 def colored_message(color, message):
+    print color + message + Fore.RESET
+
+def return_colored_message(color, message):
     return color + message + Fore.RESET
 
 def carriage_return_animate(line):

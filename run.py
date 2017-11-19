@@ -15,7 +15,7 @@ def main():
     init()
     message.animate_characters(Fore.LIGHTYELLOW_EX, draw.ROCKET, 0.05)
     message.spinning_cursor()
-    message.print_line('\n1. Paste course url or\n' +
+    message.print_line('\r1. Paste course url or\n' +
     '2. Press enter for Bulk Download')
     url = raw_input()
 
@@ -37,7 +37,7 @@ def main():
 
 def schedule_download(url):
     ''' Look for the scheduled time in settings.json '''
-    scheduled_time = install.read_settings_json('preferences', 'download_later_at')
+    scheduled_time = install.read_settings_json('preferences', 'download_time')
     if scheduled_time == '':
         tip = 'Tip: You can schedule download time in settings.json.'
         message.carriage_return_animate(tip)
@@ -74,7 +74,7 @@ def download_course(url):
         cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
     else:
         cookie_path = ''
-        usr_pass_message = message.colored_message(Fore.LIGHTGREEN_EX, 'Using username and password combination for download\n')
+        usr_pass_message = message.return_colored_message(Fore.LIGHTGREEN_EX, 'Using username and password combination for download\n')
         message.carriage_return_animate(usr_pass_message)
     #create course folder
     try:

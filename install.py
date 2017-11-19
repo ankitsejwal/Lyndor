@@ -89,7 +89,7 @@ def create_settings_json():
             "use_cookie_for_download": True, #if false then username & password will be used
             "location" : set_path()+'/Lynda',
             "download_subtitles" : True,
-            "download_later_at": ""
+            "download_time": ""
         },
         "requirements":{
             "dependencies": ['youtube-dl', 'lxml', 'beautifulsoup4', 'colorama']
