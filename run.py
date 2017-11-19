@@ -80,8 +80,8 @@ def download_course(url):
         chapters.save_course(url, lynda_folder_path)
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
-    except:
-        sys.exit(message.animate_characters(Fore.LIGHTWHITE_EX, draw.NOPE, 0.02))
+    # except:
+    #     sys.exit(message.animate_characters(Fore.LIGHTWHITE_EX, draw.NOPE, 0.02))
 
     #save chapters and videos
     try:

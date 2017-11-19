@@ -1,5 +1,7 @@
 import os
+import sys
 import time
+import shutil
 import urllib2
 import re
 from bs4 import BeautifulSoup
@@ -72,15 +74,32 @@ def course_path(urlink, lynda_folder_path):
     soup = create_soup(urlink)
     course_title = soup.find('h1', {"class": "default-title"}).text
     #remove non-alphanumeric characters
-    course_title = re.sub('[^ a-zA-Z0-9.,-]', '-', course_title)
-    course_path = lynda_folder_path + course_title
-    return course_path
+    course_title = re.sub('[^ a-zA-Z0-9.,-]', ' -', course_title)
+    return lynda_folder_path + course_title
 
 def save_course(urlink, lynda_folder_path):
     ''' create course folder '''
-    course = course_path(urlink, lynda_folder_path)
-    os.mkdir(course)
-
+    current_course = course_path(urlink, lynda_folder_path)
+    courses = os.listdir(lynda_folder_path)
+    
+    for course in courses:
+        if (lynda_folder_path + course) == current_course:
+        
+            QUESTION = '\nThis course already exists: Do you wish to delete it and download again? (Y/N): \n'
+            message.colored_message(Fore.LIGHTBLUE_EX, QUESTION)
+            answer = None
+            while answer != 'y' or answer != 'n':
+                answer = raw_input().lower()
+                if answer == 'y':
+                    shutil.rmtree(current_course)
+                    message.colored_message(Fore.LIGHTRED_EX, "\n- Course deleted!!\n")
+                elif answer == 'n':
+                    sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Ended!!\n"))
+                else:
+                    print 'oops! that\'s not a valid choice, type: Y or N'
+    os.mkdir(current_course)
+    
+    # os.mkdir(current_course)
 def save_chapters(urlink, course_folder_path):
     ''' create chapters folder '''
     soup = create_soup(urlink)
