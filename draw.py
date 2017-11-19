@@ -79,20 +79,20 @@ ROCKET = u"""\
            .d$ .
            d$$  :
           .$$$
-          :$$$   :        You can download multiple
-          $$$$   :        courses at one time, just
-          $$$$   :        paste all the urls in the 
-         .$$$$                Bulk Download.txt
+          :$$$   :         Download multiple courses
+          $$$$   :       at a time, just paste all the
+          $$$$   :         urls in Bulk Download.txt
+         .$$$$                
          :$$$$    :
          $$$$$    :
-         :    $$$$$
-         :    $$$$$
+         :    $$$$$           You can change your
+         :    $$$$$       preferences in settings.json
         .:    $$$$$.
        / :    $$$$: \\
       /  :    $$$$:  \\
      '        $$$$`   '
-     |   /:   $$$$\   | Ready
-     |  /     $$$` \  | To
-     |_/   :__$$P   \_| Launch !!!
+     |   /:   $$$$\   |   Ready
+     |  /     $$$` \  |   To
+     |_/   :__$$P   \_|   Launch !!!
 
 """

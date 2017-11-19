@@ -87,7 +87,7 @@ def save_course(urlink, lynda_folder_path):
         if (lynda_folder_path + course) == current_course:
         
             QUESTION = '\nThis course already exists: Do you wish to delete it and download again? (Y/N): '
-            message.colored_message(Fore.LIGHTBLUE_EX, QUESTION)
+            sys.stdout.write(Fore.LIGHTBLUE_EX + QUESTION + Fore.RESET)
             while answer != 'y':
                 answer = raw_input().lower()
                 if answer == 'y':
@@ -98,7 +98,7 @@ def save_course(urlink, lynda_folder_path):
                 elif answer == 'n':
                     sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n-> Program Ended!!\n"))
                 else:
-                    message.colored_message(Fore.LIGHTRED_EX, "\n- oops!! that's not a valid choice, type Y or N: ")
+                    sys.stdout.write(Fore.LIGHTRED_EX + "\n- oops!! that's not a valid choice, type Y or N: " + Fore.RESET)
     os.mkdir(current_course)
 
 def save_chapters(urlink, course_folder_path):

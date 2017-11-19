@@ -22,7 +22,7 @@ def spinning_cursor():
     '''spinning cursor'''
     flag = True
     while flag:
-        for cursor in '\\|/-\\|/-  -':
+        for cursor in '\\|/--> ':
             time.sleep(0.1)
             # Use '\r' to move cursor back to line beginning
             # Or use '\b' to erase the last character

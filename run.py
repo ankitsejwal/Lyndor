@@ -39,7 +39,7 @@ def schedule_download(url):
     ''' Look for the scheduled time in settings.json '''
     scheduled_time = install.read_settings_json('preferences', 'download_later_at')
     if scheduled_time == '':
-        print '\nTip: You can schedule download time in settings.json to start download at midnight[00:00] or any other time.'
+        print '\nTip: You can schedule download time in settings.json.'
         download_course(url)
         return
     else:
@@ -80,8 +80,6 @@ def download_course(url):
         chapters.save_course(url, lynda_folder_path)
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
-    # except:
-    #     sys.exit(message.animate_characters(Fore.LIGHTWHITE_EX, draw.NOPE, 0.02))
 
     #save chapters and videos
     try:
