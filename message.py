@@ -10,8 +10,6 @@ RENAMING_ERROR = "\nError in renaming file !!!"
 
 INFO_FILE_CREATED = "\n-> info.txt file created\n"
 
-COOKIE_NOT_FOUND_ERROR = "\n-> Oops!! Did you forget to put cookies.txt inside Downloads or Desktop folder ??\n"
-    
 def animate_characters(color, string, speed):
     '''printing ASCII arts line by line'''
     for line in string.splitlines():
@@ -54,4 +52,5 @@ def carriage_return_animate(line):
         sys.stdout.flush()
     sys.stdout.write('\r')
     time.sleep(0.4)
+    sys.stdout.write("\033[K")
     
