@@ -107,6 +107,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
     },
     "preferences": {
         "download_subtitles": true,         // if false, subtitles won't be downloaded
+        "download_time": "",
         "location": "/path/to/Movies/Lynda",
         "use_cookie_for_download": true     // if false, username + password will be used instead
     }
