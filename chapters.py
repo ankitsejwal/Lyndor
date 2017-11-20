@@ -37,7 +37,7 @@ def gather_info(url, course_path):
     duration = soup.find('div', {"class": "duration"}).find('span').text
     download_date = time.strftime("%d/%h/%Y")   # todays date
 
-    message.write("Course Name", course_title)
+    message.write("\nCourse Name", course_title)
     message.write("Course id", course_id)
     message.write("Author Name", author_name)
     message.write("Topics", topic_tag)

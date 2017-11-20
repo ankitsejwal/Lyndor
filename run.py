@@ -18,7 +18,7 @@ def main():
     message.print_line('\r1. Paste course url or\n' +
     '2. Press enter for Bulk Download')
     url = raw_input()
-
+    print ''
     start_time = time.time() #start time counter begins
     if url == "":
         urls = download.read_bulk_download()
