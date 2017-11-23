@@ -61,7 +61,7 @@ def gather_info(url, course_path):
         info_file.writelines('Course URL' + '\t\t' + url + '\n')
     info_file.close()
 
-    with open('CONTENT.md','a') as content_md:
+    with open('CONTENT.md', 'a') as content_md:
         content_md.writelines("# " + course_title + " with " + author_name + " on lynda.com \n\n")
         content_md.writelines("## Chapters:\n\n") # next heading
     content_md.close()
@@ -81,11 +81,11 @@ def save_course(urlink, lynda_folder_path):
     ''' create course folder '''
     current_course = course_path(urlink, lynda_folder_path)
     courses = os.listdir(lynda_folder_path)
-    
+
     answer = None
     for course in courses:
         if (lynda_folder_path + course) == current_course:
-        
+
             QUESTION = '\nCourse already exists: Do you wish to delete it and download again? (Y/N): '
             sys.stdout.write(Fore.LIGHTBLUE_EX + QUESTION + Fore.RESET)
             while answer != 'y':

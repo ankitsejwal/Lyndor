@@ -54,7 +54,7 @@ def schedule_download(url):
                     return
                 print 'Download will start at: ' + scheduled_time + ', leave this window open.'
                 time.sleep(60)
-        except(KeyboardInterrupt):
+        except KeyboardInterrupt:
             sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
 
 def download_course(url):
