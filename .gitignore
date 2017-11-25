@@ -6,4 +6,5 @@ aliases.bat
 testfile.py
 settings.json
 venv
+.python-version
 test.py
