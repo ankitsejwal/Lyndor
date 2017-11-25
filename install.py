@@ -23,7 +23,7 @@ def set_path():
     if check_os() == 'macos':
         os.chdir(os.path.expanduser('~/Movies'))
         return os.getcwd()
-    elif check_os() == 'windows' or check_os == 'linux':
+    elif check_os() == 'windows' or check_os() == 'linux':
         os.chdir(os.path.expanduser('~/Videos'))
         return os.getcwd()
 
@@ -87,7 +87,7 @@ def create_settings_json():
             },
         "preferences":{
             "use_cookie_for_download": True, #if false then username & password will be used
-            "location" : set_path()+'/Lynda',
+            "location" : set_path() + '/Lynda',
             "download_subtitles" : True,
             "download_time": ""
         },
@@ -130,7 +130,6 @@ Don\'t forget to give a look at settings.json\n'
 
 if __name__ == '__main__':
     try:
-        set_path()
         create_settings_json()
         create_folder()
         create_aliases()
