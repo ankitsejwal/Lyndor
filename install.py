@@ -23,7 +23,7 @@ def set_path():
     if check_os() == 'macos':
         os.chdir(os.path.expanduser('~/Movies'))
         return os.getcwd()
-    elif check_os() == 'windows':
+    elif check_os() == 'windows' or check_os == 'linux':
         os.chdir(os.path.expanduser('~/Videos'))
         return os.getcwd()
 
