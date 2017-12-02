@@ -1,4 +1,5 @@
-language: "python"
+language: python
 python:
-  - '2.7'
-script: pytest
+  - "2.7"
+script: 
+  - pytest
