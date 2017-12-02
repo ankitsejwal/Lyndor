@@ -126,7 +126,7 @@ def install_dependencies():
         os.system('pip install '+ module)
 
     print '\n>>> All the required softwares are installed, \
-Don\'t forget to give a look at settings.json\n'
+Don\'t forget to have a look at settings.json\n'
 
 if __name__ == '__main__':
     try:
