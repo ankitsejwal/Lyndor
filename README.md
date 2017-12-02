@@ -1,4 +1,4 @@
-## Lyndor #
+# Lyndor
 
 * This software can download any [**Lynda.com**](https://www.lynda.com) course
 * You will need a Lynda.com Basic, Premium or Organisation account inorder to download courses.
