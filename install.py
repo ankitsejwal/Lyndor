@@ -24,7 +24,11 @@ def set_path():
         os.chdir(os.path.expanduser('~/Movies'))
         return os.getcwd()
     elif check_os() == 'windows' or check_os() == 'linux':
-        os.chdir(os.path.expanduser('~/Videos'))
+        if find_a_file('Videos'):
+            os.chdir(os.path.expanduser('~/Videos'))
+        else:
+            os.mkdir(os.path.expanduser('~/Videos'))
+            os.chdir(os.path.expanduser('~/Videos'))
         return os.getcwd()
 
 def folder_path(folder):
@@ -35,6 +39,14 @@ def folder_path(folder):
     elif check_os() == 'windows':
         os.chdir(os.path.expanduser('~/'+folder))
         return os.getcwd()
+
+def find_a_file(folder):
+    ''' find a file in a directory '''
+    directory = os.path.expanduser('~/')
+    for fil in os.listdir(directory):
+        if fil == folder:
+            return True
+    return False 
 
 def create_folder():
     ''' Create lynda folder '''
