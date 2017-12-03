@@ -53,9 +53,9 @@ def create_folder():
     path = read_settings_json('preferences', 'location')
     if not os.path.exists(path):
         os.makedirs(path)
-        print '-> Lynda folder created at: ' + read_settings_json('preferences', 'location') +'\n'
+        print('-> Lynda folder created at: ' + read_settings_json('preferences', 'location') +'\n')
     else:
-        print '>>> Lynda folder already exists\n'
+        print('>>> Lynda folder already exists\n')
 
 def create_aliases():
     '''Create aliases file'''
