@@ -53,10 +53,10 @@ def write_content_md(path):
 
 def hms_string(sec_elapsed):
     ''' format elapsed time '''
-    h = int(sec_elapsed / (60 * 60))
-    m = int((sec_elapsed % (60 * 60)) / 60)
-    s = sec_elapsed % 60.
-    return "{}:{:>02}:{:>05.2f}".format(h, m, s)
+    hour = int(sec_elapsed / (60 * 60))
+    minutes = int((sec_elapsed % (60 * 60)) / 60)
+    seconds = sec_elapsed % 60.
+    return "{}:{:>02}:{:>05.2f}".format(hour, minutes, seconds)
 
 def execute(path):
     '''execute functions'''
