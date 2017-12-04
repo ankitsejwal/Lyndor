@@ -44,9 +44,9 @@ def rename(path):
 def write_content_md(path):
     ''' write the saved videos to content_md files '''
     with open('CONTENT.md', 'a') as content_md:
-        for f in os.listdir(path):
-            if f.endswith('.mp4'):
-                content_md.writelines('* ' + f + '\n')
+        for video in os.listdir(path):
+            if video.endswith('.mp4'):
+                content_md.writelines('* ' + video + '\n')
     content_md.close()
     print("\n-> CONTENT.md is created.")
 
