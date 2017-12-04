@@ -5,7 +5,7 @@ import message
 import chapters
 import cookies
 import download
-import renameFiles
+import rename_files
 import install
 import draw
 from colorama import *
@@ -31,7 +31,7 @@ def main():
     try:
         end_time = time.time()
         message.animate_characters(Fore.LIGHTGREEN_EX, draw.COW, 0.1)
-        message.colored_message(Fore.LIGHTGREEN_EX, "\nThe whole process took {}\n".format(renameFiles.hms_string(end_time - start_time)))
+        message.colored_message(Fore.LIGHTGREEN_EX, "\nThe whole process took {}\n".format(rename_files.hms_string(end_time - start_time)))
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
 
@@ -92,13 +92,13 @@ def download_course(url):
 
     # Rename files
     try:
-        path = renameFiles.assign_folder(course_folder_path)
+        path = rename_files.assign_folder(course_folder_path)
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
     except:
         sys.exit('error in assigning path')
     try:
-        renameFiles.execute(path)
+        rename_files.execute(path)
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
     except:
