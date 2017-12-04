@@ -18,6 +18,7 @@
 - Username + Password combination       - Adjust preferences (settings.json)
 - cookies.txt(Organizational login)     - Info files for each course
 - Schedule download time                - Cross platform support
+- aria2 (for faster downloads)
 ```
 
 ```python
@@ -101,17 +102,18 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 
 {
     "credentials": {
-        "username": "",                     // username and password combination will 
-        "password": "",                     // only work when "use_cookie_for_download": false
-        "use_cookie_for_download": true     // if false, username + password will be used instead
+        "username": "",                         // username and password combination will 
+        "password": "",                         // only work when "use_cookie_for_download": false
+        "use_cookie_for_download": true         // if false, username + password will be used instead
     },
     "requirements": {
         "dependencies": ["youtube-dl", "lxml", "beautifulsoup4", "colorama"]
     },
     "preferences": {
-        "download_subtitles": true,         // if false, subtitles won't be downloaded
-        "download_time": "",
-        "location": "/path/to/Movies/Lynda"
+        "download_subtitles": true,
+        "ext-downloader-aria2-installed": false, // set true after installing aria2 (faster downloads)
+        "location": "/Users/ankitsejwal/Movies/Lynda",
+        "download_time": ""
     }
 }
 ```
