@@ -102,7 +102,8 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 {
     "credentials": {
         "username": "",                     // username and password combination will 
-        "password": ""                      // only work when "use_cookie_for_download": false
+        "password": "",                     // only work when "use_cookie_for_download": false
+        "use_cookie_for_download": true     // if false, username + password will be used instead
     },
     "requirements": {
         "dependencies": ["youtube-dl", "lxml", "beautifulsoup4", "colorama"]
@@ -110,8 +111,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
     "preferences": {
         "download_subtitles": true,         // if false, subtitles won't be downloaded
         "download_time": "",
-        "location": "/path/to/Movies/Lynda",
-        "use_cookie_for_download": true     // if false, username + password will be used instead
+        "location": "/path/to/Movies/Lynda"
     }
 }
 ```

@@ -94,13 +94,14 @@ def create_settings_json():
 
     settings_dict = {
         "credentials":{
-            "username" : "",
-            "password" : "",
+            "username" : "",                    # use cookie for organizational login-
+            "password" : "",                    # instead of username & password
+            "use_cookie_for_download": True,    # if false, username & password will be used
             },
         "preferences":{
-            "use_cookie_for_download": True, #if false then username & password will be used
             "location" : set_path() + '/Lynda',
             "download_subtitles" : True,
+            "ext-downloader-aria2-installed": False, # set True after installing aria2, for faster downloads
             "download_time": ""
         },
         "requirements":{

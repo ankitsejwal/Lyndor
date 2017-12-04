@@ -70,7 +70,7 @@ def download_course(url):
     course_folder_path = chapters.course_path(url, lynda_folder_path)
     desktop_folder_path = install.folder_path("Desktop")
     download_folder_path = install.folder_path("Downloads")
-    if install.read_settings_json('preferences', 'use_cookie_for_download'):
+    if install.read_settings_json('credentials', 'use_cookie_for_download'):
         cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
     else:
         cookie_path = ''
