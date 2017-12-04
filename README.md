@@ -13,11 +13,11 @@
 ```
   Features:
 
-- Bulk Download                         - Creates Course & Chapter folders
-- subtitles download                    - videos and subtitles renaming
-- username + password combination       - adjust preferences (settings.json)
+- Bulk download                         - Creates Course & Chapter folders
+- Subtitles download                    - Videos and subtitles renaming
+- Username + Password combination       - Adjust preferences (settings.json)
 - cookies.txt(Organizational login)     - Info files for each course
-- Schedule download time                - cross platform support
+- Schedule download time                - Cross platform support
 ```
 
 ```python
