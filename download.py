@@ -7,24 +7,28 @@ import message
 def download_files(url, cookie_path, course_folder):
     ''' This function downloads all the videos in course folder'''
     os.chdir(course_folder)
+    COOKIE = install.read_settings_json('preferences', 'use_cookie_for_download')
+    SUBTITLE = install.read_settings_json('preferences', 'download_subtitles')
+    EXTERNAL_DOWNLOADER = install.read_settings_json('preferences', 'external-downloader')
+    USERNAME = install.read_settings_json('credentials', 'username')
+    PASSWORD = install.read_settings_json('credentials', 'password')
+        
     try:
-        # Checking subtitle preferences
-        if install.read_settings_json('preferences', 'download_subtitles'):
-            subtitles = ' --all-subs '
-        else:
-            subtitles = ' '
+        subtitles = ' --all-subs ' if SUBTITLE else ' '     # Checking subtitle preferences
+        # Output name of videos/subtitles
+        output = ' -o ' +'"'+ course_folder + "/%(playlist_index)s - %(title)s.%(ext)s" + '"'
+        # Extername downloader option
+        ext_downloader = ' --external-downloader aria2c' if EXTERNAL_DOWNLOADER == 'aria2c' else ''
+        cookie = ' --cookies ' + '"' + cookie_path + '"'    #cookie
+        username = ' -u ' + USERNAME                        #username
+        password = ' -p ' + PASSWORD                        #password
 
         # Checking cookie preferences
-        if  install.read_settings_json('preferences', 'use_cookie_for_download'):
-            # Edit cookie file
-            cookies.edit_cookie(cookie_path, message.NETSCAPE)
-            output = ' -o ' +'"'+ course_folder + "/%(playlist_index)s - %(title)s.%(ext)s" + '"'
-            os.system('youtube-dl --cookies '+'"'+cookie_path+'"' + output + subtitles + url)
+        if  COOKIE:
+            cookies.edit_cookie(cookie_path, message.NETSCAPE) # Edit cookie file
+            os.system('youtube-dl' + cookie + output + subtitles + url + ext_downloader)
         else:
-            username = ' -u ' + install.read_settings_json('credentials', 'username')
-            password = ' -p ' + install.read_settings_json('credentials', 'password')
-            output = ' -o ' +'"'+ course_folder + "/%(playlist_index)s - %(title)s.%(ext)s" + '"'
-            os.system('youtube-dl' + username + password + output + subtitles + url)
+            os.system('youtube-dl' + username + password + output + subtitles + url + ext_downloader)
     except KeyboardInterrupt:
         sys.exit('Program Interrupted')
 
