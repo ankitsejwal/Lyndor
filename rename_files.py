@@ -17,7 +17,6 @@ def assign_folder(folder):
 
 def rename(path):
     ''' Rename files '''
-
     message.colored_message(Fore.LIGHTYELLOW_EX, '\nRenaming videos to arrange them in correct order:\n')
     # Rename video files
     for vid in os.listdir(path):
