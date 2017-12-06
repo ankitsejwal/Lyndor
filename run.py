@@ -18,7 +18,7 @@ def main():
     message.print_line('\r1. Paste course url or\n' +
     '2. Press enter for Bulk Download')
     url = raw_input()
-    print ''
+    print('')
     start_time = time.time() #start time counter begins
     if url == "":
         urls = download.read_bulk_download()
@@ -52,7 +52,7 @@ def schedule_download(url):
                 if time.strftime("%H:%M") == scheduled_time:
                     download_course(url)
                     return
-                print 'Download will start at: ' + scheduled_time + ', leave this window open.'
+                print('Download will start at: ' + scheduled_time + ', leave this window open.')
                 time.sleep(60)
         except KeyboardInterrupt:
             sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))

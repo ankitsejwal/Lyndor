@@ -65,7 +65,7 @@ def create_aliases():
         alias = open('aliases.bat', 'w')
         alias.write(run_path)
         alias.close()
-        print '-> aliases.bat file created.\n'
+        print('-> aliases.bat file created.\n')
 
 def lynda_folder_files():
     ''' create Run-Lyndor.bat in windows '''
@@ -73,7 +73,7 @@ def lynda_folder_files():
     bulk_download = open('Bulk Download.txt','w')
     bulk_download.close()
     shutil.move('Bulk Download.txt', read_settings_json('preferences', 'location')+'/Bulk Download.txt')
-    print '-> Bulk Download.txt file created successfully.\n'
+    print('-> Bulk Download.txt file created successfully.\n')
     if check_os() == 'windows':
         run_path = 'python "'+os.getcwd()+'/run.py"'
         lynda = open('Run-Lyndor.bat', 'a')
@@ -86,7 +86,7 @@ def lynda_folder_files():
         try:
             os.rename('Run-Lyndor.bat', read_settings_json('preferences', 'location') + '/Run-Lyndor.bat')
         finally:
-            print '-> Run-Lyndor.bat file created.\n'
+            print('-> Run-Lyndor.bat file created.\n')
 
 def create_settings_json():
     ''' Create settings_json file '''
@@ -112,9 +112,9 @@ def create_settings_json():
     json.dump(settings_dict, out_file, indent=4)
     out_file.close()
 
-    print '\n>>> Courses will be saved at -> '+ read_settings_json('preferences', 'location') +'\n'
-    print '-> settings.json file created in Lyndor folder.\
- (Have a look at this file, you can edit settings here.)\n'
+    print('\n>>> Courses will be saved at -> '+ read_settings_json('preferences', 'location') +'\n')
+    print('-> settings.json file created in Lyndor folder.\
+ (Have a look at this file, you can edit settings here.)\n')
     
 def read_settings_json(section, key):
     ''' Read settings.json '''
@@ -138,8 +138,8 @@ def install_dependencies():
     for module in dependencies:
         os.system('pip install '+ module)
 
-    print '\n>>> All the required softwares are installed, \
-Don\'t forget to have a look at settings.json\n'
+    print('\n>>> All the required softwares are installed, \
+Don\'t forget to have a look at settings.json\n')
 
 if __name__ == '__main__':
     try:
@@ -149,6 +149,6 @@ if __name__ == '__main__':
         lynda_folder_files()
         install_dependencies()
     except KeyboardInterrupt:
-        print "Program execution cancelled through keyboard!"
+        print("Program execution cancelled through keyboard!")
         sys.exit(0)
             

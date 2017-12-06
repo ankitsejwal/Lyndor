@@ -13,7 +13,7 @@ INFO_FILE_CREATED = "\n-> info.txt file created\n"
 def animate_characters(color, string, speed):
     '''printing ASCII arts line by line'''
     for line in string.splitlines():
-        print color + line + Fore.RESET
+        print(color + line + Fore.RESET)
         time.sleep(speed)
 
 def spinning_cursor():
@@ -41,7 +41,7 @@ def print_line(value):
 
 def colored_message(color, message):
     ''' print colored line ''' 
-    print color + message + Fore.RESET
+    print(color + message + Fore.RESET)
 
 def return_colored_message(color, message):
     ''' return colored line '''
