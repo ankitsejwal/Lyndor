@@ -13,7 +13,7 @@ def check_os():
         return 'macos'
     elif sys.platform.lower() == 'win32':
         return 'windows'
-    elif sys.platform.lower() == 'linux2':
+    elif sys.platform.lower() == 'linux2' or sys.platform.lower() == 'linux':
         return 'linux'
     else:
         print('operating system not supported: ' + sys.platform.lower())
