@@ -18,7 +18,7 @@
 - Username + Password combination       - Adjust preferences (settings.json)
 - cookies.txt(Organizational login)     - Info files for each course
 - Schedule download time                - Cross platform support
-- aria2 (for faster downloads)
+- Runs on both python2 and python3      - aria2 downloader(for faster downloads)
 ```
 
 ```python
@@ -34,9 +34,9 @@ def Operating_Systems():
 
 ### Requirements
 
-* **Python 2.7**
+* **Python 2 or Python 3**
 * Python is free and comes pre-installed in MacOS and most Linux distributions, Windows users can install python from official [**python**](https://www.python.org/download/releases/2.7/) website
-* **NOTE:** Windows users must add python.exe to path 
+* **NOTE:** Windows users must add python.exe to path
 
 ![**Windows installer**](https://www.howtogeek.com/wp-content/uploads/2017/05/ximg_591a09e55df0e.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.Sy31NTwaIO.png)
 
