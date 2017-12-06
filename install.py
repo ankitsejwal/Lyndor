@@ -16,6 +16,7 @@ def check_os():
     elif sys.platform.lower() == 'linux2':
         return 'linux'
     else:
+        print('operating system not supported: ' + sys.platform.lower())
         sys.exit('unknown operating system.')
 
 def set_path():
