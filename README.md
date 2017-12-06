@@ -112,7 +112,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
     "preferences": {
         "download_subtitles": true,
         "ext-downloader-aria2-installed": false, // set true after installing aria2 (faster downloads)
-        "location": "/Users/ankitsejwal/Movies/Lynda",
+        "location": "/path/to/folder/Lynda",
         "download_time": ""
     }
 }
