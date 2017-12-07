@@ -113,7 +113,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
         "download_subtitles": true,
         "ext-downloader-aria2-installed": false, // set true after installing aria2 (faster downloads)
         "location": "/path/to/folder/Lynda",
-        "download_time": ""                      // set time to schedule download, like 00:00 for 12am
+        "download_time": ""                      // set time to schedule download (ex: "01:00" for 1am)
     }
 }
 ```
