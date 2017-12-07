@@ -122,7 +122,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 
 ```bash
 # open terminal or commandline
-$ python path/to/lyndor-folder/run.py
+$ python path/to/Lyndor/run.py
 ```
 * **Windows** users can simply double click **Run-Lyndor.bat** to run the program. Run-Lyndor.bat file should be located in (Lynda) folder where all courses are downloaded.
 ```
