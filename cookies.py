@@ -1,3 +1,5 @@
+''' Finds and edits cookie'''
+
 import os
 import sys
 import glob

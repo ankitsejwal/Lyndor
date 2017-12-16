@@ -1,3 +1,5 @@
+''' Installs Lyndor software and dependencies '''
+
 import os
 import sys
 import shutil

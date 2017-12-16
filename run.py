@@ -1,5 +1,6 @@
+''' Lyndor runs from here - contains the main functions '''
+
 import sys
-import os
 import time
 import message
 import chapters

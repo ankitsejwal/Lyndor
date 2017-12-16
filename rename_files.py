@@ -1,3 +1,5 @@
+''' Rename videos and subtitle, also write content.md '''
+
 import os
 import re
 import sys

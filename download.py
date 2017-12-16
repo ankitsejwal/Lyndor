@@ -1,3 +1,5 @@
+''' Downloads videos and subtitles '''
+
 import os
 import sys
 import install

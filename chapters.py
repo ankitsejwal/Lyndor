@@ -1,3 +1,5 @@
+''' Creates course folder/ Saves chapters'''
+
 import os
 import sys
 import time

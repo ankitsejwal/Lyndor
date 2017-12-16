@@ -1,3 +1,5 @@
+''' All printing messages and functions '''
+
 import time
 import sys
 from colorama import *
