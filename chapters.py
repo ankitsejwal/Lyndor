@@ -4,7 +4,7 @@ import os
 import sys
 import time
 import shutil
-import urllib2
+import requests
 import re
 from bs4 import BeautifulSoup
 import message
@@ -12,9 +12,9 @@ from colorama import *
 
 def create_soup(url):
     ''' create soup object '''
-    url = urllib2.urlopen(url)
-    pg_content = url.read()
-    return BeautifulSoup(pg_content, 'lxml')
+    request = requests.get(url)
+    page_content = request.content
+    return BeautifulSoup(page_content, 'html.parser')
 
 def gather_info(url, course_path):
     ''' gather course information. '''
