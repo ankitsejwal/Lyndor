@@ -19,11 +19,12 @@ def main():
     message.print_line('\r1. Paste course url or\n' +
     '2. Press enter for Bulk Download')
     
-    # Fix Python 2.x and 3.x
+    # Prevent name error on python 3.x
     try: 
         url = raw_input()
     except NameError:
         url = input()
+    
     print('')
     start_time = time.time() #start time counter begins
     if url == "":
