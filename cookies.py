@@ -8,7 +8,7 @@ from colorama import *
 
 def add_new_line(cookie, line):
     '''returns cookie file with NETSCAPE line'''
-    # fix python 2.x and 3.x
+    # fix for python 2.x and 3.x
     try:
         with file(cookie, 'r') as original: data = original.read()
         with file(cookie, 'w') as modified: modified.write(line + data)
