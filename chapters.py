@@ -91,7 +91,10 @@ def save_course(urlink, lynda_folder_path):
             QUESTION = '\nCourse already exists: Do you wish to delete it and download again? (Y/N): '
             sys.stdout.write(Fore.LIGHTBLUE_EX + QUESTION + Fore.RESET)
             while answer != 'y':
-                answer = raw_input().lower()
+                # fix for python 2.x and 3.x
+                try: answer = raw_input().lower()
+                except NameError: answer = input().lower() 
+
                 if answer == 'y':
                     shutil.rmtree(current_course)
                     message.colored_message(Fore.LIGHTRED_EX, "\nx- Existing course folder deleted!!\n")
