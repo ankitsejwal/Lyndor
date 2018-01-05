@@ -18,7 +18,12 @@ def main():
     message.spinning_cursor()
     message.print_line('\r1. Paste course url or\n' +
     '2. Press enter for Bulk Download')
-    url = raw_input()
+    
+    # Fix Python 2.x and 3.x
+    try: 
+        url = raw_input()
+    except NameError:
+        url = input()
     print('')
     start_time = time.time() #start time counter begins
     if url == "":
