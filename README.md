@@ -40,13 +40,14 @@ def Operating_Systems():
 
 ![**Windows installer**](https://www.howtogeek.com/wp-content/uploads/2017/05/ximg_591a09e55df0e.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.Sy31NTwaIO.png)
 
-### Install
+### Install Lyndor
 ```bash
-   $ cd path/to/lyndor
-   $ python install.py
-   # Apart from many other processes, install.py creates a Lynda folder inside your Videos or Movies folder
-   # all the courses will be downloaded to Lynda folder
-   # to change path later, paste your desired path into settings.json
+    # Download Lyndor then run following commands
+    $ cd path/to/lyndor
+    $ python install.py
+    # Apart from many other processes, install.py creates a Lynda folder inside your
+    # Videos or Movies folder, all the courses will be downloaded to Lynda folder
+    # to change path later, paste your desired path into settings.json
 ```
 Note: **Windows** users can simply double click **install.bat** file to run install.py file alternatively.
 
