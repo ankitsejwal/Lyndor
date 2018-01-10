@@ -4,11 +4,6 @@
 
 * Download any [**Lynda.com**](https://www.lynda.com) course for offline use.
 * You will need a Lynda.com Basic, Premium or Organisation account inorder to download courses.
-* On providing course url, the program will download - Course Folder, Chapters, Videos, Subtitles and Info files, and will arrange all the videos in correct order by renaming them in a sequence.
-* You can download multiple courses at one time by pasting several urls in **Bulk Download.txt**
-* info.txt and CONTENT.md file is created, containing additional info about the course.
-
-* **NOTE:** The Basic and Premium account costs about $20 and $30 respectively once the 30 day free trial ends, which is not much considering you are investing in your career or following your passion, thus you may get exponential returns.
 
 ```
   Features:
@@ -20,6 +15,11 @@
 - Schedule download time                - Cross platform support
 - Runs on both python2 and python3      - aria2 downloader(for faster downloads)
 ```
+
+* On providing course url, the program will download - Course Folder, Chapters, Videos, Subtitles and Info files, and will arrange all the videos in correct order by renaming them in a sequence.
+* Download multiple courses by pasting several urls in **Bulk Download.txt**
+* info.txt and CONTENT.md file is created, containing additional info about the course.
+* **NOTE:** The Basic and Premium account costs about $20 and $30 respectively once the 30 day free trial ends, which is not much considering you are investing in your career or following your passion, thus you may get exponential returns.
 
 ```python
 #supports multiple platforms :)
