@@ -129,7 +129,7 @@ $ python path/to/Lyndor/run.py
 * **Windows** users can simply double click **Run-Lyndor.bat** to run the program. Run-Lyndor.bat file should be located in (Lynda) folder where all courses are downloaded.
 ```
 # Linux and MacOS users can add Lynda keyword as alias to launch the program by just typing Lynda in terminal.
-$ alias lynda='python2.7 /path-to/lyndor/run.py'
+$ alias lynda='python /path-to/Lyndor/run.py'
 ```
 * [**How to create alias?**](https://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)
 
@@ -143,4 +143,4 @@ $ alias lynda='python2.7 /path-to/lyndor/run.py'
 * Each release of the program is well tested on MacOS, feedback and bug reporting for Windows and Linux operating system is needed and will be greatly appreciated.
 
 ### Requesting Features
-* New features are being requested constantly, you are encouraged to ask for a new feature from the Issues tab <img src="https://assets-cdn.github.com/favicon.ico" alt="octocat icon" width="18">
+* New features are being requested constantly, you are encouraged to ask for a new feature by creating a new issue. <img src="https://assets-cdn.github.com/favicon.ico" alt="octocat icon" width="18">
