@@ -42,10 +42,9 @@ def Operating_Systems():
 
 ### Install Lyndor
 ```bash
-    # Download Lyndor then run following commands
-
-    $ cd path/to/lyndor
-    $ python install.py
+    # Download Lyndor
+    # Open terminal or commandline
+    $ python path/to/Lyndor/install.py
 
     # Apart from many other processes, install.py creates a Lynda folder inside your
     # Videos or Movies folder, all the courses will be downloaded to Lynda folder
@@ -110,7 +109,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
         "use_cookie_for_download": true         // if false, username + password will be used instead
     },
     "requirements": {
-        "dependencies": ["youtube-dl", "lxml", "beautifulsoup4", "colorama"]
+        "dependencies": ["youtube-dl", "requests", "beautifulsoup4", "colorama"]
     },
     "preferences": {
         "download_subtitles": true,
