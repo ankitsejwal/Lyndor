@@ -7,4 +7,5 @@ testfile.py
 settings.json
 venv
 .python-version
+geckodriver.log
 test.py
