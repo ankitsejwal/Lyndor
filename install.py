@@ -108,7 +108,7 @@ def create_settings_json():
             "download_time": ""
         },
         "requirements":{
-            "dependencies": ['youtube-dl', 'requests', 'beautifulsoup4', 'colorama']
+            "dependencies": ['youtube-dl', 'requests', 'beautifulsoup4', 'colorama', 'selenium']
         }
     }
     out_file = open(LYNDOR_PATH+'/settings.json', 'w')
