@@ -6,7 +6,7 @@ import install
 import cookies
 import message
 
-def download_files(url, cookie_path, course_folder):
+def videos(url, cookie_path, course_folder):
     ''' This function downloads all the videos in course folder'''
     os.chdir(course_folder)
     COOKIE = install.read_settings_json('credentials', 'use_cookie_for_download')

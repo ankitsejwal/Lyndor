@@ -5,7 +5,7 @@ import time
 import message
 import chapters
 import cookies
-import download
+import videos
 import rename_files
 import install
 import draw
@@ -28,7 +28,7 @@ def main():
     print('')
     start_time = time.time() #start time counter begins
     if url == "":
-        urls = download.read_bulk_download()
+        urls = videos.read_bulk_download()
         if not urls:
             sys.exit(message.colored_message(Fore.LIGHTRED_EX, 'Please paste urls in Bulk Download.txt\n'))
         for url in urls:
@@ -93,7 +93,7 @@ def download_course(url):
     try:
         chapters.gather_info(url, course_folder_path)   # Gather information
         chapters.save_chapters(url, course_folder_path) # Create chapters inside course folder
-        download.download_files(url, cookie_path, course_folder_path) # Downloading lynda videos to course folder
+        videos.download(url, cookie_path, course_folder_path) # Downloading lynda videos to course folder
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
 
