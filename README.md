@@ -85,7 +85,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 ---- LICENSE
 ---- settings.json      (edit settings here)
 -- run.py               (main file - execute the file, to run the program)
--- chapters.py
+-- save.py
 -- download.py
 -- ...
 -- ...

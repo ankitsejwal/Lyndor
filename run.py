@@ -3,7 +3,7 @@
 import sys
 import time
 import message
-import chapters
+import save
 import cookies
 import videos
 import rename_files
@@ -66,7 +66,7 @@ def schedule_download(url):
 
 def download_course(url):
     ''' download course '''
-    #check for a valid url
+    # Check for a valid url
     if url.find('.html') == -1:
         sys.exit(message.animate_characters(Fore.LIGHTRED_EX, draw.ANONYMOUS, 0.02))
 
@@ -74,7 +74,7 @@ def download_course(url):
 
     # Folder/File paths
     lynda_folder_path = install.read_settings_json('preferences', 'location') + '/'
-    course_folder_path = chapters.course_path(url, lynda_folder_path)
+    course_folder_path = save.course_path(url, lynda_folder_path)
     desktop_folder_path = install.folder_path("Desktop")
     download_folder_path = install.folder_path("Downloads")
     if install.read_settings_json('credentials', 'use_cookie_for_download'):
@@ -83,16 +83,11 @@ def download_course(url):
         cookie_path = ''
         usr_pass_message = message.return_colored_message(Fore.LIGHTGREEN_EX, 'Using username and password combination for download\n')
         message.carriage_return_animate(usr_pass_message)
-    #create course folder
-    try:
-        chapters.save_course(url, lynda_folder_path)
-    except KeyboardInterrupt:
-        sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
 
-    #save chapters and videos
     try:
-        chapters.gather_info(url, course_folder_path)   # Gather information
-        chapters.save_chapters(url, course_folder_path) # Create chapters inside course folder
+        save.course(url, lynda_folder_path)         # Create course folder
+        save.info_file(url, course_folder_path)     # Gather information
+        save.chapters(url, course_folder_path)      # Create chapters inside course folder
         videos.download(url, cookie_path, course_folder_path) # Downloading lynda videos to course folder
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))

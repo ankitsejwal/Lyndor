@@ -16,7 +16,7 @@ def create_soup(url):
     page_content = request.content
     return BeautifulSoup(page_content, 'html.parser')
 
-def gather_info(url, course_path):
+def info_file(url, course_path):
     ''' gather course information. '''
     soup = create_soup(url)
     course_title = soup.find('h1', {"class": "default-title"}).text
@@ -49,7 +49,7 @@ def gather_info(url, course_path):
     message.write("Downloaded On", download_date)
     message.write("Course URL", url)
 
-    os.chdir(course_path)
+    os.chdir(course_path)   # Jump to course directory to save info.txt
 
     with open('info.txt', 'a') as info_file:
         info_file.writelines('Course Name' + '\t\t' + course_title + '\n')
@@ -79,7 +79,7 @@ def course_path(urlink, lynda_folder_path):
     course_title = re.sub('[^ a-zA-Z0-9.,-]', ' -', course_title)
     return lynda_folder_path + course_title
 
-def save_course(urlink, lynda_folder_path):
+def course(urlink, lynda_folder_path):
     ''' create course folder '''
     current_course = course_path(urlink, lynda_folder_path)
     courses = os.listdir(lynda_folder_path)
@@ -106,7 +106,7 @@ def save_course(urlink, lynda_folder_path):
                     sys.stdout.write(Fore.LIGHTRED_EX + "\n- oops!! that's not a valid choice, type Y or N: " + Fore.RESET)
     os.mkdir(current_course)
 
-def save_chapters(urlink, course_folder_path):
+def chapters(urlink, course_folder_path):
     ''' create chapters folder '''
     soup = create_soup(urlink)
     heading4 = soup.find_all('h4', {"class": "ga"})
