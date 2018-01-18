@@ -115,6 +115,8 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
         "download_subtitles": true,
         "ext-downloader-aria2-installed": false, // set true after installing aria2 (faster downloads)
         "location": "/path/to/folder/Lynda",
+        "download_exercise_file": False,         // feature not available for organizational login
+        "web_browser_for_exfile": "chrome",      // select chrome or firefox as a web browser
         "download_time": ""                      // set time to schedule download (ex: "01:00" for 1am)
     }
 }

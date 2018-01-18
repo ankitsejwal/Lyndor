@@ -103,7 +103,8 @@ def create_settings_json():
         "preferences":{
             "location" : set_path() + '/Lynda',
             "download_subtitles" : True,
-            "download_exercise_file": False,    # feature not available for organizational login 
+            "download_exercise_file": False,    # feature not available for organizational login
+            "web_browser_for_exfile": 'chrome', # select chrome or firefox as a web browser 
             "ext-downloader-aria2-installed": False, # set True after installing aria2, for faster downloads
             "download_time": ""
         },
