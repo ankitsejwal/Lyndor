@@ -6,8 +6,7 @@ import shutil
 import json
 
 real_path = os.path.realpath(__file__)
-real_path = real_path[:real_path.find('install.py')]
-LYNDOR_PATH = real_path
+LYNDOR_PATH = real_path[:real_path.find('install.py')]
 
 def check_os():
     '''Check operating system'''
