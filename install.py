@@ -4,6 +4,7 @@ import os
 import sys
 import shutil
 import json
+import requests
 
 real_path = os.path.realpath(__file__)
 LYNDOR_PATH = real_path[:real_path.find('install.py')]
@@ -142,6 +143,34 @@ def install_dependencies():
     for module in dependencies:
         os.system('pip install '+ module)
 
+def download_webdriver():
+    ''' Download web driver '''
+    os.chdir(LYNDOR_PATH)   # change directory to LYNDOR
+    
+    print('\n-> Downloading web driver for ' + check_os())
+    
+    if check_os() == 'windows':
+        chrome_url = 'https://chromedriver.storage.googleapis.com/2.35/chromedriver_win32.zip'
+        firefox_url = 'https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-win64.zip'
+    elif check_os() == 'macos':
+        chrome_url = 'https://chromedriver.storage.googleapis.com/2.35/chromedriver_mac64.zip'
+        firefox_url = 'https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-macos.tar.gz'
+    elif check_os() == 'linux':
+        chrome_url = 'https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip'
+        firefox_url = 'https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz'
+
+    chrome = requests.get(chrome_url)
+    firefox = requests.get(firefox_url)
+
+    with open('webdriver/chromedriver.zip', 'wb') as f:
+        f.write(chrome.content)
+    
+    with open('webdriver/firefoxdriver.zip', 'wb') as f:
+        f.write(firefox.content)
+
+    print('\nWeb driver downloaded inside /Lyndor/webdriver folder, extract the zip file and set the path of extracted\
+ file to "PATH" variable, see README.md file for more detail.\n')
+
     print('\n>>> All the required softwares are installed, \
 Don\'t forget to have a look at settings.json\n')
 
@@ -152,6 +181,7 @@ if __name__ == '__main__':
         create_aliases()
         lynda_folder_files()
         install_dependencies()
+        download_webdriver()
     except KeyboardInterrupt:
         print("Program execution cancelled through keyboard!")
         sys.exit(0)

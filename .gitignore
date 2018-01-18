@@ -9,3 +9,7 @@ venv
 .python-version
 geckodriver.log
 test.py
+chromedriver.zip
+chromedriver
+firefoxdriver.zip
+geckodriver
