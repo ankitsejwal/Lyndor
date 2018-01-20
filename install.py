@@ -168,11 +168,26 @@ def download_webdriver():
     with open('webdriver/firefoxdriver.zip', 'wb') as f:
         f.write(firefox.content)
 
-    print('\nWeb driver downloaded inside /Lyndor/webdriver folder, extract the zip file and set the path of extracted\
+    print('\n>>> Web driver downloaded inside "/Lyndor/webdriver" folder, extract the zip file and set the path of extracted\
  file to "PATH" variable, see README.md file for more detail.\n')
 
-    print('\n>>> All the required softwares are installed, \
-Don\'t forget to have a look at settings.json\n')
+    print('\n>>> Installation complete, Don\'t forget to have a look at settings.json\n')
+
+def download_aria2():
+    ''' Download aria2c for windows '''
+    import requests
+    os.chdir(LYNDOR_PATH)
+    if check_os() == 'macos':
+        try:
+            os.mkdir('aria2c')
+        except:
+            pass
+        aria = requests.get('https://github.com/aria2/aria2/releases/download/release-1.33.1/aria2-1.33.1-win-64bit-build1.zip')
+        print('\n-> Downloading aria2c for windows')
+        with open('./aria2c/aria2c.zip', 'wb') as f:
+            f.write(aria.content)
+        print('\n>>> aria2c.zip has been downloaded inside "Lyndor/aria2c" folder, you can unzip it \
+and double click aria2c.exe to install it for faster downloads')
 
 if __name__ == '__main__':
     try:
@@ -181,6 +196,7 @@ if __name__ == '__main__':
         create_aliases()
         lynda_folder_files()
         install_dependencies()
+        download_aria2()
         download_webdriver()
     except KeyboardInterrupt:
         print("Program execution cancelled through keyboard!")
