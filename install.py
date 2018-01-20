@@ -146,7 +146,10 @@ def download_webdriver():
     ''' Download web driver '''
     import requests
     os.chdir(LYNDOR_PATH)   # change directory to LYNDOR
-    
+    try:
+        os.mkdir('webdriver')   # create directory webdriver to save platform specific webdrivers
+    except:
+        pass
     print('\n-> Downloading web driver for ' + check_os())
     
     if check_os() == 'windows':
