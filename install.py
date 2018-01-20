@@ -4,7 +4,6 @@ import os
 import sys
 import shutil
 import json
-import requests
 
 real_path = os.path.realpath(__file__)
 LYNDOR_PATH = real_path[:real_path.find('install.py')]
@@ -145,6 +144,7 @@ def install_dependencies():
 
 def download_webdriver():
     ''' Download web driver '''
+    import requests
     os.chdir(LYNDOR_PATH)   # change directory to LYNDOR
     
     print('\n-> Downloading web driver for ' + check_os())
