@@ -177,7 +177,7 @@ def download_aria2():
     ''' Download aria2c for windows '''
     import requests
     os.chdir(LYNDOR_PATH)
-    if check_os() == 'macos':
+    if check_os() == 'windows':
         try:
             os.mkdir('aria2c')
         except:
