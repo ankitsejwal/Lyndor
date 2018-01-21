@@ -1,14 +1,7 @@
 ''' Lyndor runs from here - contains the main functions '''
 
-import sys
-import time
-import message
-import save
-import cookies
-import videos
-import rename_files
-import install
-import draw
+import sys, time
+import message, save, cookies, videos, install, rename_files, draw, exercise_file
 from colorama import *
 
 def main():
@@ -86,6 +79,7 @@ def download_course(url):
 
     try:
         save.course(url, lynda_folder_path)         # Create course folder
+        exercise_file.download(url, course_folder_path) # Download exercise-files
         save.info_file(url, course_folder_path)     # Gather information
         save.chapters(url, course_folder_path)      # Create chapters inside course folder
         videos.download(url, cookie_path, course_folder_path) # Downloading lynda videos to course folder

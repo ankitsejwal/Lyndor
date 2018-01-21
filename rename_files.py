@@ -1,8 +1,6 @@
 ''' Rename videos and subtitle, also write content.md '''
 
-import os
-import re
-import sys
+import os, re, shutil, sys
 import message
 from colorama import *
 
