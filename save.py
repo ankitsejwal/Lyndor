@@ -124,7 +124,7 @@ def chapters(urlink, course_folder_path):
     with open('CONTENT.md', 'a') as content_md:
         for h in heading4:
             chapter = h.text
-            chapter = re.sub('[,:?.><"/\\|*]', ' ', chapter)
+            chapter = re.sub('[,:?><"/\\|*]', ' ', chapter)
 
             if chapter[1] == '.':
                 chapter_name = chapter[3:]
