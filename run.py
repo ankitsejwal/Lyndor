@@ -88,9 +88,9 @@ def download_course(url):
             if save.check_exercise_file(url):
                 exercise_file.download(url, course_folder_path) # Download exercise-file
             else:
-                print('-> Exercise file not available.')
+                print('\n-> Exercise file not available.')
         else:
-            print('Exercise file downloads for organizational login is not supported, please download manually.')
+            print('\nExercise file downloads for organizational login is not supported, please download manually.')
         
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
