@@ -49,10 +49,10 @@ def download(url, course_folder):
         for folder in os.listdir():
             if folder == ex_file_name:
                 print('\r{}'.format('Download in progress ...'))
-                if os.path.getsize(folder) > 0: # if file completely.
+                if os.path.getsize(folder) > 0: # if file downloaded completely.
                     print('Download completed.')
                     file_not_found = False
-        time.sleep(1)
+        time.sleep(2)
     try:
         shutil.move(ex_file_name, course_folder)
         print('File Moved to Course Folder successfully.')

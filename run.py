@@ -79,10 +79,19 @@ def download_course(url):
 
     try:
         save.course(url, lynda_folder_path)         # Create course folder
-        exercise_file.download(url, course_folder_path) # Download exercise-files
         save.info_file(url, course_folder_path)     # Gather information
         save.chapters(url, course_folder_path)      # Create chapters inside course folder
         videos.download(url, cookie_path, course_folder_path) # Downloading lynda videos to course folder
+        # Download exercise file
+        # check for organizational login, should be false to download.
+        if not install.read_settings_json('credentials', 'use_cookie_for_download'):
+            if save.check_exercise_file(url):
+                exercise_file.download(url, course_folder_path) # Download exercise-file
+            else:
+                print('-> Exercise file not available.')
+        else:
+            print('Exercise file downloads for organizational login is not supported, please download manually.')
+        
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
 

@@ -71,6 +71,13 @@ def info_file(url, course_path):
     # print message
     message.print_line(message.INFO_FILE_CREATED)
 
+def check_exercise_file(url):
+    soup = create_soup(url)
+    ex_file = soup.find(id='exercise-tab')
+    if ex_file is not None:
+        return True
+    return False
+
 def course_path(urlink, lynda_folder_path):
     ''' finding course path '''
     soup = create_soup(urlink)
