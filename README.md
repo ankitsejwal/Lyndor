@@ -121,7 +121,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
         "download_subtitles": true,
         "ext-downloader-aria2-installed": false, // set true after installing aria2 (faster downloads)
         "location": "/path/to/folder/Lynda",
-        "download_exercise_file": False,         // feature not available for organizational login
+        "download_exercise_file": false,         // feature not available for organizational login
         "web_browser_for_exfile": "chrome",      // select chrome or firefox as a web browser
         "download_time": ""                      // set time to schedule download (ex: "01:00" for 1am)
     }
@@ -151,7 +151,7 @@ $ alias lyndor='python /path-to/Lyndor/run.py'
 * Extract cookies from browser after login to Lynda.com by addon [cookies.txt](https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg) extension
 * Your cookies.txt file must be downloaded in either Downloads or Desktop folder.
 
-#### Exercise files download:
+### Exercise files download:
 
 * Note: This feature isn't available for organizational login, also follow the steps below after Lyndor installation.
 
@@ -175,6 +175,17 @@ export PATH="/path/to/Lyndor/webdriver:$PATH"
 ```
 
 * Windows users can save the path as usual, here's an example [**saving PATH in windows**](https://www.youtube.com/watch?v=Y2q_b4ugPWk), note in the video some different directory is used as a demonstration, you just have to paste in 'webdriver' directory's path instead.
+
+```javascript
+// settings.json - File
+...
+...
+        "download_exercise_file": false,         // set true to download exercise files
+        "web_browser_for_exfile": "chrome",
+        "download_time": ""
+    }
+}
+```
 
 ### aria2 downloader for faster downloads:
 
