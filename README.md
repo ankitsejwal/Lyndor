@@ -14,6 +14,7 @@
 - cookies.txt(Organizational login)     - Info files for every course
 - Schedule download time                - Cross platform support
 - Runs on both python2 and python3      - aria2 downloader(for faster downloads)
+- Exercise file download
 ```
 
 * On providing course url, the program will download - Course Folder, Chapters, Videos, Subtitles and Info files, and will arrange all the videos in correct order by renaming them in a sequence.
@@ -91,6 +92,11 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 -- ...
 -- ...
 -- install.py
+--- webdriver           (directory)
+  - chromedriver.zip
+  - firefoxdriver.zip
+--- aria2c              (installed for Windows users only)
+  - aria2c.zip
 ```
 
 ### Usage
@@ -109,7 +115,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
         "use_cookie_for_download": true         // if false, username + password will be used instead
     },
     "requirements": {
-        "dependencies": ["youtube-dl", "requests", "beautifulsoup4", "colorama"]
+        "dependencies": ["youtube-dl", "selenium", "requests", "beautifulsoup4", "colorama"]
     },
     "preferences": {
         "download_subtitles": true,
@@ -128,21 +134,52 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 # open terminal or commandline
 $ python path/to/Lyndor/run.py
 ```
+
 * **Windows** users can simply double click **Run-Lyndor.bat** to run the program. Run-Lyndor.bat file should be located in (Lynda) folder where all courses are downloaded.
-```
+
+```bash
 # Linux and MacOS users can add Lynda keyword as alias to launch the program by just typing Lynda in terminal.
 $ alias lynda='python /path-to/Lyndor/run.py'
 ```
+
 * [**How to create alias?**](https://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)
 
 * The program will ask now for URL, just paste a course url in the Terminal/CMD - and the download should begin.
 
 #### If you wish to download via cookies (Recommended for Organizational login):
+
 * Extract cookies from browser after login to Lynda.com by addon [cookies.txt](https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg) extension
 * Your cookies.txt file must be downloaded in either Downloads or Desktop folder.
 
+#### Exercise files download:
+
+* Note: This feature isn't available for organizational login, also carry out steps below after Lyndor installation.
+
+* During installation two webdriver files will be downloaded inside the webdriver folder
+
+```bash
+-- ...
+-- ...
+-- ...
+-- install.py
+--- webdriver           (directory)
+  - chromedriver.zip
+  - firefoxdriver.zip
+```
+
+* unzip both the driver files to reveal the actual driver files, then copy the webdriver folder path to add to your PATH variable.
+
+```bash
+# for Mac or Linux -> add the new webdriver directory path to ~/.bash_profile or ~/.bash_rc
+export PATH="/path/to/Lyndor/webdriver:$PATH"
+```
+
+* Windows users can save the path as usual, here's an example [**saving PATH in windows**](https://www.youtube.com/watch?v=Y2q_b4ugPWk), note in the video some different directory is used as a demonstration, you just have to paste in 'webdriver' directory's path instead.
+
 ### Reporting Issues
+
 * Each release of the program is well tested on MacOS, feedback and bug reporting for Windows and Linux operating system is needed and will be greatly appreciated.
 
 ### Requesting Features
+
 * New features are being requested constantly, you are encouraged to ask for a new feature by creating a new issue. <img src="https://assets-cdn.github.com/favicon.ico" alt="octocat icon" width="18">
