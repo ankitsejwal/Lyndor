@@ -95,7 +95,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 --- webdriver           (directory)
   - chromedriver.zip
   - firefoxdriver.zip
---- aria2c              (installed for Windows users only)
+--- aria2c              (visible to Windows users only)
   - aria2c.zip
 ```
 
@@ -139,12 +139,12 @@ $ python path/to/Lyndor/run.py
 
 ```bash
 # Linux and MacOS users can add Lynda keyword as alias to launch the program by just typing Lynda in terminal.
-$ alias lynda='python /path-to/Lyndor/run.py'
+$ alias lyndor='python /path-to/Lyndor/run.py'
 ```
 
 * [**How to create alias?**](https://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)
 
-* The program will ask now for URL, just paste a course url in the Terminal/CMD - and the download should begin.
+* The program will ask now for URL, just paste a Course URL in the Terminal/Command-prompt -> press enter.
 
 #### If you wish to download via cookies (Recommended for Organizational login):
 
@@ -153,7 +153,7 @@ $ alias lynda='python /path-to/Lyndor/run.py'
 
 #### Exercise files download:
 
-* Note: This feature isn't available for organizational login, also carry out steps below after Lyndor installation.
+* Note: This feature isn't available for organizational login, also follow the steps below after Lyndor installation.
 
 * During installation two webdriver files will be downloaded inside the webdriver folder
 
@@ -167,7 +167,7 @@ $ alias lynda='python /path-to/Lyndor/run.py'
   - firefoxdriver.zip
 ```
 
-* unzip both the driver files to reveal the actual driver files, then copy the webdriver folder path to add to your PATH variable.
+* unzip both the ***driver.zip files to reveal the actual files inside it, then copy the webdriver folder path to add to your PATH variable.
 
 ```bash
 # for Mac or Linux -> add the new webdriver directory path to ~/.bash_profile or ~/.bash_rc
@@ -190,7 +190,7 @@ export PATH="/path/to/Lyndor/webdriver:$PATH"
 }
 ```
 
-* You have a option in settings.json which you can use for faster downloads, but you need to install the aria2 installer first.
+* You have an option in settings.json which you can use for faster downloads, but you need to install the aria2 installer first.
 
 * For Mac and Linux users it is very easy to install aria2c from command line.
 
@@ -199,7 +199,7 @@ export PATH="/path/to/Lyndor/webdriver:$PATH"
 $ brew install aria2
 ```
 
-* Windows users need .exe file to install it, which this program downloads for windows users, you can find a folder named 'aria2' after the installation, it will contains aria2.zip file, just extract and double click the .exe file to install aria2.
+* Windows users need .exe file to install it, which this program downloads for windows users, you can find a folder inside Lyndor, called 'aria2', it will contains aria2.zip file, just extract and double click the .exe file to install aria2.
 
 ### Reporting Issues
 
