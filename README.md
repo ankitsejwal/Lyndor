@@ -208,3 +208,7 @@ $ brew install aria2
 ### Requesting Features
 
 * New features are being requested constantly, you are encouraged to ask for a new feature by creating a new issue. <img src="https://assets-cdn.github.com/favicon.ico" alt="octocat icon" width="18">
+
+### Acknowledgement
+
+* Thanks to [**youtube-dl**](https://github.com/rg3/youtube-dl), selenium, beautifulsoup, requests, colorama for providing their open source code to enable this project.
