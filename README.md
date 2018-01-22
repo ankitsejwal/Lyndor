@@ -176,6 +176,31 @@ export PATH="/path/to/Lyndor/webdriver:$PATH"
 
 * Windows users can save the path as usual, here's an example [**saving PATH in windows**](https://www.youtube.com/watch?v=Y2q_b4ugPWk), note in the video some different directory is used as a demonstration, you just have to paste in 'webdriver' directory's path instead.
 
+### aria2 downloader for faster downloads:
+
+```javascript
+// settings.json - File
+...
+...
+        "ext-downloader-aria2-installed": false, // set true after installing aria2
+        "location": "/path/to/folder/Lynda",
+        "download_exercise_file": False,
+        "web_browser_for_exfile": "chrome",
+     }
+}
+```
+
+* You have a option in settings.json which you can use for faster downloads, but you need to install the aria2 installer first.
+
+* For Mac and Linux users it is very easy to install aria2c from command line.
+
+```bash
+# for example you can download aria2 on MacOs using homebrew
+$ brew install aria2
+```
+
+* Windows users need .exe file to install it, which this program downloads for windows users, you can find a folder named 'aria2' after the installation, it will contains aria2.zip file, just extract and double click the .exe file to install aria2.
+
 ### Reporting Issues
 
 * Each release of the program is well tested on MacOS, feedback and bug reporting for Windows and Linux operating system is needed and will be greatly appreciated.
