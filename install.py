@@ -87,6 +87,8 @@ def lynda_folder_files():
         lynda.close()
         try:
             os.rename('Run-Lyndor.bat', read_settings_json('preferences', 'location') + '/Run-Lyndor.bat')
+        except:
+            pass
         finally:
             print('-> Run-Lyndor.bat file created.\n')
 

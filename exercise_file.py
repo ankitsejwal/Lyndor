@@ -45,8 +45,9 @@ def download(url, course_folder):
     file_not_found = True
     while file_not_found:
         message.spinning_cursor()
-        os.chdir(install.folder_path("Downloads"))
-        for folder in os.listdir():
+        downloads_folder = install.folder_path("Downloads")
+        os.chdir(downloads_folder)
+        for folder in os.listdir(downloads_folder):
             if folder == ex_file_name:
                 print('\r{}'.format('Download in progress ...'))
                 if os.path.getsize(folder) > 0: # if file downloaded completely.
@@ -58,7 +59,3 @@ def download(url, course_folder):
         print('File Moved to Course Folder successfully.')
     except:
         print('Moving error.')
-
-    
-if __name__ == '__main__':
-    download('https://www.lynda.com/Python-tutorials/Programming-Fundamentals-Real-World/418249-2.html')
