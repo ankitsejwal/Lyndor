@@ -34,7 +34,7 @@ def Operating_Systems():
 ```
 
 ## Requirements
----------------
+
 * **Python 2 or Python 3**
 * Python is free and comes pre-installed in MacOS and most Linux distributions, Windows users can install python from official [**python**](https://www.python.org/download/releases/2.7/) website
 * **NOTE:** Windows users must add python.exe to path
@@ -42,7 +42,6 @@ def Operating_Systems():
 ![**Windows installer**](https://www.howtogeek.com/wp-content/uploads/2017/05/ximg_591a09e55df0e.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.Sy31NTwaIO.png)
 
 ## Install Lyndor
------------------
 
 ```bash
     # Download Lyndor
@@ -56,7 +55,6 @@ def Operating_Systems():
 Note: **Windows** users can simply double click **install.bat** file to run install.py file alternatively.
 
 ## Lynda Folder Structure
--------------------------
 
 ```
 - Lynda Folder          (Here goes all your downloaded courses)
@@ -69,7 +67,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 ```
 
 ## Course Folder Structure
---------------------------
+
 ```
 - Course1 Folder
 ---- CONTENT.md
@@ -86,7 +84,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 ```
 
 ## Lyndor Folder Structure
---------------------------
+
 ```
 - Lyndor Folder
 ---- LICENSE
@@ -105,8 +103,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
   - aria2c.zip
 ```
 
-### Usage
----------
+## Usage
 
 * Lynda course can be downloaded in two ways, either with username + password combination or with cookies.txt file
 * Add your username and password to settings.json and set ["use_cookie_for_download": false]
@@ -135,8 +132,8 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 }
 ```
 
-#### To run the program
------------------------
+## Run Lyndor
+
 
 ```bash
 # open terminal or commandline
@@ -154,7 +151,7 @@ $ alias lyndor='python /path-to/Lyndor/run.py'
 
 * The program will ask now for URL, just paste a Course URL in the Terminal/Command-prompt -> press enter.
 
-#### If you wish to download via cookies (Recommended for Organizational login)
+### If you wish to download via cookies (Recommended for Organizational login)
 -------------------------
 
 * Extract cookies from browser after login to Lynda.com by addon [cookies.txt](https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg) extension
@@ -197,8 +194,8 @@ export PATH="/path/to/Lyndor/webdriver:$PATH"
 }
 ```
 
-### aria2 downloader for faster downloads
------------------------------------------
+## aria2 downloader for faster downloads
+
 
 ```javascript
 // settings.json - File
@@ -223,17 +220,14 @@ $ brew install aria2
 
 * Windows users need .exe file to install it, which this program downloads for windows users, you can find a folder inside Lyndor, called 'aria2', it will contains aria2.zip file, just extract the zip file and set the path of the directory to windows PATH variable here's an example [**saving PATH in windows**](https://www.youtube.com/watch?v=Y2q_b4ugPWk), watch the video to get a general idea.
 
-### Reporting Issues
---------------------
+## Reporting Issues
 
 * Each release of the program is well tested on MacOS, feedback and bug reporting for Windows and Linux operating system is needed and will be greatly appreciated.
 
-### Requesting Features
------------------------
+## Requesting Features
 
 * New features are being requested constantly, you are encouraged to ask for a new feature by creating a new issue. <img src="https://assets-cdn.github.com/favicon.ico" alt="octocat icon" width="18">
 
-### Acknowledgement
--------------------
+## Acknowledgement
 
 * Thanks to [**youtube-dl**](https://github.com/rg3/youtube-dl), selenium, beautifulsoup, requests, colorama for providing their open source code to enable this project.
