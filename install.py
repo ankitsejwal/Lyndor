@@ -1,9 +1,6 @@
 ''' Installs Lyndor software and dependencies '''
 
-import os
-import sys
-import shutil
-import json
+import os, sys, shutil, zipfile, json
 
 real_path = os.path.realpath(__file__)
 LYNDOR_PATH = real_path[:real_path.find('install.py')]
@@ -173,8 +170,8 @@ def download_webdriver():
     with open('webdriver/firefoxdriver.zip', 'wb') as f:
         f.write(firefox.content)
 
-    print('\n>>> Web driver downloaded inside "/Lyndor/webdriver" folder, extract the zip file and set the path of extracted\
- file to "PATH" variable, see README.md file for more detail.\n')
+    print('\n>>> Web driver downloaded inside "/Lyndor/webdriver" folder, extract the zip file and\
+set the webdriver directory path to "PATH" variable, see README.md file for more detail.\n')
 
     print('\n>>> Installation complete, Don\'t forget to have a look at settings.json\n')
 
@@ -191,8 +188,14 @@ def download_aria2():
         print('\n-> Downloading aria2c for windows')
         with open('./aria2c/aria2c.zip', 'wb') as f:
             f.write(aria.content)
-        print('\n>>> aria2c.zip has been downloaded inside "Lyndor/aria2c" folder, you can unzip it \
-and double click aria2c.exe to install it for faster downloads')
+        print('\n>>> aria2c.zip has been downloaded inside "Lyndor/aria2c" folder')
+        print('>>> unzipping aria2c.zip')
+        unzip('aria2c', 'aria2c.zip')
+        print('>>> aria2c.zip has been unzipped, copy its path and save to PATH variable.\n')
+
+def unzip(directory, zip_file):
+    with zipfile.ZipFile(directory + '/' + zip_file, 'r' ) as f:
+        f.extractall(path=directory)
 
 if __name__ == '__main__':
     try:
