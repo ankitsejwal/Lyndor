@@ -1,4 +1,4 @@
-''' Installs Lyndor software and dependencies '''
+''' Install Lyndor software and dependencies '''
 
 import os
 import sys
@@ -113,18 +113,16 @@ def create_settings_json():
 
     settings_dict = {
         "credentials": {
-            "username": "",                    # use cookie for organizational login-
-            "password": "",                    # instead of username & password
-            "use_cookie_for_download": True,    # if false, username & password will be used
+            "username": "",                             # use cookie for organizational login-
+            "password": "",                             # instead of username & password
+            "use_cookie_for_download": True,            # if false, username & password will be used
         },
         "preferences": {
             "location": set_path() + '/Lynda',
             "download_subtitles": True,
-            # feature not available for organizational login
-            "download_exercise_file": False,
-            "web_browser_for_exfile": 'chrome',  # select chrome or firefox as a web browser
-            # set True after installing aria2, for faster downloads
-            "ext-downloader-aria2-installed": False,
+            "download_exercise_file": False,            # feature unavailable for organizational login
+            "web_browser_for_exfile": 'chrome',         # select chrome or firefox as a web browser
+            "ext-downloader-aria2-installed": False,    # set True after installing aria2
             "download_time": ""
         },
         "requirements": {
