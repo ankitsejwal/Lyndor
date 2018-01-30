@@ -3,7 +3,10 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import install, message
-import os, sys, time, shutil
+import os
+import sys
+import time
+import shutil
 
 username = install.read_settings_json('credentials', 'username')
 password = install.read_settings_json('credentials', 'password')
