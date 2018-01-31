@@ -9,12 +9,12 @@
   Features:
 
 - Bulk download                         - Creates Course & Chapter folders
-- Subtitles download                    - Videos and subtitles renaming
+- Subtitles download                    - Transfer videos & subtitles to Chapters
 - Username + Password combination       - Adjust preferences (settings.json)
 - cookies.txt(Organizational login)     - Info files for every course
 - Schedule download time                - Cross platform support
 - Runs on both python2 and python3      - aria2 downloader(for faster downloads)
-- Exercise file download
+- Exercise file download                - Videos and subtitles renaming
 ```
 
 * On providing course url, the program will download - Course Folder, Chapters, Videos, Subtitles and Info files, and will arrange all the videos in correct order by renaming them in a sequence.
