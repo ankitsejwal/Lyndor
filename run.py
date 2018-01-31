@@ -102,12 +102,6 @@ def download_course(url):
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
     except:
         sys.exit('error in assigning path')
-    try:
-        rename_files.execute(path)
-    except KeyboardInterrupt:
-        sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
-    except:
-        sys.exit(message.RENAMING_ERROR)
 
 if __name__ == '__main__':
     main()

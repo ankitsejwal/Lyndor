@@ -65,7 +65,6 @@ def info_file(url, course_path):
 
     with open('CONTENT.md', 'a') as content_md:
         content_md.writelines("# " + course_title + " with " + author_name + " on lynda.com \n\n")
-        content_md.writelines("## Chapters:\n\n") # next heading
     content_md.close()
 
     # print message
@@ -78,17 +77,17 @@ def check_exercise_file(url):
         return True
     return False
 
-def course_path(urlink, lynda_folder_path):
+def course_path(url, lynda_folder_path):
     ''' finding course path '''
-    soup = create_soup(urlink)
+    soup = create_soup(url)
     course_title = soup.find('h1', {"class": "default-title"}).text
     # Check for valid characters
     course_title = re.sub('[,:?.><"/\\|*]', ' -', course_title)
     return lynda_folder_path + course_title
 
-def course(urlink, lynda_folder_path):
+def course(url, lynda_folder_path):
     ''' create course folder '''
-    current_course = course_path(urlink, lynda_folder_path)
+    current_course = course_path(url, lynda_folder_path)
     courses = os.listdir(lynda_folder_path)
 
     answer = None
@@ -113,37 +112,58 @@ def course(urlink, lynda_folder_path):
                     sys.stdout.write(Fore.LIGHTRED_EX + "\n- oops!! that's not a valid choice, type Y or N: " + Fore.RESET)
     os.mkdir(current_course)
 
-def chapters(urlink, course_folder_path):
+def chapters(url, course_folder_path):
     ''' create chapters folder '''
-    soup = create_soup(urlink)
+    soup = create_soup(url)
     heading4 = soup.find_all('h4', {"class": "ga"})
     chapter_no = 0
 
     message.colored_message(Fore.LIGHTYELLOW_EX, "Creating Chapters:\n") # Print message
 
-    with open('CONTENT.md', 'a') as content_md:
-        for h in heading4:
-            chapter = h.text
-            chapter = re.sub('[,:?><"/\\|*]', ' ', chapter)
+    
+    for h in heading4:
+        chapter = h.text
+        chapter = re.sub('[,:?><"/\\|*]', ' ', chapter)
 
-            if chapter[1] == '.':
-                chapter_name = chapter[3:]
-                chapter = str(chapter_no).zfill(2) + '. ' + chapter_name
-                chapter_no += 1
-            elif chapter[2] == '.':
-                chapter_name = chapter[4:]
-                chapter = str(chapter_no).zfill(2) + '. ' + chapter_name
-                chapter_no += 1
-            else:
-                chapter = str(chapter_no).zfill(2) + '. ' + chapter
-                chapter_no += 1
-            message.print_line(chapter)
+        if chapter[1] == '.':
+            chapter_name = chapter[3:]
+            chapter = str(chapter_no).zfill(2) + '. ' + chapter_name
+            chapter_no += 1
+        elif chapter[2] == '.':
+            chapter_name = chapter[4:]
+            chapter = str(chapter_no).zfill(2) + '. ' + chapter_name
+            chapter_no += 1
+        else:
+            chapter = str(chapter_no).zfill(2) + '. ' + chapter
+            chapter_no += 1
+        message.print_line(chapter)
 
-            os.mkdir(course_folder_path + "/" + chapter) # create folders (chapters)
-            content_md.writelines('* ' + chapter + '\n') # writelines to content_md
-
-        content_md.writelines('\n## Video files:\n\n') # next heading
-    content_md.close() # close content_md
-
+        os.mkdir(course_folder_path + "/" + chapter) # create folders (chapters)
+            
+    chapters_and_videos_to_contentmd(url)
     message.colored_message(Fore.LIGHTGREEN_EX, '\n-> '+str(chapter_no)+' chapters created!!\n')
  
+ 
+def chapters_and_videos_to_contentmd(url):
+
+    soup = create_soup(url)
+
+    chapters = soup.find_all("h4", class_="ga")
+    ul_video = soup.find_all('ul', class_="row toc-items")
+    
+    chapter_count = 0
+    video_count = 0
+
+    with open('CONTENT.md', 'a') as content_md:
+
+        for li in ul_video:
+            content_md.writelines('\n## ' + chapters[chapter_count].text + '\n')
+            chapter_count += 1
+            group = li.find_all('a', class_='video-name')
+            for video in group:
+                content_md.writelines('\n* ' + str(video_count).zfill(2) + ' - ' + video.text.strip())
+                video_count += 1
+            content_md.writelines('\n\n')
+
+    content_md.close()                  # close content.md - operation finished
+    print("\n-> CONTENT.md is created.")
