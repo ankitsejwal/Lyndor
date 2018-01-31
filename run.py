@@ -83,6 +83,7 @@ def download_course(url):
         save.info_file(url, course_folder_path)     # Gather information
         save.chapters(url, course_folder_path)      # Create chapters inside course folder
         videos.download(url, cookie_path, course_folder_path) # Downloading lynda videos to course folder
+        move.vid_srt_to_chapter(url, course_folder_path) # Move videos and subtitles to chapter folders
         # Download exercise file
         # check for organizational login, should be false to download.
         if not install.read_settings_json('credentials', 'use_cookie_for_download'):

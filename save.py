@@ -163,7 +163,7 @@ def chapters_and_videos_to_contentmd(url):
             for video in group:
                 content_md.writelines('\n* ' + str(video_count).zfill(2) + ' - ' + video.text.strip())
                 video_count += 1
-            content_md.writelines('\n\n')
+            content_md.writelines('\n')
 
     content_md.close()                  # close content.md - operation finished
     print("\n-> CONTENT.md is created.")
