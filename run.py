@@ -1,7 +1,7 @@
 ''' Lyndor runs from here - contains the main functions '''
 
 import sys, time
-import message, save, cookies, videos, install, rename_files, draw, exercise_file
+import message, save, cookies, videos, install, move, draw, exercise_file
 from colorama import *
 
 def main():
@@ -31,7 +31,7 @@ def main():
     try:
         end_time = time.time()
         message.animate_characters(Fore.LIGHTGREEN_EX, draw.COW, 0.1)
-        message.colored_message(Fore.LIGHTGREEN_EX, "\nThe whole process took {}\n".format(rename_files.hms_string(end_time - start_time)))
+        message.colored_message(Fore.LIGHTGREEN_EX, "\nThe whole process took {}\n".format(move.hms_string(end_time - start_time)))
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
 
@@ -70,6 +70,7 @@ def download_course(url):
     course_folder_path = save.course_path(url, lynda_folder_path)
     desktop_folder_path = install.folder_path("Desktop")
     download_folder_path = install.folder_path("Downloads")
+    
     if install.read_settings_json('credentials', 'use_cookie_for_download'):
         cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
     else:
@@ -95,13 +96,6 @@ def download_course(url):
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
 
-    # Rename files
-    try:
-        path = rename_files.assign_folder(course_folder_path)
-    except KeyboardInterrupt:
-        sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
-    except:
-        sys.exit('error in assigning path')
 
 if __name__ == '__main__':
     main()
