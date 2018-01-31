@@ -43,9 +43,9 @@ def vid_srt_to_chapter(url, course_folder):
         for video in group:
             video_count += 1
             video_name = str(video_count).zfill(2) + ' - ' + video.text.strip() + '.mp4'
-            video_name = re.sub('[:?><"/\\|*]', '', video_name)
+            video_name = re.sub('[:?><"/\\|*]', ' -', video_name)
             subtitle_name = str(video_count).zfill(2) + ' - ' + video.text.strip() + '.en.srt'
-            subtitle_name = re.sub('[:?><"/\\|*]', '', subtitle_name)
+            subtitle_name = re.sub('[:?><"/\\|*]', ' -', subtitle_name)
             
             try:
                 shutil.move(video_name, chapter_name)
@@ -57,7 +57,7 @@ def vid_srt_to_chapter(url, course_folder):
             except:
                 pass
 
-    print('\n>>> Files moved successfully.')
+    print('\n>>> videos/subtitles moved inside chapters folder successfully.')
 
 def hms_string(sec_elapsed):
     ''' format elapsed time '''

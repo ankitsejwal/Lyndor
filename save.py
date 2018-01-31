@@ -126,16 +126,13 @@ def chapters(url, course_folder_path):
         chapter = re.sub('[,:?><"/\\|*]', ' ', chapter)
 
         if chapter[1] == '.':
-            chapter_name = chapter[3:]
-            chapter = str(chapter_no).zfill(2) + '. ' + chapter_name
-            chapter_no += 1
+            chapter = str(chapter_no).zfill(2) + '. ' + chapter[3:]
         elif chapter[2] == '.':
-            chapter_name = chapter[4:]
-            chapter = str(chapter_no).zfill(2) + '. ' + chapter_name
-            chapter_no += 1
+            chapter = str(chapter_no).zfill(2) + '. ' + chapter[4:]
         else:
             chapter = str(chapter_no).zfill(2) + '. ' + chapter
-            chapter_no += 1
+        
+        chapter_no += 1
         message.print_line(chapter)
 
         os.mkdir(course_folder_path + "/" + chapter) # create folders (chapters)
@@ -145,6 +142,7 @@ def chapters(url, course_folder_path):
  
  
 def chapters_and_videos_to_contentmd(url):
+    ''' write chapters and videos info. to content.md '''
 
     soup = create_soup(url)
 
@@ -161,8 +159,8 @@ def chapters_and_videos_to_contentmd(url):
             chapter_count += 1
             group = li.find_all('a', class_='video-name')
             for video in group:
-                content_md.writelines('\n* ' + str(video_count).zfill(2) + ' - ' + video.text.strip())
                 video_count += 1
+                content_md.writelines('\n* ' + str(video_count).zfill(2) + ' - ' + video.text.strip())
             content_md.writelines('\n')
 
     content_md.close()                  # close content.md - operation finished

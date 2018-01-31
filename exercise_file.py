@@ -59,6 +59,6 @@ def download(url, course_folder):
         time.sleep(2)
     try:
         shutil.move(ex_file_name, course_folder)
-        print('File Moved to Course Folder successfully.')
+        print('Ex-File Moved to Course Folder successfully.')
     except:
         print('Moving error.')
