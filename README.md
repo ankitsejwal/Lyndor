@@ -17,6 +17,8 @@
 - Exercise file download                - Videos and subtitles renaming
 ```
 
+![**Lyndor in Action**](./images/lyndor-run.gif)
+
 * On providing course url, the program will download - Course Folder, Chapters, Videos, Subtitles and Info files, and will arrange all the videos in correct order by renaming them in a sequence.
 * Download multiple courses by pasting several urls in **Bulk Download.txt**
 * info.txt and CONTENT.md file is created, containing additional info about the course.
