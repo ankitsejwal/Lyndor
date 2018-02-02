@@ -160,7 +160,7 @@ def chapters_and_videos_to_contentmd(url):
             group = li.find_all('a', class_='video-name')
             for video in group:
                 video_count += 1
-                content_md.writelines('\n* ' + str(video_count).zfill(2) + ' - ' + video.text.strip())
+                content_md.writelines("\n* " + str(video_count).zfill(2) + " - " + str(video.text.strip()))
             content_md.writelines('\n')
 
     content_md.close()                  # close content.md - operation finished
