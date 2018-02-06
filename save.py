@@ -71,6 +71,7 @@ def info_file(url, course_path):
     message.print_line(message.INFO_FILE_CREATED)
 
 def check_exercise_file(url):
+    ''' check if a course has an exercise file '''
     soup = create_soup(url)
     ex_file = soup.find(id='exercise-tab')
     if ex_file is not None:

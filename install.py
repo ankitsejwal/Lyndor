@@ -221,6 +221,7 @@ def download_aria2():
 
 
 def unzip(directory, zip_file):
+    ''' unzip a file '''
     with zipfile.ZipFile(directory + '/' + zip_file, 'r') as f:
         f.extractall(path=directory)
 
