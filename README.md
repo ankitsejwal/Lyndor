@@ -8,13 +8,13 @@
 ```
   Features:
 
-- Username + Password combination       - cookies.txt(Organizational login)
+- Organizational login (cookies.txt)    - Regular login (Username + Password combination)
 - Cross platform support                - Runs on both Python2 and Python3
 - Exercise file download                - Subtitles download
 - Creates Course & Chapter folders      - Generate Info files
 - Videos and subtitles renaming         - Move videos/subtitles to correct Chapters
-- Adjust preferences (settings.json)    - aria2 downloader(for faster downloads)
-- Bulk download                         - Schedule download time
+- Adjust preferences (settings.json)    - aria2 external downloader (for faster downloads)
+- Bulk downloads                        - Schedule download time
 ```
 
 ![**Lyndor in Action**](./images/lyndor-run.gif)
