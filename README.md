@@ -8,19 +8,6 @@
 ```
   Features:
 
-- Bulk download                         - Creates Course & Chapter folders
-- Subtitles download                    - Transfer videos & subtitles to Chapters
-- Username + Password combination       - Adjust preferences (settings.json)
-- cookies.txt(Organizational login)     - Info files for every course
-- Schedule download time                - Cross platform support
-- Runs on both python2 and python3      - aria2 downloader(for faster downloads)
-- Exercise file download                - Videos and subtitles renaming
-```
-
-
-```
-  Features:
-
 - Username + Password combination       - cookies.txt(Organizational login)
 - Cross platform support                - Runs on both Python2 and Python3
 - Exercise file download                - Subtitles download
