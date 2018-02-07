@@ -2,8 +2,8 @@
 
 [![Build Status](https://travis-ci.org/ankitsejwal/Lyndor.svg?branch=master)](https://travis-ci.org/ankitsejwal/Lyndor)
 
-* Download any [**Lynda.com**](https://www.lynda.com) course for offline use.
-* You will need a Lynda.com Basic, Premium or Organisation account inorder to download courses.
+* Download [**Lynda.com**](https://www.lynda.com) course for personal offline use.
+* You will need a Lynda.com Basic, Premium or Organisation account inorder to download a course.
 
 ```
   Features:
@@ -17,9 +17,22 @@
 - Exercise file download                - Videos and subtitles renaming
 ```
 
+
+```
+  Features:
+
+- Username + Password combination       - cookies.txt(Organizational login)
+- Cross platform support                - Runs on both Python2 and Python3
+- Exercise file download                - Subtitles download
+- Creates Course & Chapter folders      - Generate Info files
+- Videos and subtitles renaming         - Move videos/subtitles to correct Chapters
+- Adjust preferences (settings.json)    - aria2 downloader(for faster downloads)
+- Bulk download                         - Schedule download time
+```
+
 ![**Lyndor in Action**](./images/lyndor-run.gif)
 
-* On providing course url, the program will download - Course Folder, Chapters, Videos, Subtitles and Info files, and will arrange all the videos in correct order by renaming them in a sequence.
+* On providing course url, the program will download - Course Folder, Chapters, Videos, Subtitles and Info files.
 * Download multiple courses by pasting several urls in **Bulk Download.txt**
 * info.txt and CONTENT.md file is created, containing additional info about the course.
 * **NOTE:** The Basic and Premium account costs about $20 and $30 respectively once the 30 day free trial ends, which is not much considering you are investing in your career or following your passion, thus you may get exponential returns.
@@ -27,12 +40,12 @@
 ```python
 #supports multiple platforms :)
 def Operating_Systems():
-    Windows = true
-    MacOS   = true
-    Linux   = true
+    Windows = True
+    MacOS   = True
+    Linux   = True
 
     if Windows or MacOs or Linux:
-        print 'Have fun!!!'
+        print('Have fun!!!')
 ```
 
 ## Requirements
@@ -54,6 +67,7 @@ def Operating_Systems():
     # Videos or Movies folder, all the courses will be downloaded to Lynda folder
     # to change path later, paste your desired path into settings.json
 ```
+
 Note: **Windows** users can simply double click **install.bat** file to run install.py file alternatively.
 
 ## Lynda Folder Structure
