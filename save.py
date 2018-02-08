@@ -64,7 +64,7 @@ def info_file(url, course_path):
     info_file.close()
 
     with open('CONTENT.md', 'a') as content_md:
-        content_md.writelines("# " + course_title + " with " + author_name + " on lynda.com \n\n")
+        content_md.writelines("# " + course_title + " with " + author_name + " on lynda.com \n")
     content_md.close()
 
     # print message
@@ -154,15 +154,20 @@ def chapters_and_videos_to_contentmd(url):
     video_count = 0
 
     with open('CONTENT.md', 'a') as content_md:
-
+        bug = False
         for li in ul_video:
-            content_md.writelines('\n## ' + chapters[chapter_count].text + '\n')
+            content_md.writelines('\n\n## ' + chapters[chapter_count].text + '\n')
             chapter_count += 1
             group = li.find_all('a', class_='video-name')
             for video in group:
                 video_count += 1
-                content_md.writelines("\n* " + str(video_count).zfill(2) + " - " + str(video.text.strip()))
-            content_md.writelines('\n')
-
-    content_md.close()                  # close content.md - operation finished
+                try:
+                    content_md.writelines("\n* " + str(video_count).zfill(2) + " - " + str(video.text.strip()))
+                except:
+                    bug = True
+                    pass
+    content_md.close()                          # close content.md - operation finished
+    
+    if bug:
+        print('There seems to be an error while writing to content.md, please report the bug on GitHub')
     print("\n-> CONTENT.md is created.")
