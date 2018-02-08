@@ -62,3 +62,4 @@ def download(url, course_folder):
         print('Ex-File Moved to Course Folder successfully.')
     except:
         print('Moving error.')
+    driver.close()
