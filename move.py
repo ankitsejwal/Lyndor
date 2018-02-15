@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 ''' Rename videos and subtitle, also write content.md '''
 
 import os, re, shutil, sys
@@ -58,14 +61,14 @@ def vid_srt_to_chapter(url, course_folder):
             try:
                 shutil.move(video_name, chapter_name)
             except:
-                print('File not found: '+ video_name)
+                print('🤕 File not found: ' + video_name)
 
             try:
                 shutil.move(subtitle_name, chapter_name)
             except:
                 pass
 
-    print('\n>>> videos/subtitles moved to appropriate chapters successfully.')
+    print('\n>>> videos/subtitles moved to appropriate chapters successfully. 🥂')
 
 def hms_string(sec_elapsed):
     ''' format elapsed time '''

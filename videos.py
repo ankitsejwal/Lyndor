@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 ''' Downloads videos and subtitles '''
 
 import os
