@@ -1,10 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 ''' All printing messages and functions '''
 
 import time
 import sys
 from colorama import *
 
-ENTER_URL = " Paste the url of a Lynda course >>> "
+ENTER_URL = " 🚀 Paste the url of a Lynda course >>> "
 
 NETSCAPE = '# Netscape HTTP Cookie File\n'
 

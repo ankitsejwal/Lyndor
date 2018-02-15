@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 ''' Creates course folder/ Saves chapters'''
 
 import os
@@ -169,5 +172,5 @@ def chapters_and_videos_to_contentmd(url):
     content_md.close()                          # close content.md - operation finished
     
     if bug:
-        print('There seems to be an error while writing to content.md, please report the bug on GitHub')
-    print("\n-> CONTENT.md is created.")
+        print('🤕 There seems to be an error while writing to content.md, please report the bug on GitHub')
+    print("\n👍🏻 CONTENT.md is created.")

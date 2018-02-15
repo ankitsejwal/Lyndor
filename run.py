@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 ''' Lyndor runs from here - contains the main functions '''
 
 import sys, time

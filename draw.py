@@ -1,4 +1,6 @@
-# coding: utf-8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """ ASCII Arts for improved UX """
 
 ANONYMOUS = u"""\
@@ -70,7 +72,7 @@ COW = u"""\
               ^__^
               (oo)\_______
  Download     (__)\       )\/\\
- Successful.      ||----w |
+ Successful🏁      ||----w |
                   ||     ||
 """
 
@@ -91,8 +93,8 @@ ROCKET = u"""\
        / :    $$$$: \\
       /  :    $$$$:  \\
      '        $$$$`   '
-     |   /:   $$$$\   |   Ready
-     |  /     $$$` \  |   To
-     |_/   :__$$P   \_|   Launch !!!
+     |   /:   $$$$\   |
+     |  /     $$$` \  |
+     |_/   :__$$P   \_|    🏄
 
 """
