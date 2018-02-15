@@ -42,7 +42,7 @@ def schedule_download(url):
     ''' Look for the scheduled time in settings.json '''
     scheduled_time = install.read_settings_json('preferences', 'download_time')
     if scheduled_time == '':
-        tip = '☝🏻 Tip: You can schedule download time in settings.json.'
+        tip = '☝🏻  Tip: You can schedule download time in settings.json.'
         message.carriage_return_animate(tip)
         download_course(url)
         return

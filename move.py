@@ -42,7 +42,7 @@ def vid_srt_to_chapter(url, course_folder):
 
         group = li.find_all('a', class_='video-name')
         
-        print('>>> Moving files inside: ' + chapter_name)
+        print('🔰  Moving files inside: ' + str(chapter_name))
         for video in group:
             video_count += 1
             
@@ -61,7 +61,7 @@ def vid_srt_to_chapter(url, course_folder):
             try:
                 shutil.move(video_name, chapter_name)
             except:
-                print('🤕 File not found: ' + video_name)
+                print('🤕  File not found: ' + str(video_name))
 
             try:
                 shutil.move(subtitle_name, chapter_name)

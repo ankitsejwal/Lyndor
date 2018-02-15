@@ -107,9 +107,9 @@ def course(url, lynda_folder_path):
 
                 if answer == 'y':
                     shutil.rmtree(current_course)
-                    message.colored_message(Fore.LIGHTRED_EX, "\nx- Existing course folder deleted!!\n")
+                    message.colored_message(Fore.LIGHTRED_EX, "\n❌  Existing course folder deleted!!")
                     time.sleep(2)
-                    message.colored_message(Fore.LIGHTGREEN_EX, "\n-> re-downloading the course.\n")
+                    message.colored_message(Fore.LIGHTGREEN_EX, "\n♻️  Re-downloading the course.\n")
                 elif answer == 'n':
                     sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n-> Program Ended!!\n"))
                 else:
@@ -142,7 +142,7 @@ def chapters(url, course_folder_path):
         os.mkdir(course_folder_path + "/" + chapter) # create folders (chapters)
             
     chapters_and_videos_to_contentmd(url)
-    message.colored_message(Fore.LIGHTGREEN_EX, '\n-> '+str(chapter_no)+' chapters created!!\n')
+    message.colored_message(Fore.LIGHTGREEN_EX, '\n✅  '+str(chapter_no)+' chapters created!!\n')
  
  
 def chapters_and_videos_to_contentmd(url):
@@ -172,5 +172,5 @@ def chapters_and_videos_to_contentmd(url):
     content_md.close()                          # close content.md - operation finished
     
     if bug:
-        print('🤕 There seems to be an error while writing to content.md, please report the bug on GitHub')
-    print("\n👍🏻 CONTENT.md is created.")
+        print('🤕  There seems to be an error while writing to content.md, please report the bug on GitHub')
+    print("\n👍🏻  CONTENT.md is created.")
