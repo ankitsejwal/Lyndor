@@ -14,7 +14,7 @@
 - Creates Course & Chapter folders      - Generate Info files
 - Videos and subtitles renaming         - Move videos/subtitles to correct Chapters
 - Adjust preferences (settings.json)    - aria2 external downloader (for faster downloads)
-- Bulk downloads                        - Schedule download time
+- Bulk downloads                        - Schedule download (Download later)
 ```
 
 ![**Lyndor in Action**](./images/lyndor-run.gif)
@@ -143,7 +143,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 $ python path/to/Lyndor/run.py
 ```
 
-* **Windows** users can simply double click **Run-Lyndor.bat** to run the program. Run-Lyndor.bat file should be located in (Lynda) folder where all courses are downloaded.
+* **Windows** users can simply double click **Run-Lyndor.bat** to run the program. Run-Lyndor.bat file should be located in (Lynda) folder where all courses are meant to be downloaded.
 
 ```bash
 # Linux and MacOS users can add Lynda keyword as alias to launch the program by just typing Lynda in terminal.
