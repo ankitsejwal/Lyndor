@@ -141,9 +141,8 @@ def chapters(url, course_folder_path):
 
         os.mkdir(course_folder_path + "/" + chapter) # create folders (chapters)
             
-    chapters_and_videos_to_contentmd(url)
     message.colored_message(Fore.LIGHTGREEN_EX, '\n✅  '+str(chapter_no)+' chapters created!!\n')
- 
+    chapters_and_videos_to_contentmd(url)
  
 def chapters_and_videos_to_contentmd(url):
     ''' write chapters and videos info. to content.md '''
@@ -173,4 +172,4 @@ def chapters_and_videos_to_contentmd(url):
     
     if bug:
         print('🤕  There seems to be an error while writing to content.md, please report the bug on GitHub')
-    print("\n👍🏻  CONTENT.md is created.")
+    print("👍🏻  CONTENT.md created.\n")

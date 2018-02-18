@@ -68,7 +68,7 @@ def vid_srt_to_chapter(url, course_folder):
             except:
                 pass
 
-    print('\n>>> videos/subtitles moved to appropriate chapters successfully. 🥂')
+    print('\n🥂  videos/subtitles moved to appropriate chapters successfully.')
 
 def hms_string(sec_elapsed):
     ''' format elapsed time '''

@@ -13,7 +13,7 @@ NETSCAPE = '# Netscape HTTP Cookie File\n'
 
 RENAMING_ERROR = "\nError in renaming file !!!"
 
-INFO_FILE_CREATED = "\n-> info.txt file created\n"
+INFO_FILE_CREATED = "\n🌟  info.txt created\n"
 
 def animate_characters(color, string, speed):
     '''printing ASCII arts line by line'''
