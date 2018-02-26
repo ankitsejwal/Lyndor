@@ -74,7 +74,11 @@ def download_course(url):
     desktop_folder_path = install.folder_path("Desktop")
     download_folder_path = install.folder_path("Downloads")
     
-    if install.read_settings_json('credentials', 'use_cookie_for_download'):
+    # Read preferences
+    download_exercise_file = install.read_settings_json('preferences', 'download_exercise_file')
+    use_cookie_for_download = install.read_settings_json('credentials', 'use_cookie_for_download')
+
+    if use_cookie_for_download:
         cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
     else:
         cookie_path = ''
@@ -87,15 +91,16 @@ def download_course(url):
         save.chapters(url, course_folder_path)      # Create chapters inside course folder
         videos.download(url, cookie_path, course_folder_path) # Downloading lynda videos to course folder
         move.vid_srt_to_chapter(url, course_folder_path) # Move videos and subtitles to chapter folders
+        
         # Download exercise file
-        # check for organizational login, should be false to download.
-        if not install.read_settings_json('credentials', 'use_cookie_for_download'):
-            if save.check_exercise_file(url):
-                exercise_file.download(url, course_folder_path) # Download exercise-file
+        if download_exercise_file:                  # check if user wants to download exercise file
+            if not use_cookie_for_download:         # make sure user is downloading via user + password
+                if save.check_exercise_file(url):
+                    exercise_file.download(url, course_folder_path) # Download exercise-file
+                else:
+                    print('\n-> Exercise file not available.')
             else:
-                print('\n-> Exercise file not available.')
-        else:
-            print('\nExercise file downloads for organizational login is not supported, please download manually.')
+                print('\nExercise file downloads for organizational login is not supported, please download manually.')
         
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
