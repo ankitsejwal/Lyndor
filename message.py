@@ -17,9 +17,13 @@ INFO_FILE_CREATED = "\n🌟  info.txt created\n"
 
 def animate_characters(color, string, speed):
     '''printing ASCII arts line by line'''
-    for line in string.splitlines():
-        print(color + line + Fore.RESET)
-        time.sleep(speed)
+    # Ignore Unicode errors for systems with different locales
+    try:
+        for line in string.splitlines():
+            print(color + line + Fore.RESET)
+            time.sleep(speed)
+    except UnicodeEncodeError:
+        pass
 
 def spinning_cursor():
     '''spinning cursor'''
