@@ -14,57 +14,64 @@
 <body>
     <div class="container">
         <br>
-        
         <div class="jumbotron">
             <h1 class="display-4">Settings</h1>
+            <p>Tweak settings for Lyndor here, after making changes press Save and your settings.json file will be updated.</p>
             <br>
             <div class="row">
                 <div class="col-sm">
-                    <input class="form-control" type="text" placeholder="Enter Username">
-                    <br>
-                    <input class="form-control" type="text" placeholder="Enter Password">
+                    <input class="form-control" type="text" placeholder="Username">
+                    <input class="form-control" type="text" placeholder="Password">
                 </div>
                 <div class="col-sm">
-                    Download exercise file
-                    <div class="btn-group btn-group-toggle" data-togg="buttons">
-                        <label class="btn btn-secondary active" for="download-exercise">
-                            <input type="radio" name="" id="">Yes
+                    <div>
+                        <input class="form-control" type="text" placeholder="location">
+                    </div>
+                    <input class="form-control" type="text" placeholder="Download time">
+                </div>
+                <div class="col-sm">
+                    <div class="btn-group btn-group-sm btn-group-toggle toggles" data-togg="buttons">
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="" id="">Use cookie to download
                         </label>
-                        <label class="btn btn-secondary" for="">
-                            <input type="radio" name="" id="">No
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="" id="">Don't
                         </label>
                     </div>
-                    <br>
-                    Download Subtitles
-                    <div class="btn-group btn-group-toggle" data-togg="buttons">
-                        <label class="btn btn-secondary active" for="download-exercise">
-                            <input type="radio" name="" id="">Yes
+                    <div class="btn-group btn-group-sm btn-group-toggle toggles" data-togg="buttons">
+                            <label class="btn btn-secondary active">
+                                <input type="radio" name="" id="">Download exercise file
+                            </label>
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="" id="">Don't
+                            </label>
+                    </div>
+                    <div class="btn-group btn-group-sm btn-group-toggle toggles" data-togg="buttons">
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="" id="">Download Subtitles
                         </label>
-                        <label class="btn btn-secondary" for="">
-                            <input type="radio" name="" id="">No
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="" id="">Don't
                         </label>
                     </div>
-                    <br>
-                    aria2 installed?
-                    <div class="btn-group btn-group-toggle" data-togg="buttons">
+                    <div class="btn-group btn-group-sm btn-group-toggle toggles" data-togg="buttons">
                         <label class="btn btn-secondary active" for="download-exercise">
-                            <input type="radio" name="" id="">Yes
+                            <input type="radio" name="" id="">aria2 installed
                         </label>
-                        <label class="btn btn-secondary" for="">
+                        <label class="btn btn-secondary">
                             <input type="radio" name="" id="">No
                         </label>    
                     </div>
+                    <br>
+                    <div class="btn-group btn-group-sm btn-group-toggle toggles" data-togg="buttons">
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="" id="">Chrome
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="" id="">Firefox
+                        </label>
+                    </div>
                 </div>    
-                <div class="col-sm">
-                    <label for="location">location</label>
-                    <input type="text">
-                    <br>
-                    <label for="web-browser">web-browser</label>
-                    <input type="text" placeholder="chrome">
-                    <br>
-                    <label for="download-time">Download time</label>
-                    <input type="text" placeholder="Enter download time">
-                </div>
             </div>
             <button class="btn btn-dark" type="button">Save</button>
         </div>
