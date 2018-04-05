@@ -42,17 +42,22 @@ def vid_srt_to_chapter(url, course_folder):
 
         group = li.find_all('a', class_='video-name')
         
+        # decide the correct zfill value to result in proper file moving
+        digit = 2
+        if count_videos(course_folder) > 99:
+            digit = 3
+
         print('🔰  Moving files inside: ' + str(chapter_name))
         for video in group:
             video_count += 1
             
-            video_name = str(video_count).zfill(2) + ' - ' + video.text.strip() + '.mp4'
+            video_name = str(video_count).zfill(digit) + ' - ' + video.text.strip() + '.mp4'
             video_name = re.sub('[?]', '', video_name)
             video_name = re.sub('[/]', '_', video_name)
             video_name = re.sub('["]', '\'', video_name)
             video_name = re.sub('[:><\\|*]', ' -', video_name)
             
-            subtitle_name = str(video_count).zfill(2) + ' - ' + video.text.strip() + '.en.srt'
+            subtitle_name = str(video_count).zfill(digit) + ' - ' + video.text.strip() + '.en.srt'
             subtitle_name = re.sub('[?]', '', subtitle_name)
             subtitle_name = re.sub('[/]', '_', subtitle_name)
             subtitle_name = re.sub('["]', '\'', subtitle_name)
@@ -69,6 +74,14 @@ def vid_srt_to_chapter(url, course_folder):
                 pass
 
     print('\n🥂  videos/subtitles moved to appropriate chapters successfully.')
+
+def count_videos(course_folder):
+    ''' count the total no. of video files '''
+    counter = 0
+    for content in os.listdir(course_folder):
+        if content.endswith('.mp4'):
+            counter += 1
+    return counter
 
 def hms_string(sec_elapsed):
     ''' format elapsed time '''

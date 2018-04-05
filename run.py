@@ -4,7 +4,7 @@
 ''' Lyndor runs from here - contains the main functions '''
 
 import sys, time
-import message, save, cookies, videos, install, move, draw, exercise_file
+import message, save, cookies, videos, install, move, draw, rename, exercise_file
 from colorama import *
 
 def main():
@@ -42,7 +42,7 @@ def schedule_download(url):
     ''' Look for the scheduled time in settings.json '''
     scheduled_time = install.read_settings_json('preferences', 'download_time')
     if scheduled_time == '':
-        tip = '☝🏻  Tip: You can schedule download time in settings.json.'
+        tip = '☝🏻  Tip: You can schedule download time in settings.json'
         message.carriage_return_animate(tip)
         download_course(url)
         return
@@ -90,6 +90,8 @@ def download_course(url):
         save.info_file(url, course_folder_path)     # Gather information
         save.chapters(url, course_folder_path)      # Create chapters inside course folder
         videos.download(url, cookie_path, course_folder_path) # Downloading lynda videos to course folder
+        rename.videos(course_folder_path)
+        rename.subtitles(course_folder_path)
         move.vid_srt_to_chapter(url, course_folder_path) # Move videos and subtitles to chapter folders
         
         # Download exercise file
