@@ -2,6 +2,9 @@
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import install, message
 import os
 import sys
@@ -39,8 +42,23 @@ def download(url, course_folder):
     print('launching desired course page ....')
     driver.get(url)
     time.sleep(4)
-    driver.find_element_by_css_selector('#exercise-tab').click()
-    driver.find_element_by_css_selector('a > .exercise-name').click()
+    
+    # Maximize Window if exercise-tab element not visible
+    try:
+        driver.find_element_by_css_selector('#exercise-tab').click()
+    except:
+        driver.maximize_window()
+        time.sleep(2)
+        driver.find_element_by_css_selector('#exercise-tab').click()
+        
+    # Make sure page is more fully loaded before finding the element
+    try:
+        driver.find_element_by_css_selector('a > .exercise-name').click()
+    except:
+        WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.CSS_SELECTOR, "html.no-touch.member.loaded")))
+        driver.find_element_by_css_selector('#exercise-tab').click()
+        driver.find_element_by_css_selector('a > .exercise-name').click()
+        
     ex_file_name = driver.find_element_by_css_selector('.exercise-name').text
     ex_file_size = driver.find_element_by_css_selector('.file-size').text
     print('Downloading ' + ex_file_name)
