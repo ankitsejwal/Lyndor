@@ -5,15 +5,12 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import install, message
-import os
-import sys
-import time
-import shutil
+import install, message, read
+import os, sys, time, shutil
 
-username = install.read_settings_json('credentials', 'username')
-password = install.read_settings_json('credentials', 'password')
-web_browser = install.read_settings_json('preferences', 'web_browser_for_exfile')
+username = read.settings_json('credentials', 'username')
+password = read.settings_json('credentials', 'password')
+web_browser = read.settings_json('preferences', 'web_browser_for_exfile')
 
 def download(url, course_folder):
     ''' Download exercise file '''

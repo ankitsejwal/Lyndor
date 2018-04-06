@@ -40,7 +40,7 @@ def main():
 
 def schedule_download(url):
     ''' Look for the scheduled time in settings.json '''
-    scheduled_time = install.read_settings_json('preferences', 'download_time')
+    scheduled_time = read.settings_json('preferences', 'download_time')
     if scheduled_time == '':
         tip = '☝🏻  Tip: You can schedule download time in settings.json'
         message.carriage_return_animate(tip)
@@ -69,7 +69,7 @@ def download_course(url):
     url = url[:url.find(".html")+5] #strip any extra text after .html in the url
 
     # Folder/File paths
-    lynda_folder_path = install.read_settings_json('preferences', 'location') + '/'
+    lynda_folder_path = read.settings_json('preferences', 'location') + '/'
     course_folder_path = save.course_path(url, lynda_folder_path)
     desktop_folder_path = install.folder_path("Desktop")
     download_folder_path = install.folder_path("Downloads")

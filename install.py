@@ -1,14 +1,9 @@
 ''' Install Lyndor software and dependencies '''
 
-import os
-import sys
-import shutil
+import os, sys, shutil
+import read
 import zipfile
 import json
-
-real_path = os.path.realpath(__file__)
-LYNDOR_PATH = real_path[:real_path.find('install.py')]
-
 
 def check_os():
     '''Check operating system'''
@@ -21,7 +16,6 @@ def check_os():
     else:
         print('operating system not supported: ' + sys.platform.lower())
         sys.exit('unknown operating system.')
-
 
 def set_path():
     '''Set path for saving lynda folder'''
@@ -61,18 +55,18 @@ def find_a_file(folder):
 
 def create_folder():
     ''' Create lynda folder '''
-    path = read_settings_json('preferences', 'location')
+    path = read.settings_json('preferences', 'location')
     if not os.path.exists(path):
         os.makedirs(path)
         print('-> Lynda folder created at: ' +
-              read_settings_json('preferences', 'location') + '\n')
+              read.settings_json('preferences', 'location') + '\n')
     else:
         print('>>> Lynda folder already exists\n')
 
 
 def create_aliases():
     '''Create aliases file'''
-    os.chdir(LYNDOR_PATH)
+    os.chdir(read.LYNDOR_PATH)
     if check_os() == 'windows':
         run_path = 'doskey lynda= python "' + os.getcwd() + '/run.py"'
         alias = open('aliases.bat', 'w')
@@ -83,10 +77,10 @@ def create_aliases():
 
 def lynda_folder_files():
     ''' create Run-Lyndor.bat in windows '''
-    os.chdir(LYNDOR_PATH)
+    os.chdir(read.LYNDOR_PATH)
     bulk_download = open('Bulk Download.txt', 'w')
     bulk_download.close()
-    shutil.move('Bulk Download.txt', read_settings_json(
+    shutil.move('Bulk Download.txt', read.settings_json(
         'preferences', 'location') + '/Bulk Download.txt')
     print('-> Bulk Download.txt file created successfully.\n')
     if check_os() == 'windows':
@@ -99,7 +93,7 @@ def lynda_folder_files():
         lynda.writelines('pause')
         lynda.close()
         try:
-            os.rename('Run-Lyndor.bat', read_settings_json('preferences',
+            os.rename('Run-Lyndor.bat', read.settings_json('preferences',
                                                            'location') + '/Run-Lyndor.bat')
         except:
             pass
@@ -109,7 +103,7 @@ def lynda_folder_files():
 
 def create_settings_json():
     ''' Create settings_json file '''
-    os.chdir(LYNDOR_PATH)
+    os.chdir(read.LYNDOR_PATH)
 
     settings_dict = {
         "credentials": {
@@ -130,29 +124,18 @@ def create_settings_json():
             "dependencies": ['youtube-dl', 'requests', 'beautifulsoup4', 'colorama', 'selenium']
         }
     }
-    out_file = open(LYNDOR_PATH + '/settings.json', 'w')
+    out_file = open(read.LYNDOR_PATH + '/settings.json', 'w')
     json.dump(settings_dict, out_file, indent=4)
     out_file.close()
 
     print('\n>>> Courses will be saved at -> ' +
-          read_settings_json('preferences', 'location') + '\n')
+          read.settings_json('preferences', 'location') + '\n')
     print('-> settings.json file created in Lyndor folder.\
  (Have a look at this file, you can edit settings here.)\n')
 
-
-def read_settings_json(section, key):
-    ''' Read settings.json '''
-    os.chdir(LYNDOR_PATH)
-
-    in_file = open('settings.json', 'r')
-    data = json.load(in_file)
-    in_file.close()
-    return data[section][key]
-
-
 def install_dependencies():
     '''install required softwares'''
-    os.chdir(LYNDOR_PATH)
+    os.chdir(read.LYNDOR_PATH)
 
     in_file = open('settings.json', 'r')
     requirements = json.load(in_file)
@@ -167,7 +150,7 @@ def install_dependencies():
 def download_webdriver():
     ''' Download web driver '''
     import requests
-    os.chdir(LYNDOR_PATH)   # change directory to LYNDOR
+    os.chdir(read.LYNDOR_PATH)   # change directory to LYNDOR
     try:
         # create directory webdriver to save platform specific webdrivers
         os.mkdir('webdriver')
@@ -203,7 +186,7 @@ set the webdriver directory path to "PATH" variable, see README.md file for more
 def download_aria2():
     ''' Download aria2c for windows '''
     import requests
-    os.chdir(LYNDOR_PATH)
+    os.chdir(read.LYNDOR_PATH)
     if check_os() == 'windows':
         try:
             os.mkdir('aria2c')

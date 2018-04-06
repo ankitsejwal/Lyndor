@@ -1,5 +1,4 @@
 import os, json
-# read preferences file
 
 real_path = os.path.realpath(__file__)
 LYNDOR_PATH = real_path[:real_path.find('read.py')]

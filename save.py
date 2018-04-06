@@ -11,7 +11,7 @@ import shutil
 import requests
 import re
 from bs4 import BeautifulSoup
-import message
+import message, read
 from colorama import *
 
 def create_soup(url):
@@ -40,7 +40,7 @@ def course(url, lynda_folder_path):
     ''' create course folder '''
     current_course = course_path(url, lynda_folder_path)
     courses = os.listdir(lynda_folder_path)
-    preference = install.read_settings_json('preferences', 'redownload_course')
+    preference = read.settings_json('preferences', 'redownload_course')
 
     answer = None
     for course in courses:
@@ -192,11 +192,11 @@ def contentmd(url):
 def videos(url, cookie_path, course_folder):
     ''' This function downloads all the videos in course folder'''
     os.chdir(course_folder)
-    COOKIE = install.read_settings_json('credentials', 'use_cookie_for_download')
-    SUBTITLE = install.read_settings_json('preferences', 'download_subtitles')
-    EXTERNAL_DOWNLOADER = install.read_settings_json('preferences', 'ext-downloader-aria2-installed')
-    USERNAME = install.read_settings_json('credentials', 'username')
-    PASSWORD = install.read_settings_json('credentials', 'password')
+    COOKIE = read.settings_json('credentials', 'use_cookie_for_download')
+    SUBTITLE = read.settings_json('preferences', 'download_subtitles')
+    EXTERNAL_DOWNLOADER = read.settings_json('preferences', 'ext-downloader-aria2-installed')
+    USERNAME = read.settings_json('credentials', 'username')
+    PASSWORD = read.settings_json('credentials', 'password')
         
     try:
         subtitles = ' --all-subs ' if SUBTITLE else ' '     # Checking subtitle preferences
