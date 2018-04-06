@@ -4,6 +4,7 @@
 ''' Creates course folder/ Saves chapters'''
 
 import os
+import install
 import sys
 import time
 import shutil
@@ -18,6 +19,64 @@ def create_soup(url):
     request = requests.get(url)
     page_content = request.content
     return BeautifulSoup(page_content, 'html.parser')
+
+def check_exercise_file(url):
+    ''' check if a course has an exercise file '''
+    soup = create_soup(url)
+    ex_file = soup.find(id='exercise-tab')
+    if ex_file is not None:
+        return True
+    return False
+
+def course_path(url, lynda_folder_path):
+    ''' finding course path '''
+    soup = create_soup(url)
+    course_title = soup.find('h1', {"class": "default-title"}).text
+    # Check for valid characters
+    course_title = re.sub('[,:?.><"/\\|*]', ' -', course_title)
+    return lynda_folder_path + course_title
+
+def course(url, lynda_folder_path):
+    ''' create course folder '''
+    current_course = course_path(url, lynda_folder_path)
+    courses = os.listdir(lynda_folder_path)
+    preference = install.read_settings_json('preferences', 'redownload_course')
+
+    answer = None
+    for course in courses:
+        if (lynda_folder_path + course) == current_course:
+            if preference == 'force':
+                # delete existing course and re-download
+                shutil.rmtree(current_course)
+                message.colored_message(Fore.LIGHTRED_EX, "\n✅  Course folder already exists. Current preference -> FORCE redownload")
+                message.colored_message(Fore.LIGHTRED_EX, "\n❌  Existing course folder deleted!!")
+                time.sleep(2)
+                message.colored_message(Fore.LIGHTGREEN_EX, "\n♻️  Re-downloading the course.\n")
+                time.sleep(2)
+            elif preference == 'skip':
+                # skip download process
+                message.colored_message(Fore.LIGHTRED_EX, "\n✅  Course folder already exists. Current preference -> SKIP redownload")
+                sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n-> Skipping course download.\n"))    
+            elif preference == 'prompt':
+                # prompt user with available choices
+                QUESTION = '\n✅  Course folder already exists: Do you wish to delete it and download again? (Y/N): '
+                sys.stdout.write(Fore.LIGHTBLUE_EX + QUESTION + Fore.RESET)
+                while answer != 'y':
+                    # fix for python 2.x and 3.x
+                    try: answer = raw_input().lower()
+                    except NameError: answer = input().lower() 
+
+                    if answer == 'y':
+                        shutil.rmtree(current_course)
+                        message.colored_message(Fore.LIGHTRED_EX, "\n❌  Existing course folder deleted!!")
+                        time.sleep(2)
+                        message.colored_message(Fore.LIGHTGREEN_EX, "\n♻️  Re-downloading the course.\n")
+                    elif answer == 'n':
+                        sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n-> Program Ended!!\n"))
+                    else:
+                        sys.stdout.write(Fore.LIGHTRED_EX + "\n- oops!! that's not a valid choice, type Y or N: " + Fore.RESET)
+    
+    os.mkdir(current_course)
 
 def info_file(url, course_path):
     ''' gather course information. '''
@@ -73,49 +132,6 @@ def info_file(url, course_path):
     # print message
     message.print_line(message.INFO_FILE_CREATED)
 
-def check_exercise_file(url):
-    ''' check if a course has an exercise file '''
-    soup = create_soup(url)
-    ex_file = soup.find(id='exercise-tab')
-    if ex_file is not None:
-        return True
-    return False
-
-def course_path(url, lynda_folder_path):
-    ''' finding course path '''
-    soup = create_soup(url)
-    course_title = soup.find('h1', {"class": "default-title"}).text
-    # Check for valid characters
-    course_title = re.sub('[,:?.><"/\\|*]', ' -', course_title)
-    return lynda_folder_path + course_title
-
-def course(url, lynda_folder_path):
-    ''' create course folder '''
-    current_course = course_path(url, lynda_folder_path)
-    courses = os.listdir(lynda_folder_path)
-
-    answer = None
-    for course in courses:
-        if (lynda_folder_path + course) == current_course:
-
-            QUESTION = '\nCourse already exists: Do you wish to delete it and download again? (Y/N): '
-            sys.stdout.write(Fore.LIGHTBLUE_EX + QUESTION + Fore.RESET)
-            while answer != 'y':
-                # fix for python 2.x and 3.x
-                try: answer = raw_input().lower()
-                except NameError: answer = input().lower() 
-
-                if answer == 'y':
-                    shutil.rmtree(current_course)
-                    message.colored_message(Fore.LIGHTRED_EX, "\n❌  Existing course folder deleted!!")
-                    time.sleep(2)
-                    message.colored_message(Fore.LIGHTGREEN_EX, "\n♻️  Re-downloading the course.\n")
-                elif answer == 'n':
-                    sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n-> Program Ended!!\n"))
-                else:
-                    sys.stdout.write(Fore.LIGHTRED_EX + "\n- oops!! that's not a valid choice, type Y or N: " + Fore.RESET)
-    os.mkdir(current_course)
-
 def chapters(url, course_folder_path):
     ''' create chapters folder '''
     soup = create_soup(url)
@@ -142,10 +158,9 @@ def chapters(url, course_folder_path):
         os.mkdir(course_folder_path + "/" + chapter) # create folders (chapters)
             
     message.colored_message(Fore.LIGHTGREEN_EX, '\n✅  '+str(chapter_no)+' chapters created!!\n')
-    chapters_and_videos_to_contentmd(url)
  
-def chapters_and_videos_to_contentmd(url):
-    ''' write chapters and videos info. to content.md '''
+def contentmd(url):
+    ''' write chapters and videos information to content.md '''
 
     soup = create_soup(url)
 
@@ -173,3 +188,31 @@ def chapters_and_videos_to_contentmd(url):
     if bug:
         print('🤕  There seems to be an error while writing to content.md, please report the bug on GitHub')
     print("👍🏻  CONTENT.md created.\n")
+
+def videos(url, cookie_path, course_folder):
+    ''' This function downloads all the videos in course folder'''
+    os.chdir(course_folder)
+    COOKIE = install.read_settings_json('credentials', 'use_cookie_for_download')
+    SUBTITLE = install.read_settings_json('preferences', 'download_subtitles')
+    EXTERNAL_DOWNLOADER = install.read_settings_json('preferences', 'ext-downloader-aria2-installed')
+    USERNAME = install.read_settings_json('credentials', 'username')
+    PASSWORD = install.read_settings_json('credentials', 'password')
+        
+    try:
+        subtitles = ' --all-subs ' if SUBTITLE else ' '     # Checking subtitle preferences
+        # Output name of videos/subtitles
+        output = ' -o ' +'"'+ course_folder + "/%(playlist_index)s - %(title)s.%(ext)s" + '"'
+        # Extername downloader option
+        ext_downloader = ' --external-downloader aria2c' if EXTERNAL_DOWNLOADER else ''
+        cookie = ' --cookies ' + '"' + cookie_path + '"'    #cookie
+        username = ' -u ' + USERNAME                        #username
+        password = ' -p ' + PASSWORD                        #password
+
+        # Checking cookie preferences
+        if  COOKIE:
+            cookies.edit_cookie(cookie_path, message.NETSCAPE) # Edit cookie file
+            os.system('youtube-dl' + cookie + output + subtitles + url + ext_downloader)
+        else:
+            os.system('youtube-dl' + username + password + output + subtitles + url + ext_downloader)
+    except KeyboardInterrupt:
+        sys.exit('Program Interrupted')

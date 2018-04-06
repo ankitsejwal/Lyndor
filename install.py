@@ -123,7 +123,8 @@ def create_settings_json():
             "download_exercise_file": False,            # feature unavailable for organizational login
             "web_browser_for_exfile": 'chrome',         # select chrome or firefox as a web browser
             "ext-downloader-aria2-installed": False,    # set True after installing aria2
-            "download_time": ""
+            "download_time": "",
+            "redownload_course": "prompt"            # choose between -> prompt, skip and force re-download
         },
         "requirements": {
             "dependencies": ['youtube-dl', 'requests', 'beautifulsoup4', 'colorama', 'selenium']
