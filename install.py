@@ -23,7 +23,8 @@ def set_path():
         os.chdir(os.path.expanduser('~/Movies'))
         return os.getcwd()
     elif check_os() == 'windows' or check_os() == 'linux':
-        if find_a_file('Videos'):
+        directory = os.path.expanduser('~/')
+        if file_found('Videos', directory):
             os.chdir(os.path.expanduser('~/Videos'))
         else:
             os.mkdir(os.path.expanduser('~/Videos'))
@@ -44,11 +45,10 @@ def folder_path(folder):
         return os.getcwd()
 
 
-def find_a_file(folder):
+def file_found(folder, directory):
     ''' find a file in a directory '''
-    directory = os.path.expanduser('~/')
-    for fil in os.listdir(directory):
-        if fil == folder:
+    for pointer in os.listdir(directory):
+        if pointer == folder:
             return True
     return False
 
@@ -118,7 +118,7 @@ def create_settings_json():
             "web_browser_for_exfile": 'chrome',         # select chrome or firefox as a web browser
             "ext-downloader-aria2-installed": False,    # set True after installing aria2
             "download_time": "",
-            "redownload_course": "prompt"            # choose between -> prompt, skip and force re-download
+            "redownload_course": "prompt"               # choose between -> prompt, skip & force re-download
         },
         "requirements": {
             "dependencies": ['youtube-dl', 'requests', 'beautifulsoup4', 'colorama', 'selenium']
@@ -132,6 +132,7 @@ def create_settings_json():
           read.settings_json('preferences', 'location') + '\n')
     print('-> settings.json file created in Lyndor folder.\
  (Have a look at this file, you can edit settings here.)\n')
+
 
 def install_dependencies():
     '''install required softwares'''
