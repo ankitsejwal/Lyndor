@@ -71,8 +71,8 @@ def download_course(url):
     # Folder/File paths
     lynda_folder_path = read.settings_json('preferences', 'location') + '/'
     course_folder_path = save.course_path(url, lynda_folder_path)
-    desktop_folder_path = install.folder_path("Desktop")
-    download_folder_path = install.folder_path("Downloads")
+    desktop_folder_path = install.get_path("Desktop")
+    download_folder_path = install.get_path("Downloads")
     
     # Read preferences
     download_exercise_file = read.settings_json('preferences', 'download_exercise_file')

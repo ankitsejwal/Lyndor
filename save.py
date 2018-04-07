@@ -5,7 +5,7 @@
 
 import os
 import install
-import sys
+import sys, zipfile, json
 import time
 import shutil
 import requests
@@ -190,7 +190,7 @@ def contentmd(url):
     print("👍🏻  CONTENT.md created.\n")
 
 def videos(url, cookie_path, course_folder):
-    ''' This function downloads all the videos in course folder'''
+    ''' Download all the videos in course folder'''
     os.chdir(course_folder)
     COOKIE = read.settings_json('credentials', 'use_cookie_for_download')
     SUBTITLE = read.settings_json('preferences', 'download_subtitles')
@@ -216,3 +216,147 @@ def videos(url, cookie_path, course_folder):
             os.system('youtube-dl' + username + password + output + subtitles + url + ext_downloader)
     except KeyboardInterrupt:
         sys.exit('Program Interrupted')
+
+def aria2():
+    ''' Download aria2c for windows '''
+    import requests
+    os.chdir(read.LYNDOR_PATH)
+    if install.check_os() == 'windows':
+        try:
+            os.mkdir('aria2c')
+        except:
+            pass
+        aria = requests.get(
+            'https://github.com/aria2/aria2/releases/download/release-1.33.1/aria2-1.33.1-win-64bit-build1.zip')
+        print('\n-> Downloading aria2c for windows')
+        with open('./aria2c/aria2c.zip', 'wb') as f:
+            f.write(aria.content)
+        print('\n>>> aria2c.zip has been downloaded inside "Lyndor/aria2c" folder')
+        print('>>> unzipping aria2c.zip')
+        unzip('aria2c', 'aria2c.zip')
+        print(
+            '>>> aria2c.zip has been unzipped, copy its path and save to PATH variable.\n')
+
+
+def unzip(directory, zip_file):
+    ''' unzip a file '''
+    with zipfile.ZipFile(directory + '/' + zip_file, 'r') as f:
+        f.extractall(path=directory)
+
+
+def settings_json():
+    ''' Create settings_json file '''
+    os.chdir(read.LYNDOR_PATH)
+
+    settings_dict = {
+        "credentials": {
+            "username": "",                             # use cookie for organizational login-
+            "password": "",                             # instead of username & password
+            "use_cookie_for_download": True,            # if false, username & password will be used
+        },
+        "preferences": {
+            "location": install.set_path() + '/Lynda',
+            "download_subtitles": True,
+            "download_exercise_file": False,            # feature unavailable for organizational login
+            "web_browser_for_exfile": 'chrome',         # select chrome or firefox as a web browser
+            "ext-downloader-aria2-installed": False,    # set True after installing aria2
+            "download_time": "",
+            "redownload_course": "prompt"               # choose between -> prompt, skip & force re-download
+        },
+        "requirements": {
+            "dependencies": ['youtube-dl', 'requests', 'beautifulsoup4', 'colorama', 'selenium']
+        }
+    }
+    out_file = open(read.LYNDOR_PATH + '/settings.json', 'w')
+    json.dump(settings_dict, out_file, indent=4)
+    out_file.close()
+
+    print('\n>>> Courses will be saved at -> ' +
+          read.settings_json('preferences', 'location') + '\n')
+    print('-> settings.json file created in Lyndor folder.\
+ (Have a look at this file, you can edit settings here.)\n')
+
+
+def lynda_folder():
+    ''' Create lynda folder '''
+    path = read.settings_json('preferences', 'location')
+    if not os.path.exists(path):
+        os.makedirs(path)
+        print('-> Lynda folder created at: ' +
+              read.settings_json('preferences', 'location') + '\n')
+    else:
+        print('>>> Lynda folder already exists\n')
+
+
+def aliases_bat():
+    '''Create aliases file'''
+    os.chdir(read.LYNDOR_PATH)
+    if install.check_os() == 'windows':
+        run_path = 'doskey lynda= python "' + os.getcwd() + '/run.py"'
+        alias = open('aliases.bat', 'w')
+        alias.write(run_path)
+        alias.close()
+        print('-> aliases.bat file created.\n')
+
+
+def run_lyndor_bat():
+    ''' create Run-Lyndor.bat in windows '''
+    os.chdir(read.LYNDOR_PATH)
+    bulk_download = open('Bulk Download.txt', 'w')
+    bulk_download.close()
+    shutil.move('Bulk Download.txt', read.settings_json(
+        'preferences', 'location') + '/Bulk Download.txt')
+    print('-> Bulk Download.txt file created successfully.\n')
+    
+    if install.check_os() == 'windows':
+        run_path = 'python "' + os.getcwd() + '/run.py"'
+        lynda = open('Run-Lyndor.bat', 'a')
+        lynda.writelines('@ECHO OFF\n')
+        lynda.writelines('REM Batch file to execute run.py\n')
+        lynda.writelines('SET PATH=%PATH%;C:\Python27;C:\Python27\Scripts\n')
+        lynda.writelines(run_path + '\n')
+        lynda.writelines('pause')
+        lynda.close()
+        try:
+            os.rename('Run-Lyndor.bat', read.settings_json('preferences',
+                                                           'location') + '/Run-Lyndor.bat')
+        except:
+            pass
+        finally:
+            print('-> Run-Lyndor.bat file created.\n')
+
+
+def webdriver():
+    ''' Download web driver '''
+    import requests
+    os.chdir(read.LYNDOR_PATH)   # change directory to LYNDOR
+    try:
+        # create directory webdriver to save platform specific webdrivers
+        os.mkdir('webdriver')
+    except:
+        pass
+    print('\n-> Downloading web driver for ' + install.check_os())
+
+    if install.check_os() == 'windows':
+        chrome_url = 'https://chromedriver.storage.googleapis.com/2.35/chromedriver_win32.zip'
+        firefox_url = 'https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-win64.zip'
+    elif install.check_os() == 'macos':
+        chrome_url = 'https://chromedriver.storage.googleapis.com/2.35/chromedriver_mac64.zip'
+        firefox_url = 'https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-macos.tar.gz'
+    elif install.check_os() == 'linux':
+        chrome_url = 'https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip'
+        firefox_url = 'https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz'
+
+    chrome = requests.get(chrome_url)
+    firefox = requests.get(firefox_url)
+
+    with open('webdriver/chromedriver.zip', 'wb') as f:
+        f.write(chrome.content)
+
+    with open('webdriver/firefoxdriver.zip', 'wb') as f:
+        f.write(firefox.content)
+
+    print('\n>>> Web driver downloaded inside "/Lyndor/webdriver" folder, extract the zip file and\
+set the webdriver directory path to "PATH" variable, see README.md file for more detail.\n')
+
+    print('\n>>> Installation complete, Don\'t forget to have a look at settings.json\n')

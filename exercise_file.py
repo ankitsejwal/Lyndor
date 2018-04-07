@@ -63,7 +63,7 @@ def download(url, course_folder):
     file_not_found = True
     while file_not_found:
         message.spinning_cursor()
-        downloads_folder = install.folder_path("Downloads")
+        downloads_folder = install.get_path("Downloads")
         os.chdir(downloads_folder)
         for folder in os.listdir(downloads_folder):
             if folder == ex_file_name:
