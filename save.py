@@ -4,7 +4,7 @@
 ''' Creates course folder/ Saves chapters'''
 
 import os
-import install
+import install, cookies
 import sys, zipfile, json
 import time
 import shutil
