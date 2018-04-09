@@ -130,7 +130,8 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
         "location": "/path/to/folder/Lynda",
         "download_exercise_file": false,         // feature not available for organizational login
         "web_browser_for_exfile": "chrome",      // select chrome or firefox as a web browser
-        "download_time": ""                      // set time to schedule download (ex: "01:00" for 1am)
+        "download_time": "",                     // set time to schedule download (ex: "01:00" for 1am)
+        "redownload_course": "prompt"            // choose between -> prompt, skip and force re-download
     }
 }
 ```
