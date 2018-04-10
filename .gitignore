@@ -5,6 +5,7 @@
 aliases.bat
 testfile.py
 settings.json
+settings-test.json
 venv
 .python-version
 geckodriver.log
