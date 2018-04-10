@@ -13,6 +13,7 @@ Preferences==0.8
 pylint==1.7.4
 requests>=2.7.0
 requirements==0.1
+selenium==3.8.1
 singledispatch==3.4.0.3
 six==1.11.0
 wrapt==1.10.11
