@@ -75,10 +75,9 @@ def download_course(url):
     download_folder_path = install.get_path("Downloads")
     
     # Read preferences
-    download_exercise_file = read.settings_json('preferences', 'download_exercise_file')
-    use_cookie_for_download = read.settings_json('credentials', 'use_cookie_for_download')
+    use_cookie_for_download = read.course_download_pref
 
-    if use_cookie_for_download:
+    if use_cookie_for_download in ['cookies', 'cookie']:
         cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
     else:
         cookie_path = ''
@@ -97,7 +96,7 @@ def download_course(url):
         move.vid_srt_to_chapter(url, course_folder_path)    # Move videos and subtitles to chapter folders
         
         # Download exercise file
-        if download_exercise_file:                  # check if user wants to download exercise file
+        if read.download_exercise_file:                  # check if user wants to download exercise file
             if not use_cookie_for_download:         # make sure user is downloading via user + password
                 if save.check_exercise_file(url):
                     exercise_file.download(url, course_folder_path) # Download exercise-file

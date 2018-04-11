@@ -49,14 +49,14 @@ def find_cookie(desktop_folder, download_folder):
     cookies = [s for s in files if 'cookies' in s]
     if not cookies:
         downloading_from_cookie = message.return_colored_message(Fore.LIGHTBLUE_EX, ' 🍪  Downloading videos using cookies.txt')
-        message.carriage_return_animate(downloading_from_cookie)
-        cookies_not_found = message.return_colored_message(Fore.LIGHTRED_EX, "\
+        cookie_not_found = message.return_colored_message(Fore.LIGHTRED_EX, "\
 Oops!! Did you forget to put 🍪  cookies.txt inside Downloads or Desktop folder ??\n")
-        message.carriage_return_animate(cookies_not_found)
-        sys.exit(message.colored_message(Fore.LIGHTRED_EX,'\nNote: If you wish to download course using username & password combination,\
-\n      you should set ->  "use_cookie_for_download": false  in settings.json\n'))
+        message.carriage_return_animate(downloading_from_cookie)
+        message.carriage_return_animate(cookie_not_found)
+        sys.exit(message.colored_message(Fore.LIGHTRED_EX,'\nNote:\n\nIf you wish to download course using username & password combination,\
+\nyou should set ->  "use_cookie_for_download": false  in settings.json\n'))
     else:
         latest_cookie = max(cookies, key=os.path.getctime)
-        latest_cookie_file = message.return_colored_message(Fore.LIGHTGREEN_EX, '🍪  Using latest cookie file: '+latest_cookie+ '\n')
+        latest_cookie_file = message.return_colored_message(Fore.LIGHTGREEN_EX, '🍪  Using latest cookie file: '+ latest_cookie + '\n')
         message.carriage_return_animate(latest_cookie_file)
         return latest_cookie

@@ -40,12 +40,11 @@ def course(url, lynda_folder_path):
     ''' create course folder '''
     current_course = course_path(url, lynda_folder_path)
     courses = os.listdir(lynda_folder_path)
-    preference = read.settings_json('preferences', 'redownload_course')
 
     answer = None
     for course in courses:
         if (lynda_folder_path + course) == current_course:
-            if preference == 'force':
+            if read.redownload_course == 'force':
                 # delete existing course and re-download
                 shutil.rmtree(current_course)
                 message.colored_message(Fore.LIGHTRED_EX, "\n✅  Course folder already exists. Current preference -> FORCE redownload")
@@ -53,11 +52,11 @@ def course(url, lynda_folder_path):
                 time.sleep(2)
                 message.colored_message(Fore.LIGHTGREEN_EX, "\n♻️  Re-downloading the course.\n")
                 time.sleep(2)
-            elif preference == 'skip':
+            elif read.redownload_course == 'skip':
                 # skip download process
                 message.colored_message(Fore.LIGHTRED_EX, "\n✅  Course folder already exists. Current preference -> SKIP redownload")
                 sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n-> Skipping course download.\n"))    
-            elif preference == 'prompt':
+            elif read.redownload_course == 'prompt':
                 # prompt user with available choices
                 QUESTION = '\n✅  Course folder already exists: Do you wish to delete it and download again? (Y/N): '
                 sys.stdout.write(Fore.LIGHTBLUE_EX + QUESTION + Fore.RESET)
@@ -192,24 +191,21 @@ def contentmd(url):
 def videos(url, cookie_path, course_folder):
     ''' Download all the videos in course folder'''
     os.chdir(course_folder)
-    COOKIE = read.settings_json('credentials', 'use_cookie_for_download')
-    SUBTITLE = read.settings_json('preferences', 'download_subtitles')
-    EXTERNAL_DOWNLOADER = read.settings_json('preferences', 'ext-downloader-aria2-installed')
-    USERNAME = read.settings_json('credentials', 'username')
-    PASSWORD = read.settings_json('credentials', 'password')
-        
+    download_preference = read.course_download_pref
+
     try:
-        subtitles = ' --all-subs ' if SUBTITLE else ' '     # Checking subtitle preferences
+        subtitles = ' --all-subs ' if read.download_subtitles else ' ' # Check subtitle preferences
         # Output name of videos/subtitles
         output = ' -o ' +'"'+ course_folder + "/%(playlist_index)s - %(title)s.%(ext)s" + '"'
-        # Extername downloader option
-        ext_downloader = ' --external-downloader aria2c' if EXTERNAL_DOWNLOADER else ''
-        cookie = ' --cookies ' + '"' + cookie_path + '"'    #cookie
-        username = ' -u ' + USERNAME                        #username
-        password = ' -p ' + PASSWORD                        #password
+        # Exter name downloader option
+        ext_downloader = ' --external-downloader aria2c' if read.external_downloader else ''
+        cookie = ' --cookies ' + '"' + cookie_path + '"'     # cookie
+        username = ' -u ' + read.username                    # username
+        password = ' -p ' + read.password                    # password
 
-        # Checking cookie preferences
-        if  COOKIE:
+        # Checking download preferences
+        if  download_preference in ['cookies', 'cookie']:
+            sys.exit(download_preference)
             cookies.edit_cookie(cookie_path, message.NETSCAPE) # Edit cookie file
             os.system('youtube-dl' + cookie + output + subtitles + url + ext_downloader)
         else:
@@ -250,23 +246,32 @@ def settings_json():
 
     settings_dict = {
         "credentials": {
-            "username": "",                             # use cookie for organizational login-
-            "password": "",                             # instead of username & password
-            "use_cookie_for_download": True,            # if false, username & password will be used
+            "regular_login": {
+                "username": "",
+                "password": ""
+            }, 
+            "library_login": {
+                "card_number": "",
+                "card_pin": "",
+                "organization_url": ""
+            },
+            "course_download_pref": ["regular-login", "cookies"],
+            "exfile_download_pref": ["regular-login", "library-login"]
         },
         "preferences": {
             "location": install.set_path() + '/Lynda',
             "download_subtitles": True,
-            "download_exercise_file": False,            # feature unavailable for organizational login
-            "web_browser_for_exfile": 'chrome',         # select chrome or firefox as a web browser
-            "ext-downloader-aria2-installed": False,    # set True after installing aria2
+            "download_exercise_file": False,                    # feature unavailable for organizational login
+            "web_browser_for_exfile": ["chrome", "firefox"],    # select chrome or firefox as a web browser
+            "ext-downloader-aria2-installed": False,            # set True after installing aria2
             "download_time": "",
-            "redownload_course": "prompt"               # choose between -> prompt, skip & force re-download
+            "redownload_course": ["prompt", "skip", "force" ]   # choose between -> prompt, skip & force re-download
         },
         "requirements": {
-            "dependencies": ['youtube-dl', 'requests', 'beautifulsoup4', 'colorama', 'selenium']
+            "dependencies": ['youtube-dl', 'requests', 'beautifulsoup4', 'colorama', 'selenium', 'flask']
         }
     }
+
     out_file = open(read.LYNDOR_PATH + '/settings.json', 'w')
     json.dump(settings_dict, out_file, indent=4)
     out_file.close()

@@ -8,33 +8,20 @@ from selenium.webdriver.support import expected_conditions as EC
 import install, message, read
 import os, sys, time, shutil
 
-username = read.settings_json('credentials', 'username')
-password = read.settings_json('credentials', 'password')
-web_browser = read.settings_json('preferences', 'web_browser_for_exfile')
-
 def download(url, course_folder):
     ''' Download exercise file '''
-    if web_browser.lower() == 'firefox': 
+    if read.web_browser_for_exfile.lower() == 'firefox': 
         driver = webdriver.Firefox()
     else:
         driver = webdriver.Chrome()
-    driver.get("https://www.lynda.com/signin/")  # launch lynda.com/signin
 
-    # enter username
-    email = driver.find_element_by_css_selector("#email-address")
-    email.clear()
-    email.send_keys(username)
-    driver.find_element_by_css_selector('#username-submit').click()
-    print('\nusername successfully entered ....')
-    time.sleep(2)
-
-    # enter password
-    passwrd = driver.find_element_by_css_selector('#password-input')
-    passwrd.send_keys(password)
-    driver.find_element_by_css_selector('#password-submit').click()
-    print('password successfully entered ....')
-    time.sleep(2)
-
+    if read.exfile_download_pref == 'regular-login':
+        regular_login(url, course_folder, driver)
+    elif read.exfile_download_pref == 'library-login':
+        lib_login(url, course_folder, driver)
+    else:
+        sys.exit('Please choose between -> regular-login / library-login in settings.json')
+    
     # move to the course page
     print('launching desired course page ....')
     driver.get(url)
@@ -57,7 +44,7 @@ def download(url, course_folder):
         driver.find_element_by_css_selector('a > .exercise-name').click()
         
     ex_file_name = driver.find_element_by_css_selector('.exercise-name').text
-    ex_file_size = driver.find_element_by_css_selector('.file-size').text
+    # ex_file_size = driver.find_element_by_css_selector('.file-size').text
     print('Downloading ' + ex_file_name)
     
     file_not_found = True
@@ -78,3 +65,39 @@ def download(url, course_folder):
     except:
         print('Moving error.')
     driver.close()
+
+def lib_login(url, course_folder, driver):
+    driver.get("https://www.lynda.com/portal/sip?org=" + read.organization_url)  # launch lynda.com/signin
+
+    # enter username
+    card_number = driver.find_element_by_css_selector("#card-number")
+    card_number.clear()
+    card_number.send_keys(read.card_number)
+
+    # enter password
+    card_pin = driver.find_element_by_css_selector('#card-pin')
+    card_pin.clear()
+    card_pin.send_keys(read.card_pin)
+
+    driver.find_element_by_css_selector('#library-login-login').click()
+    print('\nusername and password successfully entered ....')
+    time.sleep(2)
+
+
+def regular_login(url, course_folder, driver):
+    driver.get("https://www.lynda.com/signin/")  # launch lynda.com/signin
+
+    # enter username
+    email = driver.find_element_by_css_selector("#email-address")
+    email.clear()
+    email.send_keys(read.username)
+    driver.find_element_by_css_selector('#username-submit').click()
+    print('\nusername successfully entered ....')
+    time.sleep(2)
+
+    # enter password
+    passwrd = driver.find_element_by_css_selector('#password-input')
+    passwrd.send_keys(read.password)
+    driver.find_element_by_css_selector('#password-submit').click()
+    print('password successfully entered ....')
+    time.sleep(2)
