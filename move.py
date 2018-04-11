@@ -25,6 +25,9 @@ def vid_srt_to_chapter(url, course_folder):
     video_count = 0
 
     print('\n')
+    total_videos = save.total_videos(url) 
+    print('total no of video are: ' + str(video_count))
+        
     for li in ul_video:
         chapter_name = chapters[chapter_count].text
         
@@ -45,7 +48,7 @@ def vid_srt_to_chapter(url, course_folder):
         
         # decide the correct zfill value to result in proper file moving
         digit = 2
-        if count_videos(course_folder) > 99:
+        if total_videos > 99:
             digit = 3
 
         print('🔰  Moving files inside: ' + str(chapter_name))
@@ -77,14 +80,6 @@ def vid_srt_to_chapter(url, course_folder):
                 pass
 
     print('\n🥂  videos/subtitles moved to appropriate chapters successfully.')
-
-def count_videos(course_folder):
-    ''' count the total no. of video files '''
-    counter = 0
-    for content in os.listdir(course_folder):
-        if content.endswith('.mp4'):
-            counter += 1
-    return counter
 
 def hms_string(sec_elapsed):
     ''' format elapsed time '''

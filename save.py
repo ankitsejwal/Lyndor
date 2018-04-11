@@ -14,6 +14,7 @@ from bs4 import BeautifulSoup
 import message, read
 from colorama import *
 
+
 def create_soup(url):
     ''' create soup object '''
     request = requests.get(url)
@@ -182,11 +183,24 @@ def contentmd(url):
                 except:
                     bug = True
                     pass
+
     content_md.close()                          # close content.md - operation finished
-    
     if bug:
         print('🤕  There seems to be an error while writing to content.md, please report the bug on GitHub')
     print("👍🏻  CONTENT.md created.\n")
+
+def total_videos(url):
+    ''' counts total available video files '''
+
+    soup = create_soup(url)
+    ul_video = soup.find_all('ul', class_="row toc-items")
+    video_count = 0
+
+    for li in ul_video:
+        group = li.find_all('a', class_='video-name')
+        for video in group:
+            video_count += 1
+    return video_count
 
 def videos(url, cookie_path, course_folder):
     ''' Download all the videos in course folder'''
@@ -205,7 +219,6 @@ def videos(url, cookie_path, course_folder):
 
         # Checking download preferences
         if  download_preference in ['cookies', 'cookie']:
-            sys.exit(download_preference)
             cookies.edit_cookie(cookie_path, message.NETSCAPE) # Edit cookie file
             os.system('youtube-dl' + cookie + output + subtitles + url + ext_downloader)
         else:
