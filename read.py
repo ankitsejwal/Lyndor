@@ -28,7 +28,7 @@ try:
     password                = settings_json('credentials', 'regular_login', 'password')
     card_number             = settings_json('credentials', 'library_login', 'card_number')
     card_pin                = settings_json('credentials', 'library_login', 'card_pin')
-    organization_url        = settings_json('credentials', 'library_login', "organization_url")
+    organization_url        = settings_json('credentials', 'library_login', 'organization_url')
     course_download_pref    = settings_json('credentials', 'course_download_pref')[0]
     exfile_download_pref    = settings_json('credentials', 'exfile_download_pref')[0]
     # read preferences

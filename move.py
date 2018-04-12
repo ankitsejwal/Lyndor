@@ -24,9 +24,8 @@ def vid_srt_to_chapter(url, course_folder):
     chapter_count = 0
     video_count = 0
 
-    print('\n')
     total_videos = save.total_videos(url) 
-    print('total no of video are: ' + str(video_count))
+    print('\nVideos downloaded: ' + str(total_videos) +'\n')
         
     for li in ul_video:
         chapter_name = chapters[chapter_count].text
