@@ -50,14 +50,14 @@ def schedule_download(url):
         return
     else:
         counter = True
-        message.colored_message(Fore.LIGHTGREEN_EX, 'Download time set to: ' + scheduled_time + '\
+        message.colored_message(Fore.LIGHTGREEN_EX, 'Download time set to: ' + read.download_time + '\
  in settings.json, you can change or remove this time in settings.json\n')
         try:
             while counter:
-                if time.strftime("%H:%M") == scheduled_time:
+                if time.strftime("%H:%M") == read.download_time:
                     download_course(url)
                     return
-                print('Download will start at: ' + scheduled_time + ', leave this window open.')
+                print('Download will start at: ' + read.download_time + ', leave this window open.')
                 time.sleep(60)
         except KeyboardInterrupt:
             sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
@@ -116,8 +116,8 @@ def download_course(url):
                     print('\nThe exercise file can only be downloaded through one of the below combinations:')
                     print('~ Regular login: username + password or')
                     print('~ Library login: card number, pin and org. url\n')
-
-
+        else:   # if exercise file not present
+            print('This course do not include the Exercise files.')
 
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
