@@ -80,7 +80,7 @@ def lib_login(url, course_folder, driver):
     card_pin.send_keys(read.card_pin)
 
     driver.find_element_by_css_selector('#library-login-login').click()
-    print('\nusername and password successfully entered ....')
+    print('\nlibrary card no. and card pin. entered successfully....')
     time.sleep(2)
 
 

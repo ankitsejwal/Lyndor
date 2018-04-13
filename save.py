@@ -274,7 +274,7 @@ def settings_json():
         "preferences": {
             "location": install.set_path() + '/Lynda',
             "download_subtitles": True,
-            "download_exercise_file": False,                    # feature unavailable for organizational login
+            "download_exercise_file": True,                    # feature unavailable for organizational login
             "web_browser_for_exfile": ["chrome", "firefox"],    # select chrome or firefox as a web browser
             "ext-downloader-aria2-installed": False,            # set True after installing aria2
             "download_time": "",
