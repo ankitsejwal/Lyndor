@@ -11,10 +11,11 @@
 - Organizational login (cookies.txt)    - Regular login (Username + Password combination)
 - Cross platform support                - Runs on both Python2 and Python3
 - Exercise file download                - Subtitles download
+- Lib. card + pin support for ex-file   - Schedule download (Download later)
 - Creates Course & Chapter folders      - Generate Info files
 - Videos and subtitles renaming         - Move videos/subtitles to correct Chapters
 - Adjust preferences (settings.json)    - aria2 external downloader (for faster downloads)
-- Bulk downloads                        - Schedule download (Download later)
+- Bulk downloads                        
 ```
 
 ![**Lyndor in Action**](./images/lyndor-run.gif)
@@ -117,23 +118,52 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 
 {
     "credentials": {
-        "username": "",                         // username and password combination will 
-        "password": "",                         // only work when "use_cookie_for_download": false
-        "use_cookie_for_download": true         // if false, username + password will be used instead
-    },
-    "requirements": {
-        "dependencies": ["youtube-dl", "selenium", "requests", "beautifulsoup4", "colorama"]
+        "regular_login": {
+            "username": "",             // not required if downloading via cookies
+            "password": ""
+        },
+        "library_login": {
+            "card_number": "",          // Library card number
+            "card_pin": "",             // Library card pin
+            "organization_url": ""      // org. url like: ottawa.ca
+        },
+        "course_download_pref": [
+            "cookies",                  // cookies will be used to download
+            "regular-login"             // place prefered option as the first item
+        ],
+        "exfile_download_pref": [
+            "library-login",            // library card will be used to download
+            "regular-login"             // place prefered option as the first item
+        ]
     },
     "preferences": {
-        "download_subtitles": true,
-        "ext-downloader-aria2-installed": false, // set true after installing aria2 (faster downloads)
         "location": "/path/to/folder/Lynda",
-        "download_exercise_file": false,         // feature not available for organizational login
-        "web_browser_for_exfile": "chrome",      // select chrome or firefox as a web browser
-        "download_time": "",                     // set time to schedule download (ex: "01:00" for 1am)
-        "redownload_course": "prompt"            // choose between -> prompt, skip and force re-download
+        "download_subtitles": true,     // set false otherwise
+        "download_exercise_file": true, // set false otherwise
+        "web_browser_for_exfile": [
+            "chrome",                   // place your prefered web browser- 
+            "firefox"                   // -as the first item 
+        ],
+        "ext-downloader-aria2-installed": false,    // set true after installing aria2 separately
+        "download_time": "",    // set time to schedule download (ex: "01:00" for 1am)
+        "redownload_course": [
+            "prompt",            // set your prefered option as first item.
+            "skip",
+            "force"
+        ]
+    },
+    "requirements": {
+        "dependencies": [
+            "youtube-dl",
+            "requests",
+            "beautifulsoup4",
+            "colorama",
+            "selenium",
+            "flask"
+        ]
     }
 }
+
 ```
 
 ## Run Lyndor
