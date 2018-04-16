@@ -147,7 +147,7 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
         "ext-downloader-aria2-installed": false,    // set true after installing aria2 separately
         "download_time": "",    // set time to schedule download (ex: "01:00" for 1am)
         "redownload_course": [
-            "prompt",            // set your prefered option as first item.
+            "prompt",           // set your prefered option as the first item.
             "skip",
             "force"
         ]
@@ -238,7 +238,8 @@ export PATH="/path/to/Lyndor/webdriver:$PATH"
         "ext-downloader-aria2-installed": false, // set true after installing aria2
         "location": "/path/to/folder/Lynda",
         "download_exercise_file": false,
-        "web_browser_for_exfile": "chrome",
+...
+...        
      }
 }
 ```
