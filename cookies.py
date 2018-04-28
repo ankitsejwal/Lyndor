@@ -7,7 +7,10 @@ import os
 import sys
 import glob
 import message
-from colorama import *
+try:
+    from colorama import *
+except ImportError:
+    pass
 
 def add_new_line(cookie, line):
     '''returns cookie file with NETSCAPE line'''

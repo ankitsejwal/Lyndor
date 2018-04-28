@@ -5,7 +5,10 @@
 
 import time
 import sys
-from colorama import *
+try:
+    from colorama import *
+except ImportError:
+    pass
 
 ENTER_URL = " 🚀 Paste the url of a Lynda course >>> "
 

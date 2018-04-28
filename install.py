@@ -56,24 +56,16 @@ def file_found(folder, directory):
 def install_dependencies():
     '''install required softwares'''
     os.chdir(read.LYNDOR_PATH)
-
-    in_file = open('settings.json', 'r')
-    requirements = json.load(in_file)
-    in_file.close()
-
-    dependencies = requirements['requirements']['dependencies']
-
-    for module in dependencies:
-        os.system('pip install ' + module)
+    os.system('pip install -r requirements.txt')
 
 
 if __name__ == '__main__':
     try:
+        install_dependencies()
         save.settings_json()
         save.lynda_folder()
         save.aliases_bat()
         save.run_lyndor_bat()
-        install_dependencies()
         save.aria2()
         save.webdriver()
     except KeyboardInterrupt:

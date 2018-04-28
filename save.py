@@ -8,12 +8,14 @@ import install, cookies
 import sys, zipfile, json
 import time
 import shutil
-import requests
 import re
-from bs4 import BeautifulSoup
 import message, read
-from colorama import *
-
+try:
+    from bs4 import BeautifulSoup
+    from colorama import *
+    import requests
+except ImportError:
+    pass
 
 def create_soup(url):
     ''' create soup object '''
@@ -279,9 +281,6 @@ def settings_json():
             "ext-downloader-aria2-installed": False,            # set True after installing aria2
             "download_time": "",
             "redownload_course": ["prompt", "skip", "force" ]   # choose between -> prompt, skip & force re-download
-        },
-        "requirements": {
-            "dependencies": ['youtube-dl', 'requests', 'beautifulsoup4', 'colorama', 'selenium', 'flask']
         }
     }
 
