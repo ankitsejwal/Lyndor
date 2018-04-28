@@ -99,7 +99,7 @@ def download_course(url):
 
         # Download exercise files
         if save.check_exercise_file(url):
-            print('Exercise file is available for download')
+            print('\nExercise file is available to download')
             if not read.download_exercise_file:
                 # if user do not want to download ex-file
                 print("settings.json says you do not want to download ex-file -> 'download_exercise_file': false")
