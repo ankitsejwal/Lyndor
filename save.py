@@ -174,7 +174,10 @@ def contentmd(url):
 
     with open('CONTENT.md', 'a') as content_md:
         for li in ul_video:
-            content_md.writelines('\n\n## ' + str(chapters[chapter_count].text) + '\n')
+            try:
+                content_md.writelines('\n\n## ' + str(chapters[chapter_count].text) + '\n')
+            except UnicodeEncodeError:
+                pass
             chapter_count += 1
             group = li.find_all('a', class_='video-name')
             for video in group:
