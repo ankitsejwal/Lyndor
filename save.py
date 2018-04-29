@@ -174,13 +174,14 @@ def contentmd(url):
 
     with open('CONTENT.md', 'a') as content_md:
         for li in ul_video:
-            content_md.writelines('\n\n## ' + str(chapters[chapter_count].text) + '\n')
+            content_md.writelines('\n\n## ' + (chapters[chapter_count].text).encode('utf-8') + '\n')
             chapter_count += 1
             group = li.find_all('a', class_='video-name')
             for video in group:
                 video_count += 1
-                content_md.writelines("\n* " + str(video_count).zfill(2) + " - " + str(video.text.strip()))
-    content_md.close()  # close content.md - operation finished
+                content_md.writelines("\n* " + str(video_count).zfill(2) + " - " + (video.text.strip()).encode('utf-8'))
+    print('✅  CONTENT.md created\n')
+    content_md.close()                  # close content.md
 
 def total_videos(url):
     ''' counts total available video files '''
