@@ -176,7 +176,7 @@ def contentmd(url):
         for li in ul_video:
             try:
                 content_md.writelines('\n\n## ' + str(chapters[chapter_count].text) + '\n')
-            except UnicodeError:
+            except UnicodeEncodeError:
                 pass
             chapter_count += 1
             group = li.find_all('a', class_='video-name')
