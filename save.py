@@ -173,14 +173,30 @@ def contentmd(url):
     video_count = 0
 
     with open('CONTENT.md', 'a') as content_md:
+        bug = False
         for li in ul_video:
-            content_md.writelines('\n\n## ' + (chapters[chapter_count].text).encode('utf-8') + '\n')
+            try:
+                content_md.writelines('\n\n## ' + (chapters[chapter_count].text).encode('utf-8') + '\n')
+            except TypeError:
+                content_md.writelines('\n\n## ' + str((chapters[chapter_count].text).encode('utf-8')) + '\n')
+            except Exception:
+                bug = True
+                break              
             chapter_count += 1
             group = li.find_all('a', class_='video-name')
             for video in group:
                 video_count += 1
-                content_md.writelines("\n* " + str(video_count).zfill(2) + " - " + (video.text.strip()).encode('utf-8'))
-    print('✅  CONTENT.md created\n')
+                try:
+                    content_md.writelines("\n* " + str(video_count).zfill(2) + " - " + (video.text.strip()).encode('utf-8'))
+                except TypeError:
+                    content_md.writelines("\n* " + str(video_count).zfill(2) + " - " + str((video.text.strip()).encode('utf-8')))
+                except Exception:
+                    bug = True
+                    break
+    if bug:
+        print('🤕  There seems to be an error while writing to content.md, please report the bug on GitHub')
+    else:
+        print("👍🏻  CONTENT.md created.\n")                
     content_md.close()                  # close content.md
 
 def total_videos(url):
