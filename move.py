@@ -71,7 +71,10 @@ def vid_srt_to_chapter(url, course_folder):
             try:
                 shutil.move(video_name, chapter_name)
             except:
-                print('🤕  File not found: ' + str(video_name))
+                try:
+                    print('🤕  File not found: ' + str(video_name))
+                except UnicodeEncodeError:
+                    print('🤕  File not found: ' + (video_name).encode('utf-8'))
 
             try:
                 shutil.move(subtitle_name, chapter_name)
