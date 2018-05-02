@@ -117,7 +117,7 @@ def download_course(url):
                     print('~ Regular login: username + password or')
                     print('~ Library login: card number, pin and org. url\n')
         else:   # if exercise file not present
-            print('This course do not include the Exercise files.')
+            print('This course does not include Exercise files.')
 
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
