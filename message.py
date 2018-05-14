@@ -43,12 +43,20 @@ def spinning_cursor():
 
 def write(description, value):
     '''prints out any message'''
-    sys.stdout.write(str(description) + '\t' + str(value) + '\n')
+    try:
+        sys.stdout.write(str(description) + '\t' + str(value) + '\n')
+    except UnicodeEncodeError:
+        sys.stdout.write((description).encode('utf-8') + '\t' + (value).encode('utf-8') + '\n')
+
     sys.stdout.flush()
 
 def print_line(value):
     ''' prints out any string '''
-    sys.stdout.write(str(value) + '\n')
+    try:
+        sys.stdout.write(str(value) + '\n')
+    except UnicodeEncodeError:
+        sys.stdout.write((value).encode('utf-8'))
+
     sys.stdout.flush()
 
 def colored_message(color, message):
