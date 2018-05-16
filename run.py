@@ -24,12 +24,14 @@ def main():
     print('')
     start_time = time.time() #start time counter begins
     if url == "":
+        # If user press Enter (i.e. url empty), get urls from Bulkdownload.txt
         urls = read.bulk_download()
         if not urls:
             sys.exit(message.colored_message(Fore.LIGHTRED_EX, 'Please paste urls in Bulk Download.txt\n'))
         for url in urls:
             schedule_download(url)
     else:
+        # begin regular download
         schedule_download(url)
     try:
         end_time = time.time()
@@ -64,6 +66,7 @@ def schedule_download(url):
 
 def download_course(url):
     ''' download course '''
+    
     # Check for a valid url
     if url.find('.html') == -1:
         sys.exit(message.animate_characters(Fore.LIGHTRED_EX, draw.ANONYMOUS, 0.02))
