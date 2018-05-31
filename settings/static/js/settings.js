@@ -59,3 +59,30 @@ function getData(){
     });
     return json;
 }
+
+function toggleEye(){
+    passwordField = document.getElementById("password");
+    eyeIcon = document.getElementById("eye-icon");
+
+    if(eyeIcon.classList[1] == 'fa-eye-slash'){
+        // closed eye
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+    
+        // change input type
+        passwordField.type = "text";
+
+    }
+    else{
+        // open eye
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+    
+        // change input type
+        passwordField.type = "password";
+    }    
+}
+
+function openEye(){
+
+}
