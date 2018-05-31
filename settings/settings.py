@@ -1,11 +1,11 @@
 from flask import Flask, render_template
-import json
+import time, json
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('settings.html')
+    return render_template('settings.html', timestamp = time.time())
 
 @app.route('/test')
 def test():

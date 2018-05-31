@@ -7,74 +7,155 @@
     <title>Fiddle with settings ...</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/css/style.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</head>
-<body>
-    <div class="container">
+ </head>
+<body class="container">
+    <form class="jumbotron">
+        <div class="row">
+                <div class="col-lg">
+                        <div id="credentials">
+                            <div id="regular-login">
+                                <h1 class="display-4">Regular login</h1>
+                                <small class="form-text text-muted" for="">Type in new username and password</small>
+    
+                                <div class="form-group">
+                                    <label class="form-text text-muted" for="">username</label>
+                                    <input class="form-control" type="text" id="username"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="form-text text-muted">password</label>
+                                    <input class="form-control" type="password" id="password"/>
+                                </div>
+                            </div>
+                            <label class="form-text text-muted" for="">Important: Choose download method</label>    
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary" id="redownload-skip">
+                                      <input type="radio" name="options" id="option2" autocomplete="off"> user + pass
+                                    </label>
+                                    <label class="btn btn-secondary" id="redownload-force">
+                                      <input type="radio" name="options" id="option3" autocomplete="off"> cookies.txt
+                                    </label>
+                             </div> <!--Radio butons--> 
+                            <br><br>
+                            <div id="library-login">
+                                <h1 class="display-4">Library Card</h1>
+                                <small class="form-text text-muted" for="">You can download just the exercise file from library login</small>
+    
+                                <div class="form-group">
+                                    <label class="form-text text-muted" for="">card number</label>
+                                    <input class="form-control" type="text" id="card_number"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="form-text text-muted">card pin</label>
+                                    <input class="form-control" type="text" id="card_pin"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="form-text text-muted">organization url</label>
+                                    <input class="form-control" type="text" id="organization_url"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="form-text text-muted">Do you want to use library login to download exercise file?</label>
+                                    <small class="form-text text-muted" for="">Set false if you want to use regular login.</small>
+                                    <br>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary active">
+                                              <input type="radio" name="options" id="option1" autocomplete="off" checked> True
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                              <input type="radio" name="options" id="option2" autocomplete="off"> False
+                                            </label>
+                                     </div> <!--Radio buttons-->
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-lg">
+                    <div id="preferences">
+                        <h1 class="display-4">Preferences</h1>
+                        <small class="form-text text-muted" for="">Set your preferences here.</small>
+
+                        <div class="form-group">
+                            <label class="form-text text-muted" for="">Lynda folder location</label>
+                            <input class="form-control" type="text" id="lynda_location"/>
+                        </div>
+                        <div class="form-group">
+                                <label for="" class="form-text text-muted">Download subtitles</label>
+
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-secondary" id="download-subtitles-true">
+                                          <input type="radio" name="options" id="option1" autocomplete="off" checked> True
+                                        </label>
+                                        <label class="btn btn-secondary" id="download-subtitles-false">
+                                          <input type="radio" name="options" id="option2" autocomplete="off"> False
+                                        </label>
+                                 </div> <!--Radio buttons--> 
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-text text-muted">Download exercise files</label>
+
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary" id="download-exfile-true">
+                                      <input type="radio" name="options" id="option1" autocomplete="off" checked> True
+                                    </label>
+                                    <label class="btn btn-secondary" id="download-exfile-false">
+                                      <input type="radio" name="options" id="option2" autocomplete="off"> False
+                                    </label>
+                             </div> <!--Radio buttons--> 
+                        </div>
+                        <div class="form-group">
+                                <label for="" class="form-text text-muted">Web browser for exercise files</label>
+
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-secondary" id="exfile-chrome">
+                                          <input type="radio" name="options" id="option1" autocomplete="off" checked> Chrome
+                                        </label>
+                                        <label class="btn btn-secondary" id="exfile-firefox">
+                                          <input type="radio" name="options" id="option2" autocomplete="off"> Firefox
+                                        </label>
+                                 </div> <!--Radio buttons--> 
+                                
+                        </div>
+                        <div class="form-group">
+                                <label for="" class="form-text text-muted">Redownload course</label>
+                                
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-secondary active" id="redownload-prompt">
+                                          <input type="radio" name="options" id="option1" autocomplete="off" checked> Prompt
+                                        </label>
+                                        <label class="btn btn-secondary" id="redownload-skip">
+                                          <input type="radio" name="options" id="option2" autocomplete="off"> Skip
+                                        </label>
+                                        <label class="btn btn-secondary" id="redownload-force">
+                                          <input type="radio" name="options" id="option3" autocomplete="off"> Force
+                                        </label>
+                                 </div> <!--Radio butons--> 
+                    
+                        </div>
+                        <div class="form-group">
+                                <label for="" class="form-text text-muted">Aria2 installed</label>
+
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-secondary" id="aria2-true">
+                                          <input type="radio" name="options" id="option1" autocomplete="off"> True
+                                        </label>
+                                        <label class="btn btn-secondary" id="aria2-false">
+                                          <input type="radio" name="options" id="option2" autocomplete="off" checked> False
+                                        </label>
+                                 </div> <!--Radio buttons--> 
+                        </div>
+                        <div class="form-group">
+                                <label for="" class="form-text text-muted">Download time</label>
+                                <input class="form-control" type="text" id="organization-url"/>
+                        </div>
+                    </div>
+                </div>
+        </div> <!-- end row -->
         <br>
-        <div class="jumbotron">
-            <h1 class="display-4">Settings</h1>
-            <p>Tweak settings for Lyndor here, after making changes press Save and your settings.json file will be updated.</p>
-            <br>
-            <div class="row">
-                <div class="col-sm">
-                    <input class="form-control" type="text" placeholder="Username">
-                    <input class="form-control" type="text" placeholder="Password">
-                </div>
-                <div class="col-sm">
-                    <div>
-                        <input class="form-control" type="text" placeholder="location">
-                    </div>
-                    <input class="form-control" type="text" placeholder="Download time">
-                </div>
-                <div class="col-sm">
-                    <div class="btn-group btn-group-sm btn-group-toggle toggles" data-togg="buttons">
-                        <label class="btn btn-secondary active">
-                            <input type="radio" name="" id="">Use cookie to download
-                        </label>
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="" id="">Don't
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-sm btn-group-toggle toggles" data-togg="buttons">
-                            <label class="btn btn-secondary active">
-                                <input type="radio" name="" id="">Download exercise file
-                            </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="" id="">Don't
-                            </label>
-                    </div>
-                    <div class="btn-group btn-group-sm btn-group-toggle toggles" data-togg="buttons">
-                        <label class="btn btn-secondary active">
-                            <input type="radio" name="" id="">Download Subtitles
-                        </label>
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="" id="">Don't
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-sm btn-group-toggle toggles" data-togg="buttons">
-                        <label class="btn btn-secondary active" for="download-exercise">
-                            <input type="radio" name="" id="">aria2 installed
-                        </label>
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="" id="">No
-                        </label>    
-                    </div>
-                    <br>
-                    <div class="btn-group btn-group-sm btn-group-toggle toggles" data-togg="buttons">
-                        <label class="btn btn-secondary active">
-                            <input type="radio" name="" id="">Chrome
-                        </label>
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="" id="">Firefox
-                        </label>
-                    </div>
-                </div>    
-            </div>
-            <button class="btn btn-dark" type="button">Save</button>
-        </div>
-    </div>    
+        <button class="btn btn-primary">Save</button>
+    </form>
+    
+    <script src="../static/js/settings.js?{{timestamp}}"></script>
 </body>
 </html>
