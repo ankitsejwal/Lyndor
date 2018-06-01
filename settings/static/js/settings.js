@@ -60,9 +60,9 @@ function getData(){
     return json;
 }
 
-function toggleEye(){
-    passwordField = document.getElementById("password");
-    eyeIcon = document.getElementById("eye-icon");
+function toggleEye(textField, icon){
+    passwordField = document.getElementById(textField);
+    eyeIcon = document.getElementById(icon);
 
     if(eyeIcon.classList[1] == 'fa-eye-slash'){
         // closed eye
@@ -83,6 +83,10 @@ function toggleEye(){
     }    
 }
 
-function openEye(){
+function passwordEyeIcon(){
+    toggleEye("password", "password-eye-icon");
+}
 
+function pinEyeIcon(){
+    toggleEye("card-pin", "pin-eye-icon");
 }

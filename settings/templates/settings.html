@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fiddle with settings ...</title>
+    <title>Edit Settings.json</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -26,7 +26,7 @@
                                     <input class="form-control" type="text" id="username"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="" class="form-text text-muted">password <i id="eye-icon" class="fas fa-eye-slash" onclick="toggleEye()"></i></label>
+                                    <label for="" class="form-text text-muted">password <i id="password-eye-icon" class="fas fa-eye-slash" onclick="passwordEyeIcon()"></i></label>
                                     <input class="form-control" type="password" id="password"/>
                                 </div>
                             </div>
@@ -49,8 +49,8 @@
                                     <input class="form-control" type="text" id="card_number"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="" class="form-text text-muted">card pin</label>
-                                    <input class="form-control" type="text" id="card_pin"/>
+                                    <label for="" class="form-text text-muted">card pin <i id="pin-eye-icon" class="fas fa-eye-slash" onclick="pinEyeIcon()"></i></label>
+                                    <input class="form-control" type="password" id="card-pin"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="form-text text-muted">organization url</label>
