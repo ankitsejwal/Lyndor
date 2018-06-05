@@ -3,7 +3,7 @@
 
 ''' Creates course folder/ Saves chapters'''
 
-import os
+import os, io
 import install, cookies
 import sys, zipfile, json
 import time
@@ -16,6 +16,12 @@ try:
     import requests
 except ImportError:
     pass
+
+def utf_encode(string):
+    return (string).encode('utf-8')
+
+def utf_decode(string):
+    return string.decode('utf-8')
 
 def create_soup(url):
     ''' create soup object '''
@@ -115,20 +121,22 @@ def info_file(url, course_path):
 
     os.chdir(course_path)   # Jump to course directory to save info.txt
 
-    with open('info.txt', 'a') as info_file:
-        info_file.writelines('Course Name' + '\t\t' + course_title + '\n')
-        info_file.writelines('Course id' + '\t\t' + course_id + '\n')
-        info_file.writelines('Author Name' + '\t\t' + author_name + '\n')
-        info_file.writelines('Topics' + '\t\t' + topic_tag + '\n')
-        info_file.writelines('Softwares' + '\t\t' + software_tag + '\n')
-        info_file.writelines('Duration' + '\t\t' + duration + '\n')
-        info_file.writelines('Release Date' + '\t\t' + release_date + '\n')
-        info_file.writelines('Downloaded On' + '\t\t' + download_date + '\n')
-        info_file.writelines('Course URL' + '\t\t' + url + '\n')
+    # write to info.txt
+    info_file = io.open('info.txt', mode='a', encoding='utf-8')
+    info_file.writelines('Course Name' + '\t\t' + course_title + '\n')
+    info_file.writelines('Course id' + '\t\t' + course_id + '\n')
+    info_file.writelines('Author Name' + '\t\t' + author_name + '\n')
+    info_file.writelines('Topics' + '\t\t' + topic_tag + '\n')
+    info_file.writelines('Softwares' + '\t\t' + software_tag + '\n')
+    info_file.writelines('Duration' + '\t\t' + duration + '\n')
+    info_file.writelines('Release Date' + '\t\t' + release_date + '\n')
+    info_file.writelines('Downloaded On' + '\t\t' + download_date + '\n')
+    info_file.writelines('Course URL' + '\t\t' + url + '\n')
     info_file.close()
 
-    with open('CONTENT.md', 'a') as content_md:
-        content_md.writelines("# " + course_title + " with " + author_name + " on lynda.com \n")
+    # write to content.md
+    content_md = io.open('CONTENT.md', mode="a", encoding="utf-8")
+    content_md.writelines("# " + course_title + " with " + author_name + " on lynda.com \n")
     content_md.close()
 
     # print message
