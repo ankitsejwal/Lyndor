@@ -155,16 +155,6 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
             "skip",
             "force"
         ]
-    },
-    "requirements": {
-        "dependencies": [
-            "youtube-dl",
-            "requests",
-            "beautifulsoup4",
-            "colorama",
-            "selenium",
-            "flask"
-        ]
     }
 }
 
