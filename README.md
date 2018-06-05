@@ -105,6 +105,10 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
   - firefoxdriver.zip
 --- aria2c              (visible to Windows users only)
   - aria2c.zip
+--- settings            (directory)
+  -- static             (directory)
+  -- templates          (directory)
+  -  settings.py        --> Flask webserver (python settings.py) 
 ```
 
 ## Usage
