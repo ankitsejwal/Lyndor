@@ -122,21 +122,21 @@ def info_file(url, course_path):
     os.chdir(course_path)   # Jump to course directory to save info.txt
 
     # write to info.txt
-    info_file = io.open('info.txt', mode='a', encoding='utf-8')
-    info_file.writelines('Course Name' + '\t\t' + course_title + '\n')
-    info_file.writelines('Course id' + '\t\t' + course_id + '\n')
-    info_file.writelines('Author Name' + '\t\t' + author_name + '\n')
-    info_file.writelines('Topics' + '\t\t' + topic_tag + '\n')
-    info_file.writelines('Softwares' + '\t\t' + software_tag + '\n')
-    info_file.writelines('Duration' + '\t\t' + duration + '\n')
-    info_file.writelines('Release Date' + '\t\t' + release_date + '\n')
-    info_file.writelines('Downloaded On' + '\t\t' + download_date + '\n')
-    info_file.writelines('Course URL' + '\t\t' + url + '\n')
+    info_file = io.open('info.txt', mode="a", encoding="utf-8")
+    info_file.writelines(u'Course Name' + '\t\t' + course_title + '\n')
+    info_file.writelines(u'Course id' + '\t\t' + course_id + '\n')
+    info_file.writelines(u'Author Name' + '\t\t' + author_name + '\n')
+    info_file.writelines(u'Topics' + '\t\t' + topic_tag + '\n')
+    info_file.writelines(u'Softwares' + '\t\t' + software_tag + '\n')
+    info_file.writelines(u'Duration' + '\t\t' + duration + '\n')
+    info_file.writelines(u'Release Date' + '\t\t' + release_date + '\n')
+    info_file.writelines(u'Downloaded On' + '\t\t' + download_date + '\n')
+    info_file.writelines(u'Course URL' + '\t\t' + url + '\n')
     info_file.close()
 
     # write to content.md
     content_md = io.open('CONTENT.md', mode="a", encoding="utf-8")
-    content_md.writelines("# " + course_title + " with " + author_name + " on lynda.com \n")
+    content_md.writelines(u"# " + course_title + " with " + author_name + " on lynda.com \n")
     content_md.close()
 
     # print message
