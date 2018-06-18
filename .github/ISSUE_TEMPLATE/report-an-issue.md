@@ -6,7 +6,7 @@ about: Edit existing content to report
 
 ## Please follow the guide below
 
-- You will be asked some questions and requested to provide some information, please read them **carefully**
+- You will be asked some question, please read them **carefully**
 - Put an `x` into all the boxes [ ] relevant to your *issue* (like this: `[x]`)
 - Use the *Preview* tab to see what your issue will actually look like
 
