@@ -1,6 +1,6 @@
 ---
 name: Report an issue
-about: Edit existing content to report
+about: Preview existing content then make changes
 
 ---
 
@@ -45,12 +45,12 @@ NameError: global name 'save' is not defined
 
 ### Answer questions related to your Environment which will help in reproducing the issue:
 
-#### The issue was encountered on:
+### The issue was encountered on:
 - [ ] MacOS
 - [ ] Windows
 - [ ] Linux
 
-#### Enter the python version you are using for download. Find your python version by `python -V` and replace (version) below with your python version.
+### Enter the python version you are using for download. Find your python version by `python -V` and replace (version) below with your python version.
 - python (version) [like python 3.6.3]
 
 ---
