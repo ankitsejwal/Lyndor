@@ -18,7 +18,8 @@
                 <div class="col-lg">
                         <div id="credentials">
                             <div id="regular-login">
-                                <h1 class="display-4">Regular login</h1>
+                                <h1 class="display-4">Regular login</h1>        
+                                <button class="btn btn-outline-dark float-right"><i class="fas fa-save"></i> Save</button>
                                 <small class="form-text text-muted" for="">Type in new username and password</small>
     
                                 <div class="form-group">
@@ -26,17 +27,17 @@
                                     <input class="form-control" type="text" id="username"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="" class="form-text text-muted">password <i id="password-eye-icon" class="fas fa-eye-slash" onclick="passwordEyeIcon()"></i></label>
+                                    <label for="" class="form-text text-muted">password <i id="password-eye-icon" class="fas fa-eye-slash" onclick="toggleEye('password','password-eye-icon')"></i></label>
                                     <input class="form-control" type="password" id="password"/>
                                 </div>
                             </div>
                             <label class="form-text text-muted" for="">Important: Choose download method</label>    
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-secondary" id="redownload-skip">
-                                      <input type="radio" name="options" id="option2" autocomplete="off"> user + pass
+                                    <label class="btn btn-secondary" id="userPass-method">
+                                      <input type="radio" name="download_method" autocomplete="off"> user + pass
                                     </label>
-                                    <label class="btn btn-secondary" id="redownload-force">
-                                      <input type="radio" name="options" id="option3" autocomplete="off"> cookies.txt
+                                    <label class="btn btn-secondary" id="cookies-method">
+                                      <input type="radio" autocomplete="off"> cookies.txt
                                     </label>
                              </div> <!--Radio butons--> 
                             <br><br>
@@ -49,8 +50,8 @@
                                     <input class="form-control" type="text" id="card_number"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="" class="form-text text-muted">card pin <i id="pin-eye-icon" class="fas fa-eye-slash" onclick="pinEyeIcon()"></i></label>
-                                    <input class="form-control" type="password" id="card-pin"/>
+                                    <label for="" class="form-text text-muted">card pin <i id="pin-eye-icon" class="fas fa-eye-slash" onclick="toggleEye('card_pin','pin-eye-icon')"></i></label>
+                                    <input class="form-control" type="password" id="card_pin"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="form-text text-muted">organization url</label>
@@ -61,11 +62,11 @@
                                     <small class="form-text text-muted" for="">Set false if you want to use regular login.</small>
                                     <br>
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            <label class="btn btn-secondary active">
-                                              <input type="radio" name="options" id="option1" autocomplete="off" checked> True
+                                            <label class="btn btn-secondary" id="exfile-library-login">
+                                              <input type="radio" autocomplete="off" checked> Yes
                                             </label>
-                                            <label class="btn btn-secondary">
-                                              <input type="radio" name="options" id="option2" autocomplete="off"> False
+                                            <label class="btn btn-secondary btn-primary" id="exfile-regular-login">
+                                              <input type="radio" autocomplete="off">  No
                                             </label>
                                      </div> <!--Radio buttons-->
                                 </div>
@@ -86,10 +87,10 @@
 
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-secondary" id="download-subtitles-true">
-                                          <input type="radio" name="options" id="option1" autocomplete="off" checked> True
+                                          <input type="radio" autocomplete="off" checked> Yes
                                         </label>
                                         <label class="btn btn-secondary" id="download-subtitles-false">
-                                          <input type="radio" name="options" id="option2" autocomplete="off"> False
+                                          <input type="radio" autocomplete="off">  No
                                         </label>
                                  </div> <!--Radio buttons--> 
                         </div>
@@ -98,10 +99,10 @@
 
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     <label class="btn btn-secondary" id="download-exfile-true">
-                                      <input type="radio" name="options" id="option1" autocomplete="off" checked> True
+                                      <input type="radio" autocomplete="off" checked> Yes
                                     </label>
                                     <label class="btn btn-secondary" id="download-exfile-false">
-                                      <input type="radio" name="options" id="option2" autocomplete="off"> False
+                                      <input type="radio" autocomplete="off">  No
                                     </label>
                              </div> <!--Radio buttons--> 
                         </div>
@@ -110,10 +111,10 @@
 
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-secondary" id="exfile-chrome">
-                                          <input type="radio" name="options" id="option1" autocomplete="off" checked> Chrome
+                                          <input type="radio" autocomplete="off" checked> Chrome
                                         </label>
                                         <label class="btn btn-secondary" id="exfile-firefox">
-                                          <input type="radio" name="options" id="option2" autocomplete="off"> Firefox
+                                          <input type="radio" autocomplete="off"> Firefox
                                         </label>
                                  </div> <!--Radio buttons--> 
                                 
@@ -122,14 +123,14 @@
                                 <label for="" class="form-text text-muted">Redownload course</label>
                                 
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn btn-secondary active" id="redownload-prompt">
-                                          <input type="radio" name="options" id="option1" autocomplete="off" checked> Prompt
+                                        <label class="btn btn-secondary" id="redownload-prompt">
+                                          <input type="radio" autocomplete="off" checked> Prompt
                                         </label>
                                         <label class="btn btn-secondary" id="redownload-skip">
-                                          <input type="radio" name="options" id="option2" autocomplete="off"> Skip
+                                          <input type="radio" autocomplete="off"> Skip
                                         </label>
                                         <label class="btn btn-secondary" id="redownload-force">
-                                          <input type="radio" name="options" id="option3" autocomplete="off"> Force
+                                          <input type="radio" autocomplete="off"> Force
                                         </label>
                                  </div> <!--Radio butons--> 
                     
@@ -139,22 +140,21 @@
 
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-secondary" id="aria2-true">
-                                          <input type="radio" name="options" id="option1" autocomplete="off"> True
+                                          <input type="radio" autocomplete="off"> Yes
                                         </label>
                                         <label class="btn btn-secondary" id="aria2-false">
-                                          <input type="radio" name="options" id="option2" autocomplete="off" checked> False
+                                          <input type="radio" autocomplete="off" checked>  No
                                         </label>
                                  </div> <!--Radio buttons--> 
                         </div>
                         <div class="form-group">
                                 <label for="" class="form-text text-muted">Download time</label>
-                                <input class="form-control" type="text" id="organization-url"/>
+                                <input class="form-control" type="text" id="download_time"/>
                         </div>
                     </div>
+                    <button class="btn btn-outline-dark btn-block"><i class="fas fa-save"></i> Save</button>
                 </div>
         </div> <!-- end row -->
-        <br>
-        <button class="btn btn-primary">Save</button>
     </form>
     
     <script src="../static/js/settings.js?{{timestamp}}"></script>
