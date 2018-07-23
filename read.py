@@ -14,7 +14,7 @@ def settings_json(section, *args):
     ''' Read settings.json '''
     os.chdir(LYNDOR_PATH)
 
-    in_file = open('settings.json', 'r')
+    in_file = open('./settings/static/js/settings.json', 'r')
     data = json.load(in_file)
     in_file.close()
     try:

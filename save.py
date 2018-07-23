@@ -300,7 +300,7 @@ def settings_json():
         }
     }
 
-    out_file = open(read.LYNDOR_PATH + '/settings.json', 'w')
+    out_file = open(read.LYNDOR_PATH + '/settings/static/js/settings.json', 'w')
     json.dump(settings_dict, out_file, indent=4)
     out_file.close()
 
