@@ -38,18 +38,18 @@ $(document).ready(function(){
 
     // download method  
     $('#userPass-method').click(function(){
-        settingsJson.credentials.course_download_pref[0] = "regular-login";
+        settingsJson.credentials.course_download_pref = "regular-login";
     })    
     $('#cookies-method').click(function(){
-        settingsJson.credentials.course_download_pref[0] = "cookies";
+        settingsJson.credentials.course_download_pref = "cookies";
     })
 
     // exercise file preferences
     $('#exfile-library-login').click(function(){
-        settingsJson.credentials.exfile_download_pref[0] = "library-login";
+        settingsJson.credentials.exfile_download_pref = "library-login";
     })    
     $('#exfile-regular-login').click(function(){
-        settingsJson.credentials.exfile_download_pref[0] = "regular-login";
+        settingsJson.credentials.exfile_download_pref = "regular-login";
     })
 
     // download subtitles preferences
@@ -97,7 +97,7 @@ $(document).ready(function(){
     })
 
 
-
+    // when SAVE button clicks
     $('button').click(function(){
         
         // update values
@@ -123,13 +123,13 @@ $(document).ready(function(){
   })
 
 // Read download method state
-if(settingsJson.credentials.course_download_pref[0] == "regular-login") 
+if(settingsJson.credentials.course_download_pref == "regular-login") 
     document.getElementById('userPass-method').classList.add("active");
 else
     document.getElementById('cookies-method').classList.add("active");
    
 // Read exercise file download preferences
-if(settingsJson.credentials.exfile_download_pref[0] == "regular-login") 
+if(settingsJson.credentials.exfile_download_pref == "regular-login") 
     document.getElementById('exfile-regular-login').classList.add("active");
 else
     document.getElementById('exfile-library-login').classList.add("active");
