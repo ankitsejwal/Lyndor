@@ -16,12 +16,11 @@ about: Preview existing content then make changes
 
 ### Before submitting an *issue* make sure you have:
 - [ ] At least skimmed through the [README](https://github.com/ankitsejwal/Lyndor/blob/master/README.md)
-- [ ] Searched for similar issues including closed ones
 
 ### What is the purpose of your *issue*?
-- [ ] Bug report (encountered problems with Lyndor)
-- [ ] Feature request (request for a new functionality)
-- [ ] Question
+- [ ] Bug report (encountered problems with Lyndor) :beetle: 
+- [ ] Feature request (request for a new functionality) :point_up:
+- [ ] Question :question:
 - [ ] Other
 
 ---
@@ -45,13 +44,13 @@ NameError: global name 'save' is not defined
 
 ### Answer questions related to your Environment which will help in reproducing the issue:
 
-### The issue was encountered on:
+### The issue was encountered on:       :computer:
 - [ ] MacOS
 - [ ] Windows
 - [ ] Linux
 
-### Enter the python version you are using for download. Find your python version by `python -V` and replace (version) below with your python version.
-- python (version) [like python 3.6.3]
+### Enter the python version you are using for download. Find your python version by typing in terminal `python -V`
+- python (version) [replace (version) with your python version like: python 3.6.3]
 
 ---
 
