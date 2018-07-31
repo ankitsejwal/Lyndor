@@ -92,30 +92,60 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 ```
 - Lyndor Folder
 ---- LICENSE
----- settings.json      (edit settings here)
--- run.py               (main file - execute the file, to run the program)
+-- run.py                   (main file - execute the file, to run the program)
 -- save.py
 -- download.py
 -- ...
 -- ...
 -- ...
 -- install.py
---- webdriver           (directory)
+--- webdriver               (directory)
   - chromedriver.zip
   - firefoxdriver.zip
---- aria2c              (visible to Windows users only)
+--- aria2c                  (visible to Windows users only)
   - aria2c.zip
---- settings            (directory)
-  -- static             (directory)
-  -- templates          (directory)
+--- settings                (directory)
+  -- static                 (directory)
+  --- css                   (sub-directory)
+  --- js                    (sub-directory)
+    ---- settings.json      (settings goes here)
+    ---- settings.js
+  -- templates              (directory)
   -  settings.py        --> Flask webserver (python settings.py) 
 ```
 
 ## Usage
 
+* In order to begin download you have to edit settings.json file first. Have a look in settings folder you will find settings.py
+```
+--- settings            (directory)
+  -- static             (sub-directory)
+  -- templates          (sub-directory)
+  -  settings.py        --> Flask webserver (python settings.py) 
+```
+ 
+```bash
+#  open terminal/cmd navigate to this folder and run
+$  python settings.py 
+
+#  This will run a local Flask web server (terminal output below):
+#  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+#  * Restarting with stat
+#  * Debugger is active!
+#  * Debugger PIN: 188-604-022
+
+```
+
+* Now just visit http://127.0.0.1:5000/ in any web-browser (Chrome/Firefox/Safari)
+
+
+![**Web page at http://127.0.0.1:5000/**](./images/settings.png)
+Just edit your preferences and add your credentials here then simply hit Save button.
+(settings.json file can be edited directly via text editor as well but editing json file for beginner maybe a bit challenging.)
+
 * Lynda course can be downloaded in two ways, either with username + password combination or with cookies.txt file
-* Add your username and password to settings.json and set ["use_cookie_for_download": false]
-* For organization login - use cookie method, set ["use_cookie_for_download": true] in settings.json
+* Add your username and password to settings.json easily through a web page
+* For organization login - use cookie method
 
 ```javascript
 // settings.json - File
@@ -131,30 +161,17 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
             "card_pin": "",             // Library card pin
             "organization_url": ""      // org. url like: ottawa.ca
         },
-        "course_download_pref": [
-            "cookies",                  // cookies will be used to download
-            "regular-login"             // place prefered option as the first item
-        ],
-        "exfile_download_pref": [
-            "library-login",            // library card will be used to download
-            "regular-login"             // place prefered option as the first item
-        ]
+        "exfile_download_pref": "regular-login",
+        "course_download_pref": "regular-login",
     },
     "preferences": {
         "location": "/path/to/folder/Lynda",
-        "download_subtitles": true,     // set false otherwise
-        "download_exercise_file": true, // set false otherwise
-        "web_browser_for_exfile": [
-            "chrome",                   // place your prefered web browser- 
-            "firefox"                   // -as the first item 
-        ],
-        "ext-downloader-aria2-installed": false,    // set true after installing aria2 separately
-        "download_time": "",    // set time to schedule download (ex: "01:00" for 1am)
-        "redownload_course": [
-            "prompt",           // set your prefered option as the first item.
-            "skip",
-            "force"
-        ]
+        "download_subtitles": true,         // set false otherwise
+        "download_exercise_file": true,     // set false otherwise
+        "web_browser_for_exfile": "chrome", // prefered web browser "chrome" or "firefox"
+        "ext-downloader-aria2-installed": false,    // set true after installing aria2
+        "download_time": "",            // time schedule download (ex: "01:00" for 1am)
+        "redownload_course": "prompt"   // choose between prompt, skip or force
     }
 }
 
