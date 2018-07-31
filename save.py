@@ -286,28 +286,27 @@ def settings_json():
                 "card_pin": "",
                 "organization_url": ""
             },
-            "course_download_pref": ["regular-login", "cookies"],
-            "exfile_download_pref": ["regular-login", "library-login"]
+            "course_download_pref": "regular-login",
+            "exfile_download_pref": "regular-login",
         },
         "preferences": {
             "location": install.set_path() + '/Lynda',
             "download_subtitles": True,
-            "download_exercise_file": True,                    # feature unavailable for organizational login
-            "web_browser_for_exfile": ["chrome", "firefox"],    # select chrome or firefox as a web browser
-            "ext-downloader-aria2-installed": False,            # set True after installing aria2
+            "download_exercise_file": True,             # feature unavailable for organizational login
+            "web_browser_for_exfile": "chrome",         # select chrome or firefox as a web browser
+            "ext-downloader-aria2-installed": False,    # set True after installing aria2
             "download_time": "",
-            "redownload_course": ["prompt", "skip", "force" ]   # choose between -> prompt, skip & force re-download
+            "redownload_course": "prompt"               # choose between -> prompt, skip & force re-download
         }
     }
 
-    out_file = open(read.LYNDOR_PATH + '/settings.json', 'w')
+    out_file = open(read.LYNDOR_PATH + '/settings/static/js/settings.json', 'w')
     json.dump(settings_dict, out_file, indent=4)
     out_file.close()
 
     print('\n>>> Courses will be saved at -> ' +
           read.settings_json('preferences', 'location') + '\n')
-    print('-> settings.json file created in Lyndor folder.\
- (Have a look at this file, you can edit settings here.)\n')
+    print('-> settings.json file created at Lyndor/settings/static/js/settings.json\n')
 
 
 def lynda_folder():
@@ -389,7 +388,8 @@ def webdriver():
     with open('webdriver/firefoxdriver.zip', 'wb') as f:
         f.write(firefox.content)
 
-    print('\n>>> Web driver downloaded inside "/Lyndor/webdriver" folder, extract the zip file and\
-set the webdriver directory path to "PATH" variable, see README.md file for more detail.\n')
-
-    print('\n>>> Installation complete, Don\'t forget to have a look at settings.json\n')
+    print('\n>>> Web driver downloaded inside "/Lyndor/webdriver" folder, extract the zip file and \
+set the webdriver directory path to "PATH" variable, see README.md file for more detail.')
+    print('\n>>> Installation complete update your settings by running "python settings/settings.py"')
+    print('\nThis will run a local webserver at port 5000, you will see a message like')
+    print('* Running on http://127.0.0.1:5000/ visit such URL in web-browser\n')

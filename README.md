@@ -53,7 +53,7 @@ def Operating_Systems():
 
     # Apart from many other processes, install.py creates a Lynda folder inside your
     # Videos or Movies folder, all the courses will be downloaded to Lynda folder
-    # to change path later, paste your desired path into settings.json
+    # this path can be changed later (You can also add you external HDD's path)
 ```
 
 Note: **Windows** users can simply double click **install.bat** file to run install.py file alternatively.
@@ -92,30 +92,59 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 ```
 - Lyndor Folder
 ---- LICENSE
----- settings.json      (edit settings here)
--- run.py               (main file - execute the file, to run the program)
+-- run.py                   (main file - execute the file, to run the program)
 -- save.py
 -- download.py
 -- ...
 -- ...
 -- ...
 -- install.py
---- webdriver           (directory)
+--- webdriver               (directory)
   - chromedriver.zip
   - firefoxdriver.zip
---- aria2c              (visible to Windows users only)
+--- aria2c                  (visible to Windows users only)
   - aria2c.zip
---- settings            (directory)
-  -- static             (directory)
-  -- templates          (directory)
+--- settings                (directory)
+  -- static                 (directory)
+  --- css                   (sub-directory)
+  --- js                    (sub-directory)
+    ---- settings.json      (settings goes here)
+    ---- settings.js
+  -- templates              (directory)
   -  settings.py        --> Flask webserver (python settings.py) 
 ```
 
 ## Usage
 
+* In order to begin download you have to edit settings.json file first. Have a look in settings folder you will find settings.py
+```
+--- settings            (directory)
+  -- static             (sub-directory)
+  -- templates          (sub-directory)
+  -  settings.py        --> Flask webserver (python settings.py) 
+```
+ 
+```bash
+#  open terminal/cmd navigate to this folder and run
+$  python settings.py 
+
+#  This will run a local Flask web server (terminal output below):
+#  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+#  * Restarting with stat
+#  * Debugger is active!
+#  * Debugger PIN: 188-604-022
+
+```
+
+* Now just visit http://127.0.0.1:5000/ in any web-browser (Chrome/Firefox/Safari)
+
+
+![**Web page at http://127.0.0.1:5000/**](./images/settings.png)
+Just edit your preferences and add your credentials here then simply hit Save button and settings.json file will be updated.
+(settings.json file can be edited directly via text editor as well but editing json file for beginners maybe a bit challenging.)
+
 * Lynda course can be downloaded in two ways, either with username + password combination or with cookies.txt file
-* Add your username and password to settings.json and set ["use_cookie_for_download": false]
-* For organization login - use cookie method, set ["use_cookie_for_download": true] in settings.json
+* For organization login - use cookie method (learn more below)
 
 ```javascript
 // settings.json - File
@@ -123,42 +152,30 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 {
     "credentials": {
         "regular_login": {
-            "username": "",             // not required if downloading via cookies
+            "username": "",                         // not required if downloading via cookies
             "password": ""
         },
-        "library_login": {
-            "card_number": "",          // Library card number
-            "card_pin": "",             // Library card pin
-            "organization_url": ""      // org. url like: ottawa.ca
+        "library_login": {                          // should be used in combination to cookies.txt
+            "card_number": "",                      // Library card number
+            "card_pin": "",                         // Library card pin
+            "organization_url": ""                  // org. url like: ottawa.ca
         },
-        "course_download_pref": [
-            "cookies",                  // cookies will be used to download
-            "regular-login"             // place prefered option as the first item
-        ],
-        "exfile_download_pref": [
-            "library-login",            // library card will be used to download
-            "regular-login"             // place prefered option as the first item
-        ]
+        "exfile_download_pref": "regular-login",
+        "course_download_pref": "regular-login",
     },
     "preferences": {
         "location": "/path/to/folder/Lynda",
-        "download_subtitles": true,     // set false otherwise
-        "download_exercise_file": true, // set false otherwise
-        "web_browser_for_exfile": [
-            "chrome",                   // place your prefered web browser- 
-            "firefox"                   // -as the first item 
-        ],
-        "ext-downloader-aria2-installed": false,    // set true after installing aria2 separately
-        "download_time": "",    // set time to schedule download (ex: "01:00" for 1am)
-        "redownload_course": [
-            "prompt",           // set your prefered option as the first item.
-            "skip",
-            "force"
-        ]
+        "download_subtitles": true,                 // set false otherwise
+        "download_exercise_file": true,             // set false otherwise
+        "web_browser_for_exfile": "chrome",         // prefered web browser "chrome" or "firefox"
+        "ext-downloader-aria2-installed": false,    // set true after installing aria2
+        "download_time": "",                        // time schedule download (ex: "01:00" for 1am)
+        "redownload_course": "prompt"               // choose between prompt, skip or force
     }
 }
 
 ```
+Note: "library_login" can only download exercise files so it should be used in combination with cookies.txt method.
 
 ## Run Lyndor
 
@@ -188,9 +205,9 @@ $ alias lyndor='python /path-to/Lyndor/run.py'
 ### Exercise files download
 ---------------------------
 
-* Note: This feature isn't available for organizational login, also follow the steps below after Lyndor installation.
+* Note: This feature isn't available for organizational login unless you have library login details, setup exercise files download by following the important steps below after Lyndor installation.
 
-* During installation two webdriver files will be downloaded inside the webdriver folder
+* During installation two webdriver files will be downloaded inside the webdriver folder from the Internet.
 
 ```bash
 -- ...
@@ -212,7 +229,8 @@ export PATH="/path/to/Lyndor/webdriver:$PATH"
 * Windows users can save the path as usual, here's an example [**saving PATH in windows**](https://www.youtube.com/watch?v=Y2q_b4ugPWk), note in the video some different directory is used as a demonstration, you just have to paste in 'webdriver' directory's path instead.
 
 ```javascript
-// settings.json - File
+// Edit settings.json - [Prefer updating settings.json from web page its easy]
+
 ...
 ...
         "download_exercise_file": false,         // set true to download exercise files
@@ -226,7 +244,7 @@ export PATH="/path/to/Lyndor/webdriver:$PATH"
 
 
 ```javascript
-// settings.json - File
+// Edit settings.json - [Prefer updating settings.json from web page its easy]
 ...
 ...
         "ext-downloader-aria2-installed": false, // set true after installing aria2

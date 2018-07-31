@@ -1,15 +1,19 @@
-from flask import Flask, render_template
+from flask import Flask, request, jsonify, render_template
 import time, json
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
+    ''' render settings page'''
     return render_template('settings.html', timestamp = time.time())
 
-@app.route('/test')
-def test():
-    with open('./settings/settings.json', 'r') as data:
-        data = json.load(data)
-        return data['preferences']
-app.run(port=5000, debug=True)                                     
+@app.route('/update', methods=['POST'])
+def update():
+    ''' update settings.json '''
+    data = request.get_json()
+    settings_file = open('./settings/static/js/settings.json', 'w')
+    json.dump(data, settings_file, indent=4)
+    return home()
+
+app.run(port=5000, debug=True)
