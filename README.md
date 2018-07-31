@@ -140,11 +140,10 @@ $  python settings.py
 
 
 ![**Web page at http://127.0.0.1:5000/**](./images/settings.png)
-Just edit your preferences and add your credentials here then simply hit Save button, settings.json file will be updated.
-(settings.json file can be edited directly via text editor as well but editing json file for beginner maybe a bit challenging.)
+Just edit your preferences and add your credentials here then simply hit Save button and settings.json file will be updated.
+(settings.json file can be edited directly via text editor as well but editing json file for beginners maybe a bit challenging.)
 
 * Lynda course can be downloaded in two ways, either with username + password combination or with cookies.txt file
-* Add your username and password to settings.json easily through a web page
 * For organization login - use cookie method (learn more below)
 
 ```javascript
@@ -156,7 +155,7 @@ Just edit your preferences and add your credentials here then simply hit Save bu
             "username": "",                         // not required if downloading via cookies
             "password": ""
         },
-        "library_login": {
+        "library_login": {                          // should be used in combination to cookies.txt
             "card_number": "",                      // Library card number
             "card_pin": "",                         // Library card pin
             "organization_url": ""                  // org. url like: ottawa.ca
@@ -176,6 +175,7 @@ Just edit your preferences and add your credentials here then simply hit Save bu
 }
 
 ```
+Note: "library_login" can only download exercise files so it should be used in combination with cookies.txt method.
 
 ## Run Lyndor
 
@@ -205,9 +205,9 @@ $ alias lyndor='python /path-to/Lyndor/run.py'
 ### Exercise files download
 ---------------------------
 
-* Note: This feature isn't available for organizational login, also follow the steps below after Lyndor installation.
+* Note: This feature isn't available for organizational login unless you have library login details, setup exercise files download by following the important steps below after Lyndor installation.
 
-* During installation two webdriver files will be downloaded inside the webdriver folder
+* During installation two webdriver files will be downloaded inside the webdriver folder from the Internet.
 
 ```bash
 -- ...
@@ -229,7 +229,8 @@ export PATH="/path/to/Lyndor/webdriver:$PATH"
 * Windows users can save the path as usual, here's an example [**saving PATH in windows**](https://www.youtube.com/watch?v=Y2q_b4ugPWk), note in the video some different directory is used as a demonstration, you just have to paste in 'webdriver' directory's path instead.
 
 ```javascript
-// settings.json - File
+// Edit settings.json - File [Prefer updating settings.json from web page its easy]
+
 ...
 ...
         "download_exercise_file": false,         // set true to download exercise files
@@ -243,7 +244,7 @@ export PATH="/path/to/Lyndor/webdriver:$PATH"
 
 
 ```javascript
-// settings.json - File
+// Edit settings.json - File [Prefer updating settings.json from web page its easy]
 ...
 ...
         "ext-downloader-aria2-installed": false, // set true after installing aria2
