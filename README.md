@@ -53,7 +53,7 @@ def Operating_Systems():
 
     # Apart from many other processes, install.py creates a Lynda folder inside your
     # Videos or Movies folder, all the courses will be downloaded to Lynda folder
-    # to change path later, paste your desired path into settings.json
+    # this path can be changed later (You can also add you external HDD's path)
 ```
 
 Note: **Windows** users can simply double click **install.bat** file to run install.py file alternatively.
@@ -229,7 +229,7 @@ export PATH="/path/to/Lyndor/webdriver:$PATH"
 * Windows users can save the path as usual, here's an example [**saving PATH in windows**](https://www.youtube.com/watch?v=Y2q_b4ugPWk), note in the video some different directory is used as a demonstration, you just have to paste in 'webdriver' directory's path instead.
 
 ```javascript
-// Edit settings.json - File [Prefer updating settings.json from web page its easy]
+// Edit settings.json - [Prefer updating settings.json from web page its easy]
 
 ...
 ...
@@ -244,7 +244,7 @@ export PATH="/path/to/Lyndor/webdriver:$PATH"
 
 
 ```javascript
-// Edit settings.json - File [Prefer updating settings.json from web page its easy]
+// Edit settings.json - [Prefer updating settings.json from web page its easy]
 ...
 ...
         "ext-downloader-aria2-installed": false, // set true after installing aria2
