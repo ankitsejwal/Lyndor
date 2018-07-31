@@ -140,12 +140,12 @@ $  python settings.py
 
 
 ![**Web page at http://127.0.0.1:5000/**](./images/settings.png)
-Just edit your preferences and add your credentials here then simply hit Save button.
+Just edit your preferences and add your credentials here then simply hit Save button, settings.json file will be updated.
 (settings.json file can be edited directly via text editor as well but editing json file for beginner maybe a bit challenging.)
 
 * Lynda course can be downloaded in two ways, either with username + password combination or with cookies.txt file
 * Add your username and password to settings.json easily through a web page
-* For organization login - use cookie method
+* For organization login - use cookie method (learn more below)
 
 ```javascript
 // settings.json - File
@@ -153,25 +153,25 @@ Just edit your preferences and add your credentials here then simply hit Save bu
 {
     "credentials": {
         "regular_login": {
-            "username": "",             // not required if downloading via cookies
+            "username": "",                         // not required if downloading via cookies
             "password": ""
         },
         "library_login": {
-            "card_number": "",          // Library card number
-            "card_pin": "",             // Library card pin
-            "organization_url": ""      // org. url like: ottawa.ca
+            "card_number": "",                      // Library card number
+            "card_pin": "",                         // Library card pin
+            "organization_url": ""                  // org. url like: ottawa.ca
         },
         "exfile_download_pref": "regular-login",
         "course_download_pref": "regular-login",
     },
     "preferences": {
         "location": "/path/to/folder/Lynda",
-        "download_subtitles": true,         // set false otherwise
-        "download_exercise_file": true,     // set false otherwise
-        "web_browser_for_exfile": "chrome", // prefered web browser "chrome" or "firefox"
+        "download_subtitles": true,                 // set false otherwise
+        "download_exercise_file": true,             // set false otherwise
+        "web_browser_for_exfile": "chrome",         // prefered web browser "chrome" or "firefox"
         "ext-downloader-aria2-installed": false,    // set true after installing aria2
-        "download_time": "",            // time schedule download (ex: "01:00" for 1am)
-        "redownload_course": "prompt"   // choose between prompt, skip or force
+        "download_time": "",                        // time schedule download (ex: "01:00" for 1am)
+        "redownload_course": "prompt"               // choose between prompt, skip or force
     }
 }
 
