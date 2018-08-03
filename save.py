@@ -232,7 +232,11 @@ def videos(url, cookie_path, course_folder):
         # Exter name downloader option
         ext_downloader = ' --external-downloader aria2c' if read.external_downloader else ''
         cookie = ' --cookies ' + '"' + cookie_path + '"'     # cookie
-        username = ' -u ' + read.username                    # username
+        uName = read.username
+
+        if "'" in uName:                                     # escaping ' for usernames with a ' (quote)
+            uName = uName.replace("'", "\\'")
+        username = ' -u ' + uName                            # username
         password = ' -p ' + read.password                    # password
 
         # Checking download preferences
@@ -292,7 +296,7 @@ def settings_json():
         "preferences": {
             "location": install.set_path() + '/Lynda',
             "download_subtitles": True,
-            "download_exercise_file": True,             # feature unavailable for organizational login
+            "download_exercise_file": False,            # feature unavailable for organizational login
             "web_browser_for_exfile": "chrome",         # select chrome or firefox as a web browser
             "ext-downloader-aria2-installed": False,    # set True after installing aria2
             "download_time": "",
