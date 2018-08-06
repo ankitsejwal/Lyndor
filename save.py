@@ -250,7 +250,10 @@ def videos(url, cookie_path, course_folder):
 
 def aria2():
     ''' Download aria2c for windows '''
-    import requests
+    try:
+        import requests
+    except ImportError:
+        pass
     os.chdir(read.LYNDOR_PATH)
     if install.check_os() == 'windows':
         try:
@@ -364,7 +367,10 @@ def run_lyndor_bat():
 
 def webdriver():
     ''' Download web driver '''
-    import requests
+    try:
+        import requests
+    except ImportError:
+        pass
     os.chdir(read.LYNDOR_PATH)   # change directory to LYNDOR
     try:
         # create directory webdriver to save platform specific webdrivers
