@@ -242,9 +242,9 @@ def videos(url, cookie_path, course_folder):
         # Checking download preferences
         if  download_preference in ['cookies', 'cookie']:
             cookies.edit_cookie(cookie_path, message.NETSCAPE) # Edit cookie file
-            os.system('youtube-dl' + cookie + output + subtitles + url + ext_downloader)
+            os.system('youtube-dl --no-check-certificate' + cookie + output + subtitles + url + ext_downloader)
         else:
-            os.system('youtube-dl' + username + password + output + subtitles + url + ext_downloader)
+            os.system('youtube-dl --no-check-certificate' + username + password + output + subtitles + url + ext_downloader)
     except KeyboardInterrupt:
         sys.exit('Program Interrupted')
 
