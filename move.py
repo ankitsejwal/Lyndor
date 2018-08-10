@@ -46,7 +46,9 @@ def vid_srt_to_chapter(url, course_folder):
         group = li.find_all('a', class_='video-name')
         
         # decide the correct zfill value to result in proper file moving
-        digit = 2
+        digit = 1
+        if total_videos > 9:
+            digit = 2
         if total_videos > 99:
             digit = 3
 

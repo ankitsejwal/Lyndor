@@ -234,7 +234,7 @@ def videos(url, cookie_path, course_folder):
         cookie = ' --cookies ' + '"' + cookie_path + '"'     # cookie
         uName = read.username
 
-        if "'" in uName:                                     # escaping ' for usernames with a ' (quote)
+        if "'" in uName:                                     # escaping single quote (') for users with quote in their username
             uName = uName.replace("'", "\\'")
         username = ' -u ' + uName                            # username
         password = ' -p ' + read.password                    # password
