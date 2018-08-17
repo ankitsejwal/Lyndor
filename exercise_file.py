@@ -13,7 +13,10 @@ def download(url, course_folder):
     if read.web_browser_for_exfile.lower() == 'firefox': 
         driver = webdriver.Firefox()
     else:
-        driver = webdriver.Chrome()
+        options = webdriver.ChromeOptions()
+        # options.add_argument('headless')
+        options.add_argument("--window-size=1300x744")
+        driver = webdriver.Chrome(chrome_options=options)
 
     if read.exfile_download_pref == 'regular-login':
         regular_login(url, course_folder, driver)
@@ -25,23 +28,16 @@ def download(url, course_folder):
     # move to the course page
     print('launching desired course page ....')
     driver.get(url)
-    time.sleep(4)
     
     # Maximize Window if exercise-tab element not visible
-    try:
-        driver.find_element_by_css_selector('#exercise-tab').click()
-    except:
-        driver.maximize_window()
-        time.sleep(2)
-        driver.find_element_by_css_selector('#exercise-tab').click()
+    WebDriverWait(driver, 15).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "#exercise-tab")))
+    driver.find_element_by_css_selector('#exercise-tab').click()
         
     # Make sure page is more fully loaded before finding the element
-    try:
-        driver.find_element_by_css_selector('a > .exercise-name').click()
-    except:
-        WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.CSS_SELECTOR, "html.no-touch.member.loaded")))
-        driver.find_element_by_css_selector('#exercise-tab').click()
-        driver.find_element_by_css_selector('a > .exercise-name').click()
+    WebDriverWait(driver, 15).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "html.no-touch.member.loaded")))
+    driver.find_element_by_css_selector('a > .exercise-name').click()
         
     ex_file_name = driver.find_element_by_css_selector('.exercise-name').text
     # ex_file_size = driver.find_element_by_css_selector('.file-size').text
@@ -49,16 +45,21 @@ def download(url, course_folder):
     
     file_not_found = True
     while file_not_found:
-        message.spinning_cursor()
+        # message.spinning_cursor()
         downloads_folder = install.get_path("Downloads")
         os.chdir(downloads_folder)
+        download_message = "Download in progress ."
         for folder in os.listdir(downloads_folder):
+            sys.stdout.write('\r{}'.format(download_message))
+            # Force Python to write data into terminal.
+            sys.stdout.flush()
+            download_message += '.'
             if folder == ex_file_name:
-                print('\r{}'.format('Download in progress ...'))
                 if os.path.getsize(folder) > 0: # if file downloaded completely.
-                    print('Download completed.')
+                    print('\nDownload completed.')
                     file_not_found = False
-        time.sleep(2)
+                    break
+            time.sleep(1)
     try:
         shutil.move(ex_file_name, course_folder)
         print('Ex-File Moved to Course Folder successfully.')
@@ -81,7 +82,6 @@ def lib_login(url, course_folder, driver):
 
     driver.find_element_by_css_selector('#library-login-login').click()
     print('\nlibrary card no. and card pin. entered successfully....')
-    time.sleep(2)
 
 
 def regular_login(url, course_folder, driver):
@@ -93,11 +93,12 @@ def regular_login(url, course_folder, driver):
     email.send_keys(read.username)
     driver.find_element_by_css_selector('#username-submit').click()
     print('\nusername successfully entered ....')
-    time.sleep(2)
-
+    # wait for password field to appear
+    WebDriverWait(driver, 15).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "#password-input")))
     # enter password
     passwrd = driver.find_element_by_css_selector('#password-input')
     passwrd.send_keys(read.password)
     driver.find_element_by_css_selector('#password-submit').click()
     print('password successfully entered ....')
-    time.sleep(2)
+    time.sleep(3)
