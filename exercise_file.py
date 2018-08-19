@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 ''' Download exercise file '''
 
 from selenium import webdriver
@@ -7,6 +10,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import install, message, read
 import os, sys, time, shutil
+from colorama import Fore
 
 def download(url, course_folder):
     ''' Download exercise file '''
@@ -45,21 +49,20 @@ def download(url, course_folder):
     
     file_not_found = True
     while file_not_found:
-        # message.spinning_cursor()
+        message.spinning_cursor()
         downloads_folder = install.get_path("Downloads")
         os.chdir(downloads_folder)
-        download_message = "Download in progress ."
         for folder in os.listdir(downloads_folder):
-            sys.stdout.write('\r{}'.format(download_message))
-            # Force Python to write data into terminal.
-            sys.stdout.flush()
-            download_message += '.'
-            if folder == ex_file_name:
+
+            sys.stdout.write("\033[K")  # Clear to the end of line
+            sys.stdout.write('\r{}'.format(f"Finding Ex_file in Downloads folder ---> {message.return_colored_message(Fore.LIGHTYELLOW_EX,folder)}"))
+            sys.stdout.flush()          # Force Python to write data into terminal.
+            if folder.encode('utf-8') == ex_file_name.encode('utf-8'):
                 if os.path.getsize(folder) > 0: # if file downloaded completely.
                     print('\nDownload completed.')
                     file_not_found = False
                     break
-            time.sleep(1)
+            time.sleep(0.1)
     try:
         shutil.move(ex_file_name, course_folder)
         print('Ex-File Moved to Course Folder successfully.')
@@ -68,7 +71,7 @@ def download(url, course_folder):
     driver.close()
 
 def lib_login(url, course_folder, driver):
-    driver.get("https://www.lynda.com/portal/sip?org=" + read.organization_url)  # launch lynda.com/signin
+    driver.get("https://www.lynda.com/portal/patron?org=" + read.organization_url)  # launch lynda.com/signin
 
     # enter username
     card_number = driver.find_element_by_css_selector("#card-number")
