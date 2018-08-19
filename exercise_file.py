@@ -55,14 +55,20 @@ def download(url, course_folder):
         for folder in os.listdir(downloads_folder):
 
             sys.stdout.write("\033[K")          # Clear to the end of line
-            sys.stdout.write('\r{}'.format(f"Finding Ex_file in Downloads folder ---> {message.return_colored_message(Fore.LIGHTYELLOW_EX,folder)}"))
+            sys.stdout.write('\r{}'.format("Finding Ex_file in Downloads folder ---> " + message.return_colored_message(Fore.LIGHTYELLOW_EX,folder)))
             sys.stdout.flush()                  # Force Python to write data into terminal.
-            if folder.encode('utf-8') == ex_file_name.encode('utf-8'):
+
+            try:
+                folder = folder.decode('utf-8') # python 2.x
+            except AttributeError:
+                pass                            # python 3.x
+
+            if folder == ex_file_name:
                 if os.path.getsize(folder) > 0: # if file downloaded completely.
                     print('\nDownload completed.')
                     file_not_found = False
                     break
-            time.sleep(0.1)
+            time.sleep(0.02)                    # delay to print which file is being scanned
     try:
         shutil.move(ex_file_name, course_folder)
         print('Ex-File Moved to Course Folder successfully.')
