@@ -54,9 +54,9 @@ def download(url, course_folder):
         os.chdir(downloads_folder)
         for folder in os.listdir(downloads_folder):
 
-            sys.stdout.write("\033[K")  # Clear to the end of line
+            sys.stdout.write("\033[K")          # Clear to the end of line
             sys.stdout.write('\r{}'.format(f"Finding Ex_file in Downloads folder ---> {message.return_colored_message(Fore.LIGHTYELLOW_EX,folder)}"))
-            sys.stdout.flush()          # Force Python to write data into terminal.
+            sys.stdout.flush()                  # Force Python to write data into terminal.
             if folder.encode('utf-8') == ex_file_name.encode('utf-8'):
                 if os.path.getsize(folder) > 0: # if file downloaded completely.
                     print('\nDownload completed.')
