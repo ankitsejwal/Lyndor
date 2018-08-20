@@ -10,7 +10,7 @@ from colorama import *
 def main():
     ''' Main function '''
     init()
-    message.animate_characters(Fore.LIGHTYELLOW_EX, draw.ROCKET, 0.05)
+    message.animate_characters(Fore.LIGHTYELLOW_EX, draw.ROCKET, 0.02)
     message.spinning_cursor()
     message.print_line('\r1. Paste course url or\n' +
     '2. Press enter for Bulk Download')
@@ -35,7 +35,7 @@ def main():
         schedule_download(url)
     try:
         end_time = time.time()
-        message.animate_characters(Fore.LIGHTGREEN_EX, draw.COW, 0.1)
+        message.animate_characters(Fore.LIGHTGREEN_EX, draw.COW, 0.02)
         message.colored_message(Fore.LIGHTGREEN_EX, "\nThe whole process took {}\n".format(move.hms_string(end_time - start_time)))
     except KeyboardInterrupt:
         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
