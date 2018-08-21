@@ -41,40 +41,50 @@ def download(url, course_folder):
     # Make sure page is more fully loaded before finding the element
     WebDriverWait(driver, 15).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "html.no-touch.member.loaded")))
-    driver.find_element_by_css_selector('a > .exercise-name').click()
-        
-    ex_file_name = driver.find_element_by_css_selector('.exercise-name').text
-    # ex_file_size = driver.find_element_by_css_selector('.file-size').text
-    print('Downloading ' + ex_file_name)
+
+    exercises = driver.find_elements_by_css_selector('a > .exercise-name')
     
-    file_not_found = True
-    while file_not_found:
+    for exercise in exercises:
+        if exercise.is_displayed():
+            print('Downloading: ' +  exercise.text)
+            exercise.click()
+
+    time.sleep(1)                                       # wait for download to begin
+
+    downloads_folder = install.get_path("Downloads")
+    os.chdir(downloads_folder)
+
+    file_found = False
+    while not file_found:
         message.spinning_cursor()
-        downloads_folder = install.get_path("Downloads")
-        os.chdir(downloads_folder)
         for folder in os.listdir(downloads_folder):
 
-            sys.stdout.write("\033[K")          # Clear to the end of line
-            sys.stdout.write('\r{}'.format("Finding Ex_file in Downloads folder ---> " + message.return_colored_message(Fore.LIGHTYELLOW_EX,folder)))
-            sys.stdout.flush()                  # Force Python to write data into terminal.
+            try: folder = folder.decode('utf-8')        # python 2.x
+            except AttributeError: pass                 # python 3.x
 
-            try:
-                folder = folder.decode('utf-8') # python 2.x
-            except AttributeError:
-                pass                            # python 3.x
+            sys.stdout.write("\033[K")                  # Clear to the end of line
+            sys.stdout.write("\rFinding Ex_file in Downloads folder ---> " + message.return_colored_message(Fore.LIGHTYELLOW_EX,folder))
+            sys.stdout.flush()                          # Force Python to write data into terminal.
 
-            if folder == ex_file_name:
-                if os.path.getsize(folder) > 0: # if file downloaded completely.
-                    print('\nDownload completed.')
-                    file_not_found = False
-                    break
-            time.sleep(0.02)                    # delay to print which file is being scanned
-    try:
-        shutil.move(ex_file_name, course_folder)
-        print('Ex-File Moved to Course Folder successfully.')
-    except:
-        print('Moving error.')
-    driver.close()
+            for exercise in exercises:
+                if folder == exercise.text:
+                    if os.path.getsize(folder) > 0:     # if file downloaded completely.
+                        try:
+                            shutil.move(exercise.text, course_folder)
+                            print('\nMoved to course folder: ' + exercise.text)
+                        except:
+                            print('\nMoving error: File already exists.')
+                        
+                        exercises.remove(exercise)      # pop out moved exercise file from exercises list
+                        file_found = True
+                        break                           # break inner for-loop when ex-file downloaded
+            
+            if(len(exercises) == 0):                    # if all exercises downloaded successfully
+                break                                   # break outer for-loop and stop scanning Downloads folder
+
+            time.sleep(0.02)                            # delay to print which file is being scanned
+
+    driver.close()                                      # close web browser
 
 def lib_login(url, course_folder, driver):
     driver.get("https://www.lynda.com/portal/patron?org=" + read.organization_url)  # launch lynda.com/signin
@@ -94,7 +104,7 @@ def lib_login(url, course_folder, driver):
 
 
 def regular_login(url, course_folder, driver):
-    driver.get("https://www.lynda.com/signin/")  # launch lynda.com/signin
+    driver.get("https://www.lynda.com/signin/")          # launch lynda.com/signin
 
     # enter username
     email = driver.find_element_by_css_selector("#email-address")
