@@ -68,8 +68,7 @@ def download(url, course_folder):
     downloads_folder = install.get_path("Downloads")
     os.chdir(downloads_folder)
 
-    file_found = False
-    while not file_found:
+    while len(exercises) > 0:                           # until exercises[] gets empty
         message.spinning_cursor()
         for folder in os.listdir(downloads_folder):
 
@@ -90,7 +89,6 @@ def download(url, course_folder):
                             print('\nMoving error: File already exists.')
                         
                         exercises.remove(exercise)      # pop out moved exercise file from exercises list
-                        file_found = True
                         break                           # break inner for-loop when ex-file downloaded
             
             if(len(exercises) == 0):                    # if all exercises downloaded successfully
