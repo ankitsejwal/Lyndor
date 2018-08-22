@@ -16,11 +16,13 @@ def download(url, course_folder):
     ''' Download exercise file '''
     if read.web_browser_for_exfile.lower() == 'firefox': 
         driver = webdriver.Firefox()
-    else:
+    elif read.web_browser_for_exfile.lower() == 'chrome':
         options = webdriver.ChromeOptions()
         # options.add_argument('headless')
         options.add_argument("--window-size=1300x744")
         driver = webdriver.Chrome(chrome_options=options)
+    else:
+        sys.exit('Choose either chrome or firefox in settings.json to download exercise file')
 
     if read.exfile_download_pref == 'regular-login':
         regular_login(url, course_folder, driver)
@@ -28,11 +30,23 @@ def download(url, course_folder):
         lib_login(url, course_folder, driver)
     else:
         sys.exit('Please choose between -> regular-login / library-login in settings.json')
+
+    time.sleep(3)   # wait request/response to happen after login
     
     # move to the course page
     print('launching desired course page ....')
     driver.get(url)
     
+    # prevent error caused by any pop-up on webpage (like course retiring soon pop up)
+    # time.sleep(3)
+    # try:
+    #     driver.find_element_by_css_selector('button.close').click()
+    # except:
+    #     pass
+    
+    # delete .exercise-tab max-height:320px so that all the ex_files can be seen
+    driver.execute_script("$('.exercise-tab .content').css('max-height', 'none');")
+
     # Maximize Window if exercise-tab element not visible
     WebDriverWait(driver, 15).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "#exercise-tab")))
@@ -120,4 +134,3 @@ def regular_login(url, course_folder, driver):
     passwrd.send_keys(read.password)
     driver.find_element_by_css_selector('#password-submit').click()
     print('password successfully entered ....')
-    time.sleep(3)
