@@ -36,22 +36,15 @@ def download(url, course_folder):
     # move to the course page
     print('launching desired course page ....')
     driver.get(url)
-    
-    # prevent error caused by any pop-up on webpage (like course retiring soon pop up)
-    # time.sleep(3)
-    # try:
-    #     driver.find_element_by_css_selector('button.close').click()
-    # except:
-    #     pass
-    
-    # delete .exercise-tab max-height:320px so that all the ex_files can be seen
-    driver.execute_script("$('.exercise-tab .content').css('max-height', 'none');")
 
     # Maximize Window if exercise-tab element not visible
     WebDriverWait(driver, 15).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "#exercise-tab")))
     driver.find_element_by_css_selector('#exercise-tab').click()
-        
+
+    # delete .exercise-tab max-height:320px so that all the ex_files can be seen
+    driver.execute_script("$('.exercise-tab .content').css('max-height', 'none');")
+
     # Make sure page is more fully loaded before finding the element
     WebDriverWait(driver, 15).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "html.no-touch.member.loaded")))
