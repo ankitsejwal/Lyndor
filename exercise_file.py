@@ -8,17 +8,24 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import install, message, read
-import os, sys, time, shutil
+import install, message, read, save
+import os, sys, time, shutil, requests
 from colorama import Fore
 
-def download(url, course_folder):
+# function list ->> download(), lib_login(), regular_login(), use_selenium(), use_aria2()
+
+
+def download(url, course_folder, cookie_path):
     ''' Download exercise file '''
     if read.web_browser_for_exfile.lower() == 'firefox': 
         driver = webdriver.Firefox()
     elif read.web_browser_for_exfile.lower() == 'chrome':
         options = webdriver.ChromeOptions()
-        # options.add_argument('headless')
+
+        # if downloading with aria2, launch chrome in headless mode
+        if read.exfile_download_method == "aria2":
+            options.add_argument('headless')
+        
         options.add_argument("--window-size=1300x744")
         driver = webdriver.Chrome(chrome_options=options)
     else:
@@ -36,27 +43,47 @@ def download(url, course_folder):
     # move to the course page
     print('launching desired course page ....')
     driver.get(url)
+    
+    if read.exfile_download_method == 'aria2':
+        if read.external_downloader == True: print('') 
+        else: sys.exit('Aria2 not installed. Check preferences in settings')
+        use_aria2(url, course_folder, cookie_path, driver)
+
+    elif read.exfile_download_method == 'selenium':
+        use_selenium(url, course_folder, driver)
+
+    else:
+        sys.exit('settings.json: exfile_download = should be selenium or aria2')
+
+def use_selenium(url, course_folder, driver):
+    ''' use just selenium to download files '''
+
+    # injecting jquery
+    jquery = requests.get(url="https://code.jquery.com/jquery-3.3.1.min.js")
+    driver.execute_script(jquery.text)
+    
+    # delete .exercise-tab max-height:320px so that all the ex_files can be seen
+    driver.execute_script("$('.exercise-tab .content').css('max-height', 'none');")
 
     # Maximize Window if exercise-tab element not visible
     WebDriverWait(driver, 15).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "#exercise-tab")))
     driver.find_element_by_css_selector('#exercise-tab').click()
 
-    # delete .exercise-tab max-height:320px so that all the ex_files can be seen
-    driver.execute_script("$('.exercise-tab .content').css('max-height', 'none');")
-
     # Make sure page is more fully loaded before finding the element
     WebDriverWait(driver, 15).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "html.no-touch.member.loaded")))
 
     exercises = driver.find_elements_by_css_selector('a > .exercise-name')
-    
-    for exercise in exercises:
-        if exercise.is_displayed():
-            print('Downloading: ' +  exercise.text)
-            exercise.click()
 
-    time.sleep(1)                                       # wait for download to begin
+    try:
+        for exercise in exercises:
+                print('Downloading: ' +  exercise.text)
+                exercise.click()
+    except Exception as e:
+        sys.exit(e)
+
+    time.sleep(4)                                       # Give some heads up time to downloads
 
     downloads_folder = install.get_path("Downloads")
     os.chdir(downloads_folder)
@@ -91,6 +118,32 @@ def download(url, course_folder):
 
     driver.close()                                      # close web browser
 
+
+
+def use_aria2(url, course_folder, cookie_path, driver):
+    ''' user aria2 to download exercise files '''
+    # jump to course_folder
+    os.chdir(course_folder)
+
+    # To be filled with all exercise file links /ajax/....
+    exercise_file_urls = []
+    files = driver.find_elements_by_css_selector('.course-file')
+
+    for file in files:
+        url = file.get_attribute('href')
+        exercise_file_urls.append(url)
+
+    driver.find_element_by_css_selector('#exercise-tab').click()
+    exercises = driver.find_elements_by_css_selector('a > .exercise-name')
+
+    for exercise in exercises:
+        print('Downloading: ' +  message.return_colored_message(Fore.LIGHTYELLOW_EX, exercise.text))
+
+    for url in exercise_file_urls:
+        os.system("aria2c --load-cookie='{}' {}".format(cookie_path, url))
+    
+
+
 def lib_login(url, course_folder, driver):
     driver.get("https://www.lynda.com/portal/patron?org=" + read.organization_url)  # launch lynda.com/signin
 
@@ -106,6 +159,7 @@ def lib_login(url, course_folder, driver):
 
     driver.find_element_by_css_selector('#library-login-login').click()
     print('\nlibrary card no. and card pin. entered successfully....')
+
 
 
 def regular_login(url, course_folder, driver):

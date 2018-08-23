@@ -6,7 +6,7 @@
 import os
 import sys
 import glob
-import message
+import message, read
 try:
     from colorama import *
 except ImportError:
@@ -50,16 +50,15 @@ def find_cookie(desktop_folder, download_folder):
     desk_files = glob.glob(desktop_folder+'/*.txt')
     files = down_files + desk_files
     cookies = [s for s in files if 'cookies' in s]
-    if not cookies:
-        downloading_from_cookie = message.return_colored_message(Fore.LIGHTBLUE_EX, ' 🍪  Downloading videos using cookies.txt')
-        cookie_not_found = message.return_colored_message(Fore.LIGHTRED_EX, "\
-Oops!! Did you forget to put 🍪  cookies.txt inside Downloads or Desktop folder ??\n")
-        message.carriage_return_animate(downloading_from_cookie)
-        message.carriage_return_animate(cookie_not_found)
-        sys.exit(message.colored_message(Fore.LIGHTRED_EX,'\nNote:\n\nIf you wish to download course using username & password combination,\
-\nyou should set ->  "use_cookie_for_download": false  in settings.json\n'))
-    else:
-        latest_cookie = max(cookies, key=os.path.getctime)
-        latest_cookie_file = message.return_colored_message(Fore.LIGHTGREEN_EX, '🍪  Using latest cookie file: '+ latest_cookie + '\n')
-        message.carriage_return_animate(latest_cookie_file)
-        return latest_cookie
+    if read.course_download_pref == 'cookies' or read.exfile_download_method == 'aria2':
+        forgot_cookie = "Oops!! Did you forget to put 🍪  cookies.txt inside Downloads or Desktop folder ??\n"
+        if not cookies:
+            cookie_not_found = message.return_colored_message(Fore.LIGHTRED_EX, forgot_cookie)
+            message.carriage_return_animate(cookie_not_found)
+            sys.exit(message.colored_message(Fore.LIGHTRED_EX,'\nNote:\n\nIf you wish to download course using username & password combination,\
+    \nyou should set ->  "course_download_pref": regular-login  in settings.json\n'))
+        else:
+            latest_cookie = max(cookies, key=os.path.getctime)
+            latest_cookie_file = message.return_colored_message(Fore.LIGHTGREEN_EX, '🍪  Using latest cookie file: '+ latest_cookie + '\n')
+            message.carriage_return_animate(latest_cookie_file)
+            return latest_cookie

@@ -82,11 +82,14 @@ def download_course(url):
     # Read preferences
     use_cookie_for_download = read.course_download_pref
 
+    cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
+
     if use_cookie_for_download in ['cookies', 'cookie']:
-        cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
+        downloading_from_cookie = message.return_colored_message(Fore.LIGHTBLUE_EX, ' 🍪  Downloading videos using cookies.txt')
+        message.carriage_return_animate(downloading_from_cookie)
     else:
-        cookie_path = ''
-        usr_pass_message = message.return_colored_message(Fore.LIGHTGREEN_EX, 'Using username and password combination for download\n')
+        # cookie_path = ''
+        usr_pass_message = message.return_colored_message(Fore.LIGHTGREEN_EX, '⛺  Using username and password combination for download\n')
         message.carriage_return_animate(usr_pass_message)
 
     try:
@@ -109,17 +112,17 @@ def download_course(url):
             else:
                 # if user wants to download ex-file
                 if read.course_download_pref == 'regular-login':
-                    exercise_file.download(url, course_folder_path)
+                    exercise_file.download(url, course_folder_path, cookie_path)
                 elif read.exfile_download_pref == 'library-login':
                     if read.card_number == '':
                         print('\nTo download ex-file via library login -> Please save library card details in settings.json')
                     else:
-                        exercise_file.download(url, course_folder_path)
+                        exercise_file.download(url, course_folder_path, cookie_path)
                 else:
                     print('\nThe exercise file can only be downloaded through one of the below combinations:')
                     print('~ Regular login: username + password or')
                     print('~ Library login: card number, pin and org. url\n')
-        else:   # if exercise file not present
+        else:       # if exercise file not present
             print('This course does not include Exercise files.')
 
     except KeyboardInterrupt:

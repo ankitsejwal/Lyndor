@@ -33,13 +33,12 @@ try:
     exfile_download_pref    = settings_json('credentials', 'exfile_download_pref')
     # read preferences
     location                = settings_json('preferences', 'location')
-    download_subtitles      = settings_json('preferences', 'web_browser_for_exfile')
+    exfile_download_method  = settings_json('preferences', 'exfile_download_method')
+    download_subtitles      = settings_json('preferences', 'download_subtitles')
     download_exercise_file  = settings_json('preferences', 'download_exercise_file')
     web_browser_for_exfile  = settings_json('preferences', 'web_browser_for_exfile')
-    external_downloader     = settings_json('preferences', 'ext-downloader-aria2-installed')
+    external_downloader     = settings_json('preferences', 'aria2_installed')
     download_time           = settings_json('preferences', 'download_time')
     redownload_course       = settings_json('preferences', 'redownload_course')
-    # read dependencies
-    dependencies            = settings_json('requirements', 'dependencies')
-except:
-    pass
+except Exception as e:
+    print(e)

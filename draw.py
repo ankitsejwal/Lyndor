@@ -81,14 +81,14 @@ ROCKET = u"""\
            .d$ .
            d$$  :
           .$$$
-          :$$$   :         Download multiple courses
-          $$$$   :       at a time, just paste all the
-          $$$$   :         urls in Bulk Download.txt
+          :$$$   :            Download multiple courses
+          $$$$   :          at a time, just paste all the
+          $$$$   :            urls in Bulk Download.txt
          .$$$$                
          :$$$$    :
          $$$$$    :
-         :    $$$$$           You can change your
-         :    $$$$$       preferences in settings.json
+         :    $$$$$      Change preferences in settings.json
+         :    $$$$$        Run python settings/settings.py
         .:    $$$$$.
        / :    $$$$: \\
       /  :    $$$$:  \\
