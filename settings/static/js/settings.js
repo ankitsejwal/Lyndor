@@ -77,6 +77,14 @@ $(document).ready(function(){
         settingsJson.preferences.web_browser_for_exfile = "firefox";
     })
 
+    // choose exercise files download method
+    $('#exfile-selenium').click(function(){
+        settingsJson.preferences.exfile_download_method = "selenium";
+    })    
+    $('#exfile-aria2').click(function(){
+        settingsJson.preferences.exfile_download_method = "aria2";
+    })
+
     // redownload course
     $('#redownload-prompt').click(function(){
         settingsJson.preferences.redownload_course = "prompt";
@@ -151,6 +159,12 @@ if(settingsJson.preferences.web_browser_for_exfile == 'chrome')
     document.getElementById('exfile-chrome').classList.add("active"); 
 else
     document.getElementById('exfile-firefox').classList.add("active"); 
+
+// read exercise download method state
+if(settingsJson.preferences.exfile_download_method == 'selenium')
+    document.getElementById('exfile-selenium').classList.add("active"); 
+else
+    document.getElementById('exfile-aria2').classList.add("active"); 
 
 // read redownload course state
 if(settingsJson.preferences.redownload_course == "prompt")

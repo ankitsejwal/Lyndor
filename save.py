@@ -301,9 +301,10 @@ def settings_json():
             "download_subtitles": True,
             "download_exercise_file": False,            # feature unavailable for organizational login
             "web_browser_for_exfile": "chrome",         # select chrome or firefox as a web browser
-            "ext-downloader-aria2-installed": False,    # set True after installing aria2
+            "aria2_installed": False,                   # set True after installing aria2
             "download_time": "",
-            "redownload_course": "prompt"               # choose between -> prompt, skip & force re-download
+            "redownload_course": "prompt",              # choose between -> prompt, skip & force re-download
+            "exfile_download_method": "selenium"        # choose between selenium and aria2
         }
     }
 

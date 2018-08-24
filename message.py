@@ -33,7 +33,7 @@ def spinning_cursor():
     flag = True
     while flag:
         for cursor in '\\|/- ':
-            time.sleep(0.2)
+            time.sleep(0.08)
             # Use '\r' to move cursor back to line beginning
             # Or use '\b' to erase the last character
             sys.stdout.write('\r{}'.format(cursor))
@@ -71,7 +71,7 @@ def carriage_return_animate(line):
     ''' print running line over an existing line '''
     for char in line:
         sys.stdout.write(char)
-        time.sleep(0.01)
+        time.sleep(0.005)
         sys.stdout.flush()
     sys.stdout.write('\r')
     time.sleep(0.1)
