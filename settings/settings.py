@@ -12,7 +12,7 @@ def home():
 def update():
     ''' update settings.json '''
     data = request.get_json()
-    settings_file = open('./settings/static/js/settings.json', 'w')
+    settings_file = open("./static/js/settings.json", "w")
     json.dump(data, settings_file, indent=4)
     return home()
 
