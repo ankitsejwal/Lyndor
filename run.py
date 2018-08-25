@@ -88,7 +88,7 @@ def download_course(url):
         downloading_from_cookie = message.return_colored_message(Fore.LIGHTBLUE_EX, ' 🍪  Downloading videos using cookies.txt')
         message.carriage_return_animate(downloading_from_cookie)
     else:
-        # cookie_path = ''
+        cookie_path = ''
         usr_pass_message = message.return_colored_message(Fore.LIGHTGREEN_EX, '⛺  Using username and password combination for download\n')
         message.carriage_return_animate(usr_pass_message)
 
