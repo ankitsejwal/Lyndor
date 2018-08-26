@@ -49,6 +49,11 @@ NameError: global name 'save' is not defined
 - [ ] Windows
 - [ ] Linux
 
+### Login method:
+- [ ] Regular login (username + password)
+- [ ] Organization login (cookies.txt)
+- [ ] cookies.txt + Library login(for exercise file)
+
 ### Enter the python version you are using for download. Find your python version by typing in terminal `python -V`
 - python (version) [replace (version) with your python version like: python 3.6.3]
 
