@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-import time, json
+import time, json, os
 
 app = Flask(__name__)
 
@@ -12,7 +12,8 @@ def home():
 def update():
     ''' update settings.json '''
     data = request.get_json()
-    settings_file = open("./static/js/settings.json", "w")
+    filename = os.path.join(app.static_folder, 'js/settings.json')
+    settings_file = open(filename, "w")
     json.dump(data, settings_file, indent=4)
     return home()
 
