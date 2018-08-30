@@ -3,12 +3,11 @@
 
 ''' Finds and edits cookie'''
 
-import os
-import sys
-import glob
-import message, read
+import os, sys, glob
+from module import message, read
+
 try:
-    from colorama import *
+    from colorama import Fore
 except ImportError:
     pass
 

@@ -4,15 +4,15 @@
 ''' Creates course folder/ Saves chapters'''
 
 import os, io
-import install, cookies
 import sys, zipfile, json
 import time
 import shutil
 import re
-import message, read
+import install
+from module import message, cookies, read
 try:
     from bs4 import BeautifulSoup
-    from colorama import *
+    from colorama import Fore
     import requests
 except ImportError:
     pass
@@ -83,7 +83,7 @@ def course(url, lynda_folder_path):
                         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n-> Program Ended!!\n"))
                     else:
                         sys.stdout.write(Fore.LIGHTRED_EX + "\n- oops!! that's not a valid choice, type Y or N: " + Fore.RESET)
-    
+    print('creating course folder at: ', current_course)
     os.mkdir(current_course)
 
 def info_file(url, course_path):
@@ -254,7 +254,7 @@ def aria2():
         import requests
     except ImportError:
         pass
-    os.chdir(read.LYNDOR_PATH)
+    os.chdir(install.LYNDOR_PATH)
     if install.check_os() == 'windows':
         try:
             os.mkdir('aria2c')
@@ -280,7 +280,7 @@ def unzip(directory, zip_file):
 
 def settings_json():
     ''' Create settings_json file '''
-    os.chdir(read.LYNDOR_PATH)
+    os.chdir(install.LYNDOR_PATH)
 
     settings_dict = {
         "credentials": {
@@ -299,16 +299,18 @@ def settings_json():
         "preferences": {
             "location": install.set_path() + '/Lynda',
             "download_subtitles": True,
-            "download_exercise_file": False,            # feature unavailable for organizational login
-            "web_browser_for_exfile": "chrome",         # select chrome or firefox as a web browser
-            "aria2_installed": False,                   # set True after installing aria2
+            "download_exercise_file": False,                # feature unavailable for organizational login
+            "web_browser_for_exfile": "chrome",             # select chrome or firefox as a web browser
+            "aria2_installed": False,                       # set True after installing aria2
             "download_time": "",
-            "redownload_course": "prompt",              # choose between -> prompt, skip & force re-download
-            "exfile_download_method": "selenium"        # choose between selenium and aria2
+            "redownload_course": "prompt",                  # choose between -> prompt, skip & force re-download
+            "exfile_download_method": "selenium",           # choose between selenium and aria2
+            # "lyndor_folder_location": install.LYNDOR_PATH   # change location if you shift lyndor somewhere else
         }
     }
 
-    out_file = open(read.LYNDOR_PATH + '/settings/static/js/settings.json', 'w')
+    settings = os.path.join(install.LYNDOR_PATH, 'settings/static/js/settings.json')
+    out_file = open(settings, 'w')
     json.dump(settings_dict, out_file, indent=4)
     out_file.close()
 
@@ -330,7 +332,7 @@ def lynda_folder():
 
 def aliases_bat():
     '''Create aliases file'''
-    os.chdir(read.LYNDOR_PATH)
+    os.chdir(install.LYNDOR_PATH)
     if install.check_os() == 'windows':
         run_path = 'doskey lynda= python "' + os.getcwd() + '/run.py"'
         alias = open('aliases.bat', 'w')
@@ -341,7 +343,7 @@ def aliases_bat():
 
 def run_lyndor_bat():
     ''' create Run-Lyndor.bat in windows '''
-    os.chdir(read.LYNDOR_PATH)
+    os.chdir(install.LYNDOR_PATH)
     bulk_download = open('Bulk Download.txt', 'w')
     bulk_download.close()
     shutil.move('Bulk Download.txt', read.settings_json(
@@ -372,7 +374,7 @@ def webdriver():
         import requests
     except ImportError:
         pass
-    os.chdir(read.LYNDOR_PATH)   # change directory to LYNDOR
+    os.chdir(install.LYNDOR_PATH)   # change directory to LYNDOR
     try:
         # create directory webdriver to save platform specific webdrivers
         os.mkdir('webdriver')

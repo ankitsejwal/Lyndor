@@ -8,7 +8,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import install, message, read, save
+import install
+from module import message, read, save
 import os, sys, time, shutil, requests
 from colorama import Fore
 

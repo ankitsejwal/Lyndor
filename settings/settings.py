@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+''' Flask based web server to edit settings.json '''
+
 from flask import Flask, request, jsonify, render_template
 import time, json, os
 

@@ -3,9 +3,17 @@
 
 ''' Lyndor runs from here - contains the main functions '''
 
-import sys, time
-import message, save, cookies, read, install, move, draw, rename, exercise_file
-from colorama import *
+import sys, time, os, six
+import module.message as message
+import module.save as save
+import module.cookies as cookies
+import module.read as read
+import install
+import module.move as move
+import module.draw as draw
+import module.rename as rename
+import module.exercise_file as exercise_file
+from colorama import Fore, init
 
 def main():
     ''' Main function '''
@@ -15,11 +23,7 @@ def main():
     message.print_line('\r1. Paste course url or\n' +
     '2. Press enter for Bulk Download')
     
-    # Prevent name error on python 3.x
-    try: 
-        url = raw_input()
-    except NameError:
-        url = input()
+    url = six.moves.input()
     
     print('')
     start_time = time.time() #start time counter begins
@@ -74,7 +78,7 @@ def download_course(url):
     url = url[:url.find(".html")+5] #strip any extra text after .html in the url
 
     # Folder/File paths
-    lynda_folder_path = read.settings_json('preferences', 'location') + '/'
+    lynda_folder_path = read.location + '/'
     course_folder_path = save.course_path(url, lynda_folder_path)
     desktop_folder_path = install.get_path("Desktop")
     download_folder_path = install.get_path("Downloads")
@@ -130,4 +134,9 @@ def download_course(url):
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
+ 
+    

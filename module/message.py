@@ -3,10 +3,9 @@
 
 ''' All printing messages and functions '''
 
-import time
-import sys
+import time, sys
 try:
-    from colorama import *
+    from colorama import Fore
 except ImportError:
     pass
 

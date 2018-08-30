@@ -4,8 +4,8 @@
 ''' Rename videos and subtitle, also write content.md '''
 
 import os, re, shutil, sys
-import save
-from colorama import *
+from module import save
+from colorama import Fore
 
 def assign_folder(folder):
     ''' return folder path '''

@@ -1,7 +1,11 @@
-import os, json
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-real_path = os.path.realpath(__file__)
-LYNDOR_PATH = real_path[:real_path.find('read.py')]
+''' Read settings.json '''
+
+import os, json
+import install
+
 
 def bulk_download():
     ''' Read Bulk Download.txt '''
@@ -12,15 +16,17 @@ def bulk_download():
 
 def settings_json(section, *args):
     ''' Read settings.json '''
-    os.chdir(LYNDOR_PATH)
+    os.chdir(install.LYNDOR_PATH)
 
-    in_file = open('./settings/static/js/settings.json', 'r')
+    settings = os.path.join(install.LYNDOR_PATH, 'settings/static/js/settings.json')
+    in_file = open(settings, 'r')
     data = json.load(in_file)
     in_file.close()
     try:
         return data[section][args[0]][args[1]]
     except:
         return data[section][args[0]]
+
 
 try:
     # read credentials
@@ -41,4 +47,4 @@ try:
     download_time           = settings_json('preferences', 'download_time')
     redownload_course       = settings_json('preferences', 'redownload_course')
 except Exception as e:
-    print(e)
+    print("can't read value:", e)
