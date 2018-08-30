@@ -230,7 +230,7 @@ def videos(url, cookie_path, course_folder):
         # Output name of videos/subtitles
         output = ' -o ' +'"'+ course_folder + "/%(playlist_index)s - %(title)s.%(ext)s" + '"'
         # Exter name downloader option
-        ext_downloader = ' --external-downloader aria2c' if read.external_downloader else ''
+        ext_downloader = ' --external-downloader aria2c' if read.aria2_installed else ''
         cookie = ' --cookies ' + '"' + cookie_path + '"'     # cookie
         uName = read.username
 

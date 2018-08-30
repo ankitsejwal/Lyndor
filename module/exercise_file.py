@@ -18,6 +18,7 @@ from colorama import Fore
 
 def download(url, course_folder, cookie_path):
     ''' Download exercise file '''
+    print('cookie path', cookie_path)
     if read.web_browser_for_exfile.lower() == 'firefox': 
         driver = webdriver.Firefox()
     elif read.web_browser_for_exfile.lower() == 'chrome':
@@ -46,7 +47,7 @@ def download(url, course_folder, cookie_path):
     driver.get(url)
     
     if read.exfile_download_method == 'aria2':
-        if read.external_downloader == True: print('') 
+        if read.aria2_installed: print('') 
         else: sys.exit('Aria2 not installed. Check preferences in settings')
         use_aria2(url, course_folder, cookie_path, driver)
 

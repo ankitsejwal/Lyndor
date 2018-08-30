@@ -47,7 +47,7 @@ def main():
 def schedule_download(url):
     ''' Look for the scheduled time in settings.json '''
     
-    if not read.external_downloader:
+    if not read.aria2_installed:
         tip = '☝🏻  Tip: Install aria2c for faster downloads, read README.md to learn more.'
         message.carriage_return_animate(tip)
     if read.download_time == '':
@@ -86,10 +86,9 @@ def download_course(url):
     # Read preferences
     use_cookie_for_download = read.course_download_pref
 
-    cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
-
-    if use_cookie_for_download in ['cookies', 'cookie']:
-        downloading_from_cookie = message.return_colored_message(Fore.LIGHTBLUE_EX, ' 🍪  Downloading videos using cookies.txt')
+    if use_cookie_for_download in ['cookies', 'cookie'] or read.exfile_download_method == 'aria2':
+        cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
+        downloading_from_cookie = message.return_colored_message(Fore.LIGHTBLUE_EX, '🍪  Downloading videos using cookies.txt')
         message.carriage_return_animate(downloading_from_cookie)
     else:
         cookie_path = ''
