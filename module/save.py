@@ -298,14 +298,13 @@ def settings_json():
         },
         "preferences": {
             "location": install.set_path() + '/Lynda',
-            "download_subtitles": True,
+            "download_subtitles": False,
             "download_exercise_file": False,                # feature unavailable for organizational login
             "web_browser_for_exfile": "chrome",             # select chrome or firefox as a web browser
             "aria2_installed": False,                       # set True after installing aria2
             "download_time": "",
             "redownload_course": "prompt",                  # choose between -> prompt, skip & force re-download
             "exfile_download_method": "selenium",           # choose between selenium and aria2
-            # "lyndor_folder_location": install.LYNDOR_PATH   # change location if you shift lyndor somewhere else
         }
     }
 
