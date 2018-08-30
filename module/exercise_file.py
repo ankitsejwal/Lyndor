@@ -18,7 +18,6 @@ from colorama import Fore
 
 def download(url, course_folder, cookie_path):
     ''' Download exercise file '''
-    print('cookie path', cookie_path)
     if read.web_browser_for_exfile.lower() == 'firefox': 
         driver = webdriver.Firefox()
     elif read.web_browser_for_exfile.lower() == 'chrome':
