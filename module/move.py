@@ -4,8 +4,8 @@
 ''' Rename videos and subtitle, also write content.md '''
 
 import os, re, shutil, sys
-import save
-from colorama import *
+from module import save
+from colorama import Fore
 
 def assign_folder(folder):
     ''' return folder path '''
@@ -25,13 +25,13 @@ def vid_srt_to_chapter(url, course_folder):
     video_count = 0
 
     total_videos = save.total_videos(url) 
-    print('\nVideos available for download: {}'.format(total_videos))
+    print('\nVideos available: {}'.format(total_videos))
 
     downloaded_videos = 0
     for file in os.listdir(course_folder):
         if file.endswith('.mp4'):
             downloaded_videos += 1
-    print('\nVideos downloaded: {}\n'.format(downloaded_videos))
+    print('Videos downloaded: {}\n'.format(downloaded_videos))
 
     for li in ul_video:
         chapter_name = chapters[chapter_count].text
@@ -84,12 +84,13 @@ def vid_srt_to_chapter(url, course_folder):
                 except UnicodeEncodeError:
                     print('🤕  File not found: ' + (video_name).encode('utf-8'))
 
+            videos_moved = "\n🥂  videos/subtitles moved to appropriate chapters successfully."
             try:
                 shutil.move(subtitle_name, chapter_name)
             except:
-                pass
+                videos_moved = ""   # prevent successful message
 
-    print('\n🥂  videos/subtitles moved to appropriate chapters successfully.')
+    print(videos_moved)
 
 def hms_string(sec_elapsed):
     ''' format elapsed time '''

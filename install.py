@@ -1,9 +1,12 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 ''' Install Lyndor software and dependencies '''
 
-import os, sys, shutil
-import read, save
-import zipfile
-import json
+import os, sys, shutil, json, zipfile
+
+real_path = os.path.realpath(__file__)
+LYNDOR_PATH = real_path[:real_path.find('install.py')]
 
 def check_os():
     '''Check operating system'''
@@ -56,12 +59,15 @@ def file_found(folder, directory):
 
 def install_dependencies():
     '''install required softwares'''
-    os.chdir(read.LYNDOR_PATH)
-    os.system('pip install -r requirements.txt')
+    os.chdir(LYNDOR_PATH)
+    print('lyndor path:', LYNDOR_PATH)
+    requirements = os.path.join(LYNDOR_PATH, 'requirements.txt')
+    os.system('pip install -r ' + requirements)
 
 
 if __name__ == '__main__':
     try:
+        from module import save
         install_dependencies()
         save.settings_json()
         save.lynda_folder()

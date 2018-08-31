@@ -3,9 +3,17 @@
 
 ''' Lyndor runs from here - contains the main functions '''
 
-import sys, time
-import message, save, cookies, read, install, move, draw, rename, exercise_file
-from colorama import *
+import sys, time, os, six
+import module.message as message
+import module.save as save
+import module.cookies as cookies
+import module.read as read
+import install
+import module.move as move
+import module.draw as draw
+import module.rename as rename
+import module.exercise_file as exercise_file
+from colorama import Fore, init
 
 def main():
     ''' Main function '''
@@ -15,11 +23,7 @@ def main():
     message.print_line('\r1. Paste course url or\n' +
     '2. Press enter for Bulk Download')
     
-    # Prevent name error on python 3.x
-    try: 
-        url = raw_input()
-    except NameError:
-        url = input()
+    url = six.moves.input()
     
     print('')
     start_time = time.time() #start time counter begins
@@ -43,7 +47,7 @@ def main():
 def schedule_download(url):
     ''' Look for the scheduled time in settings.json '''
     
-    if not read.external_downloader:
+    if not read.aria2_installed:
         tip = '☝🏻  Tip: Install aria2c for faster downloads, read README.md to learn more.'
         message.carriage_return_animate(tip)
     if read.download_time == '':
@@ -74,7 +78,7 @@ def download_course(url):
     url = url[:url.find(".html")+5] #strip any extra text after .html in the url
 
     # Folder/File paths
-    lynda_folder_path = read.settings_json('preferences', 'location') + '/'
+    lynda_folder_path = read.location + '/'
     course_folder_path = save.course_path(url, lynda_folder_path)
     desktop_folder_path = install.get_path("Desktop")
     download_folder_path = install.get_path("Downloads")
@@ -82,10 +86,9 @@ def download_course(url):
     # Read preferences
     use_cookie_for_download = read.course_download_pref
 
-    cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
-
-    if use_cookie_for_download in ['cookies', 'cookie']:
-        downloading_from_cookie = message.return_colored_message(Fore.LIGHTBLUE_EX, ' 🍪  Downloading videos using cookies.txt')
+    if use_cookie_for_download in ['cookies', 'cookie'] or read.exfile_download_method == 'aria2':
+        cookie_path = cookies.find_cookie(desktop_folder_path, download_folder_path)
+        downloading_from_cookie = message.return_colored_message(Fore.LIGHTBLUE_EX, '🍪  Downloading videos using cookies.txt')
         message.carriage_return_animate(downloading_from_cookie)
     else:
         cookie_path = ''
@@ -130,4 +133,9 @@ def download_course(url):
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
+ 
+    

@@ -8,7 +8,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import install, message, read, save
+import install
+from module import message, read, save
 import os, sys, time, shutil, requests
 from colorama import Fore
 
@@ -45,7 +46,7 @@ def download(url, course_folder, cookie_path):
     driver.get(url)
     
     if read.exfile_download_method == 'aria2':
-        if read.external_downloader == True: print('') 
+        if read.aria2_installed: print('') 
         else: sys.exit('Aria2 not installed. Check preferences in settings')
         use_aria2(url, course_folder, cookie_path, driver)
 

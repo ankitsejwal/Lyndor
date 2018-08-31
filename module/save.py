@@ -4,15 +4,16 @@
 ''' Creates course folder/ Saves chapters'''
 
 import os, io
-import install, cookies
 import sys, zipfile, json
 import time
 import shutil
 import re
-import message, read
+import install
+import six
+from module import message, cookies, read
 try:
     from bs4 import BeautifulSoup
-    from colorama import *
+    from colorama import Fore
     import requests
 except ImportError:
     pass
@@ -70,9 +71,8 @@ def course(url, lynda_folder_path):
                 QUESTION = '\n✅  Course folder already exists: Do you wish to delete it and download again? (Y/N): '
                 sys.stdout.write(Fore.LIGHTBLUE_EX + QUESTION + Fore.RESET)
                 while answer != 'y':
-                    # fix for python 2.x and 3.x
-                    try: answer = raw_input().lower()
-                    except NameError: answer = input().lower() 
+                    # get user input
+                    answer = six.moves.input().lower()
 
                     if answer == 'y':
                         shutil.rmtree(current_course)
@@ -84,6 +84,7 @@ def course(url, lynda_folder_path):
                     else:
                         sys.stdout.write(Fore.LIGHTRED_EX + "\n- oops!! that's not a valid choice, type Y or N: " + Fore.RESET)
     
+    print('\ncreating course folder at: {}'.format(current_course))
     os.mkdir(current_course)
 
 def info_file(url, course_path):
@@ -184,9 +185,8 @@ def contentmd(url):
         bug = False
         for li in ul_video:
             try:
-                content_md.writelines('\n\n## ' + (chapters[chapter_count].text).encode('utf-8') + '\n')
-            except TypeError:
-                content_md.writelines('\n\n## ' + str((chapters[chapter_count].text).encode('utf-8')) + '\n')
+                chapter_name = '\n\n## {}\n'.format(chapters[chapter_count].text)
+                content_md.writelines(chapter_name)
             except Exception:
                 bug = True
                 break              
@@ -195,9 +195,8 @@ def contentmd(url):
             for video in group:
                 video_count += 1
                 try:
-                    content_md.writelines("\n* " + str(video_count).zfill(2) + " - " + (video.text.strip()).encode('utf-8'))
-                except TypeError:
-                    content_md.writelines("\n* " + str(video_count).zfill(2) + " - " + str((video.text.strip()).encode('utf-8')))
+                    video_name = "\n* {} - {}".format(str(video_count).zfill(2), video.text.strip())
+                    content_md.writelines(video_name)
                 except Exception:
                     bug = True
                     break
@@ -216,8 +215,7 @@ def total_videos(url):
 
     for li in ul_video:
         group = li.find_all('a', class_='video-name')
-        for video in group:
-            video_count += 1
+        video_count += len(group)
     return video_count
 
 def videos(url, cookie_path, course_folder):
@@ -230,7 +228,7 @@ def videos(url, cookie_path, course_folder):
         # Output name of videos/subtitles
         output = ' -o ' +'"'+ course_folder + "/%(playlist_index)s - %(title)s.%(ext)s" + '"'
         # Exter name downloader option
-        ext_downloader = ' --external-downloader aria2c' if read.external_downloader else ''
+        ext_downloader = ' --external-downloader aria2c' if read.aria2_installed else ''
         cookie = ' --cookies ' + '"' + cookie_path + '"'     # cookie
         uName = read.username
 
@@ -254,7 +252,7 @@ def aria2():
         import requests
     except ImportError:
         pass
-    os.chdir(read.LYNDOR_PATH)
+    os.chdir(install.LYNDOR_PATH)
     if install.check_os() == 'windows':
         try:
             os.mkdir('aria2c')
@@ -280,7 +278,7 @@ def unzip(directory, zip_file):
 
 def settings_json():
     ''' Create settings_json file '''
-    os.chdir(read.LYNDOR_PATH)
+    os.chdir(install.LYNDOR_PATH)
 
     settings_dict = {
         "credentials": {
@@ -298,17 +296,18 @@ def settings_json():
         },
         "preferences": {
             "location": install.set_path() + '/Lynda',
-            "download_subtitles": True,
-            "download_exercise_file": False,            # feature unavailable for organizational login
-            "web_browser_for_exfile": "chrome",         # select chrome or firefox as a web browser
-            "aria2_installed": False,                   # set True after installing aria2
+            "download_subtitles": False,
+            "download_exercise_file": False,                # feature unavailable for organizational login
+            "web_browser_for_exfile": "chrome",             # select chrome or firefox as a web browser
+            "aria2_installed": False,                       # set True after installing aria2
             "download_time": "",
-            "redownload_course": "prompt",              # choose between -> prompt, skip & force re-download
-            "exfile_download_method": "selenium"        # choose between selenium and aria2
+            "redownload_course": "prompt",                  # choose between -> prompt, skip & force re-download
+            "exfile_download_method": "selenium",           # choose between selenium and aria2
         }
     }
 
-    out_file = open(read.LYNDOR_PATH + '/settings/static/js/settings.json', 'w')
+    settings = os.path.join(install.LYNDOR_PATH, 'settings/static/js/settings.json')
+    out_file = open(settings, 'w')
     json.dump(settings_dict, out_file, indent=4)
     out_file.close()
 
@@ -330,7 +329,7 @@ def lynda_folder():
 
 def aliases_bat():
     '''Create aliases file'''
-    os.chdir(read.LYNDOR_PATH)
+    os.chdir(install.LYNDOR_PATH)
     if install.check_os() == 'windows':
         run_path = 'doskey lynda= python "' + os.getcwd() + '/run.py"'
         alias = open('aliases.bat', 'w')
@@ -341,7 +340,7 @@ def aliases_bat():
 
 def run_lyndor_bat():
     ''' create Run-Lyndor.bat in windows '''
-    os.chdir(read.LYNDOR_PATH)
+    os.chdir(install.LYNDOR_PATH)
     bulk_download = open('Bulk Download.txt', 'w')
     bulk_download.close()
     shutil.move('Bulk Download.txt', read.settings_json(
@@ -372,7 +371,7 @@ def webdriver():
         import requests
     except ImportError:
         pass
-    os.chdir(read.LYNDOR_PATH)   # change directory to LYNDOR
+    os.chdir(install.LYNDOR_PATH)   # change directory to LYNDOR
     try:
         # create directory webdriver to save platform specific webdrivers
         os.mkdir('webdriver')

@@ -98,10 +98,10 @@ $(document).ready(function(){
 
     // aria2 installed?
     $('#aria2-true').click(function(){
-        settingsJson.preferences.ext_downloader_aria2_installed = true;
+        settingsJson.preferences.aria2_installed = true;
     })    
     $('#aria2-false').click(function(){
-        settingsJson.preferences.ext_downloader_aria2_installed = false;
+        settingsJson.preferences.aria2_installed = false;
     })
 
 
@@ -175,7 +175,7 @@ else
     document.getElementById('redownload-force').classList.add("active");
 
 // read aria2 state
-if(settingsJson.preferences.ext_downloader_aria2_installed == true)
+if(settingsJson.preferences.aria2_installed == true)
     document.getElementById('aria2-true').classList.add("active"); 
 else
     document.getElementById('aria2-false').classList.add("active"); 
