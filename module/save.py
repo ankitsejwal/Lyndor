@@ -83,7 +83,8 @@ def course(url, lynda_folder_path):
                         sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n-> Program Ended!!\n"))
                     else:
                         sys.stdout.write(Fore.LIGHTRED_EX + "\n- oops!! that's not a valid choice, type Y or N: " + Fore.RESET)
-    print('creating course folder at: ', current_course)
+    
+    print('\ncreating course folder at: {}'.format(current_course))
     os.mkdir(current_course)
 
 def info_file(url, course_path):
@@ -184,9 +185,8 @@ def contentmd(url):
         bug = False
         for li in ul_video:
             try:
-                content_md.writelines('\n\n## ' + (chapters[chapter_count].text).encode('utf-8') + '\n')
-            except TypeError:
-                content_md.writelines('\n\n## ' + str((chapters[chapter_count].text).encode('utf-8')) + '\n')
+                chapter_name = '\n\n## {}\n'.format(chapters[chapter_count].text)
+                content_md.writelines(chapter_name)
             except Exception:
                 bug = True
                 break              
@@ -195,9 +195,8 @@ def contentmd(url):
             for video in group:
                 video_count += 1
                 try:
-                    content_md.writelines("\n* " + str(video_count).zfill(2) + " - " + (video.text.strip()).encode('utf-8'))
-                except TypeError:
-                    content_md.writelines("\n* " + str(video_count).zfill(2) + " - " + str((video.text.strip()).encode('utf-8')))
+                    video_name = "\n* {} - {}".format(str(video_count).zfill(2), video.text.strip())
+                    content_md.writelines(video_name)
                 except Exception:
                     bug = True
                     break
@@ -216,8 +215,7 @@ def total_videos(url):
 
     for li in ul_video:
         group = li.find_all('a', class_='video-name')
-        for video in group:
-            video_count += 1
+        video_count += len(group)
     return video_count
 
 def videos(url, cookie_path, course_folder):

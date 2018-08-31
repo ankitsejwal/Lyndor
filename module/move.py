@@ -84,12 +84,13 @@ def vid_srt_to_chapter(url, course_folder):
                 except UnicodeEncodeError:
                     print('🤕  File not found: ' + (video_name).encode('utf-8'))
 
+            videos_moved = "\n🥂  videos/subtitles moved to appropriate chapters successfully."
             try:
                 shutil.move(subtitle_name, chapter_name)
             except:
-                pass
+                videos_moved = ""   # prevent successful message
 
-    print('\n🥂  videos/subtitles moved to appropriate chapters successfully.')
+    print(videos_moved)
 
 def hms_string(sec_elapsed):
     ''' format elapsed time '''
