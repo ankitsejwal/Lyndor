@@ -4,9 +4,6 @@
 ''' Install Lyndor software and dependencies '''
 
 import os, sys, shutil, json, zipfile
-# from module import read
-from module import save
-
 
 real_path = os.path.realpath(__file__)
 LYNDOR_PATH = real_path[:real_path.find('install.py')]
@@ -70,6 +67,7 @@ def install_dependencies():
 
 if __name__ == '__main__':
     try:
+        from module import save
         install_dependencies()
         save.settings_json()
         save.lynda_folder()
