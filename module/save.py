@@ -9,6 +9,7 @@ import time
 import shutil
 import re
 import install
+import six
 from module import message, cookies, read
 try:
     from bs4 import BeautifulSoup
@@ -70,9 +71,8 @@ def course(url, lynda_folder_path):
                 QUESTION = '\n✅  Course folder already exists: Do you wish to delete it and download again? (Y/N): '
                 sys.stdout.write(Fore.LIGHTBLUE_EX + QUESTION + Fore.RESET)
                 while answer != 'y':
-                    # fix for python 2.x and 3.x
-                    try: answer = raw_input().lower()
-                    except NameError: answer = input().lower() 
+                    # get user input
+                    answer = six.moves.input().lower()
 
                     if answer == 'y':
                         shutil.rmtree(current_course)
