@@ -4,7 +4,7 @@
 ''' Rename videos and subtitle, also write content.md '''
 
 import os, re, shutil, sys
-from module import save
+from module import save, message
 from colorama import Fore
 
 def assign_folder(folder):
@@ -42,7 +42,17 @@ def vid_srt_to_chapter(url, course_folder):
             chapter_name = str(chapter_count).zfill(2) + '. ' + chapter_name[4:]
         else:
             chapter_name = str(chapter_count).zfill(2) + '. ' + chapter_name
-        chapter_name = re.sub('[,:?><"/\\|*]', ' ', chapter_name)
+        
+        # Check for valid characters
+        replacements = [
+            ('[?]', ''),
+            ('[/]', '_'),
+            ('["]', "'"),
+            ('[:><\\|*]', ' -')
+        ]
+
+        for old, new in replacements:
+            chapter_name = re.sub(old, new, chapter_name)
         chapter_name = chapter_name.strip()
         
         chapter_count += 1
@@ -64,33 +74,50 @@ def vid_srt_to_chapter(url, course_folder):
             
             video_name = str(video_count).zfill(digit) + ' - ' + video.text.strip()
             video_name = video_name.split("\n").pop(0) + '.mp4'
-            video_name = re.sub('[?]', '', video_name)
-            video_name = re.sub('[/]', '_', video_name)
-            video_name = re.sub('["]', '\'', video_name)
-            video_name = re.sub('[:><\\|*]', ' -', video_name)
+            # Check for valid characters
+            replacements = [
+                ('[?]', ''),
+                ('[/]', '_'),
+                ('["]', "'"),
+                ('[:><\\|*]', ' -')
+            ]
+
+            for old, new in replacements:
+                video_name = re.sub(old, new, video_name)
             
             subtitle_name = str(video_count).zfill(digit) + ' - ' + video.text.strip()
             subtitle_name = subtitle_name.split("\n").pop(0) + '.en.srt'
-            subtitle_name = re.sub('[?]', '', subtitle_name)
-            subtitle_name = re.sub('[/]', '_', subtitle_name)
-            subtitle_name = re.sub('["]', '\'', subtitle_name)
-            subtitle_name = re.sub('[:><\\|*]', ' -', subtitle_name)
+            # Check for valid characters
+            replacements = [
+                ('[?]', ''),
+                ('[/]', '_'),
+                ('["]', "'"),
+                ('[:><\\|*]', ' -')
+            ]
+
+            for old, new in replacements:
+                subtitle_name = re.sub(old, new, subtitle_name)
+            
+            moved_successfully = "\n🥂  videos/subtitles moved to appropriate chapters successfully."
 
             try:
+                # display what's being moved
+                message.carriage_return_animate_fast('Moving video {}'.format(video_name))
                 shutil.move(video_name, chapter_name)
             except:
+                moved_successfully = ""         # prevent successful message
                 try:
                     print('🤕  File not found: ' + str(video_name))
                 except UnicodeEncodeError:
                     print('🤕  File not found: ' + (video_name).encode('utf-8'))
 
-            videos_moved = "\n🥂  videos/subtitles moved to appropriate chapters successfully."
             try:
                 shutil.move(subtitle_name, chapter_name)
             except:
-                videos_moved = ""   # prevent successful message
+                pass  
 
-    print(videos_moved)
+    print(moved_successfully)
+
 
 def hms_string(sec_elapsed):
     ''' format elapsed time '''
