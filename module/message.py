@@ -46,7 +46,6 @@ def write(description, value):
         sys.stdout.write(str(description) + '\t' + str(value) + '\n')
     except UnicodeEncodeError:
         sys.stdout.write((description).encode('utf-8') + '\t' + (value).encode('utf-8') + '\n')
-
     sys.stdout.flush()
 
 def print_line(value):
@@ -55,7 +54,6 @@ def print_line(value):
         sys.stdout.write(str(value) + '\n')
     except UnicodeEncodeError:
         sys.stdout.write((value).encode('utf-8'))
-
     sys.stdout.flush()
 
 def colored_message(color, message):
@@ -74,5 +72,14 @@ def carriage_return_animate(line):
         sys.stdout.flush()
     sys.stdout.write('\r')
     time.sleep(0.1)
+    sys.stdout.write("\033[K")
+
+def carriage_return_animate_fast(line):
+    ''' print running line over an existing line '''
+    for char in line:
+        sys.stdout.write(char)
+        time.sleep(0.004)
+        sys.stdout.flush()
+    sys.stdout.write('\r')
     sys.stdout.write("\033[K")
     

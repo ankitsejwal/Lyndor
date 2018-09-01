@@ -42,8 +42,19 @@ def course_path(url, lynda_folder_path):
     ''' finding course path '''
     soup = create_soup(url)
     course_title = soup.find('h1', {"class": "default-title"}).text
+    
     # Check for valid characters
-    course_title = re.sub('[,:?.><"/\\|*]', ' -', course_title)
+    replacements = [
+        ('[?]', ''),
+        ('[/]', '_'),
+        ('["]', "'"),
+        ('[:><\\|*]', ' -')
+    ]
+
+    for old, new in replacements:
+        course_title = re.sub(old, new, course_title)
+    
+    course_title = course_title.strip()
     return lynda_folder_path + course_title
 
 def course(url, lynda_folder_path):
@@ -154,7 +165,17 @@ def chapters(url, course_folder_path):
     
     for h in heading4:
         chapter = h.text
-        chapter = re.sub('[,:?><"/\\|*]', ' ', chapter)
+    
+        # Check for valid characters
+        replacements = [
+            ('[?]', ''),
+            ('[/]', '_'),
+            ('["]', "'"),
+            ('[:><\\|*]', ' -')
+        ]
+
+        for old, new in replacements:
+            chapter = re.sub(old, new, chapter)                
 
         if chapter[1] == '.':
             chapter = str(chapter_no).zfill(2) + '. ' + chapter[3:]
@@ -166,7 +187,9 @@ def chapters(url, course_folder_path):
         chapter_no += 1
         message.print_line(chapter)
 
-        os.mkdir(course_folder_path + "/" + chapter) # create folders (chapters)
+        new_chapter = course_folder_path + "/" + chapter
+        new_chapter = new_chapter.strip()
+        os.mkdir(new_chapter) # create folders (chapters)
             
     message.colored_message(Fore.LIGHTGREEN_EX, '\n✅  '+str(chapter_no)+' chapters created!!\n')
  
