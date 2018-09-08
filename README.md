@@ -91,14 +91,9 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 
 ```
 - Lyndor Folder
----- LICENSE
 -- run.py                   (main file - execute the file, to run the program)
--- save.py
--- download.py
--- ...
--- ...
--- ...
--- install.py
+-- install.py               (installation file - execute to install Lyndor)
+--- module                  (directory)
 --- webdriver               (directory)
   - chromedriver.zip
   - firefoxdriver.zip
@@ -112,6 +107,9 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
     ---- settings.js
   -- templates              (directory)
   -  settings.py        --> Flask webserver (python settings.py) 
+---- LICENSE
+--- .github                 (directory)             
+--- images                  (directory)
 ```
 
 ## Usage
@@ -188,8 +186,11 @@ $ python path/to/Lyndor/run.py
 * **Windows** users can simply double click **Run-Lyndor.bat** to run the program. Run-Lyndor.bat file should be located in (Lynda) folder where all courses are meant to be downloaded.
 
 ```bash
-# Linux and MacOS users can add Lynda keyword as alias to launch the program by just typing Lynda in terminal.
+# Linux and MacOS users can add Lyndor keyword as alias to launch the program by just typing Lyndor in terminal.
 $ alias lyndor='python /path-to/Lyndor/run.py'
+
+# Execute following line to add alias for lyndor in Windows operating system:
+C:> doskey lyndor=python PathToLyndor\run.py $*
 ```
 
 * [**How to create alias?**](https://www.moncefbelyamani.com/create-aliases-in-bash-profile-to-assign-shortcuts-for-common-terminal-commands/)
