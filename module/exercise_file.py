@@ -138,9 +138,14 @@ def use_aria2(url, course_folder, cookie_path, driver):
     exercises = driver.find_elements_by_css_selector('a > .exercise-name')
 
     for exercise in exercises:
-        print('Downloading: ' +  message.return_colored_message(Fore.LIGHTYELLOW_EX, exercise.text))
+        exercise_message = message.return_colored_message(Fore.LIGHTYELLOW_EX, exercise.text)
+        print("To be Downloaded: {}".format(exercise_message))
 
+    total_ex_files = len(exercise_file_urls)
+    counter = 1
     for url in exercise_file_urls:
+        print(message.return_colored_message(Fore.LIGHTYELLOW_EX, "\nDownloading {} of {}".format(counter, total_ex_files)))
+        counter += 1
         os.system("aria2c --load-cookie='{}' {}".format(cookie_path, url))
     
 
