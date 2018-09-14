@@ -22,4 +22,4 @@ def update():
     json.dump(data, settings_file, indent=4)
     return home()
 
-app.run(port=5000, debug=True)
+app.run(port=5005, debug=True)
