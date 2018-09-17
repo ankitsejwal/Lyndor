@@ -95,7 +95,7 @@ def course(url, lynda_folder_path):
                     else:
                         sys.stdout.write(Fore.LIGHTRED_EX + "\n- oops!! that's not a valid choice, type Y or N: " + Fore.RESET)
     
-    print('\ncreating course folder at: {}'.format(current_course))
+    print(u'\ncreating course folder at: {}'.format(current_course))
     os.mkdir(current_course)
 
 def info_file(url, course_path):
@@ -204,25 +204,27 @@ def contentmd(url):
     chapter_count = 0
     video_count = 0
 
-    with open('CONTENT.md', 'a') as content_md:
-        bug = False
-        for li in ul_video:
+
+    content_md = io.open('CONTENT.md', mode="a", encoding="utf-8")
+
+    bug = False
+    for li in ul_video:
+        try:
+            chapter_name = u'\n\n## {}\n'.format(chapters[chapter_count].text)
+            content_md.writelines(chapter_name)
+        except Exception:
+            bug = True
+            break              
+        chapter_count += 1
+        group = li.find_all('a', class_='video-name')
+        for video in group:
+            video_count += 1
             try:
-                chapter_name = '\n\n## {}\n'.format(chapters[chapter_count].text)
-                content_md.writelines(chapter_name)
+                video_name = u"\n* {} - {}".format(str(video_count).zfill(2), video.text.strip())
+                content_md.writelines(video_name)
             except Exception:
                 bug = True
-                break              
-            chapter_count += 1
-            group = li.find_all('a', class_='video-name')
-            for video in group:
-                video_count += 1
-                try:
-                    video_name = "\n* {} - {}".format(str(video_count).zfill(2), video.text.strip())
-                    content_md.writelines(video_name)
-                except Exception:
-                    bug = True
-                    break
+                break
     if bug:
         print('🤕  There seems to be an error while writing to content.md, please report the bug on GitHub')
     else:
