@@ -13,29 +13,19 @@ except ImportError:
 
 def add_new_line(cookie, line):
     '''returns cookie file with NETSCAPE line'''
-    # fix for python 2.x and 3.x
-    try:
-        with file(cookie, 'r') as original: data = original.read()
-        with file(cookie, 'w') as modified: modified.write(line + data)
-    except NameError:
-        with open(cookie, 'r') as original: data = original.read()
-        with open(cookie, 'w') as modified: modified.write(line + data)
+    
+    with open(cookie, 'r') as original: data = original.read()
+    with open(cookie, 'w') as modified: modified.write(line + data)
     
     return modified
 
 def edit_hex_file(cookie):
     '''returns cookie file without carriage return'''
     # fix for python 2.x and 3.x
-    try:
-        with file(cookie, 'r') as f:
-            newcontent = f.read().replace("\r\n", "\n")
-        with file(cookie, 'w') as f:
-            newfile = f.write(newcontent)
-    except NameError:
-        with open(cookie, 'r') as f:
-            newcontent = f.read().replace("\r\n", "\n")
-        with open(cookie, 'w') as f:
-            newfile = f.write(newcontent)       
+    with open(cookie, 'r') as f:
+        newcontent = f.read().replace("\r\n", "\n")
+    with open(cookie, 'w') as f:
+        newfile = f.write(newcontent)       
     return newfile
 
 def edit_cookie(cookie, line):
