@@ -17,7 +17,7 @@ def check_os():
     elif sys.platform.lower() == 'linux2' or sys.platform.lower() == 'linux':
         return 'linux'
     else:
-        print('operating system not supported: ' + sys.platform.lower())
+        print('operating system not supported:', sys.platform.lower())
         sys.exit('unknown operating system.')
 
 

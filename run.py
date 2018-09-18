@@ -63,7 +63,7 @@ def schedule_download(url):
                 if time.strftime("%H:%M") == read.download_time:
                     download_course(url)
                     return
-                print('Download will start at: ' + read.download_time + ', leave this window open.')
+                print(f'Download will start at: {read.download_time} leave this window open.')
                 time.sleep(60)
         except KeyboardInterrupt:
             sys.exit(message.colored_message(Fore.LIGHTRED_EX, "\n- Program Interrupted!!\n"))
