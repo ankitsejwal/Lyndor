@@ -9,13 +9,12 @@
   Features:
 
 - Organizational login (cookies.txt)    - Regular login (Username + Password combination)
-- Cross platform support                - Runs on both Python2 and Python3
+- Cross platform support                - Bulk downloads
 - Exercise file download                - Subtitles download
 - Lib. card + pin support for ex-file   - Schedule download (Download later)
 - Creates Course & Chapter folders      - Generate Info files
 - Videos and subtitles renaming         - Move videos/subtitles to correct Chapters
-- Adjust preferences (settings.json)    - aria2 external downloader (for faster downloads)
-- Bulk downloads                        
+- Adjust preferences (settings.json)    - aria2 external downloader (for faster downloads)                        
 ```
 
 ![**Lyndor in Action**](./images/lyndor-run.gif)
@@ -38,8 +37,8 @@ def Operating_Systems():
 
 ## Requirements
 
-* **Python 2 or Python 3**
-* Python is free and comes pre-installed in MacOS and most Linux distributions, Windows users can install python from official [**python**](https://www.python.org/download/releases/2.7/) website
+* **Python 3.6 or above**
+* Python is free to download [**python**](https://www.python.org/downloads/release/python-370/)
 * **NOTE:** Windows users must add python.exe to path
 
 ![**Windows installer**](https://www.howtogeek.com/wp-content/uploads/2017/05/ximg_591a09e55df0e.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.Sy31NTwaIO.png)
