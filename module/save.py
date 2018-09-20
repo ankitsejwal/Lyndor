@@ -334,7 +334,7 @@ def settings_json():
     json.dump(settings_dict, out_file, indent=4)
     out_file.close()
 
-    print(f'\n>>> Courses will be saved at -> {read.location} \n')
+    # print(f'\n>>> Courses will be saved at -> {read.location} \n')
     print('-> settings.json file created at Lyndor/settings/static/js/settings.json\n')
 
 

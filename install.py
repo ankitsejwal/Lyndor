@@ -10,14 +10,17 @@ LYNDOR_PATH = real_path[:real_path.find('install.py')]
 
 def check_os():
     '''Check operating system'''
-    if sys.platform.lower() == 'darwin':
+    
+    platform = sys.platform.lower()
+
+    if platform == 'darwin':
         return 'macos'
-    elif sys.platform.lower() == 'win32':
+    elif platform == 'win32':
         return 'windows'
-    elif sys.platform.lower() == 'linux2' or sys.platform.lower() == 'linux':
+    elif platform == 'linux2' or platform == 'linux':
         return 'linux'
     else:
-        print('operating system not supported:', sys.platform.lower())
+        print('operating system not supported:', platform)
         sys.exit('unknown operating system.')
 
 

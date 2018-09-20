@@ -43,7 +43,7 @@ try:
     download_subtitles      = settings_json('preferences', 'download_subtitles')
     download_exercise_file  = settings_json('preferences', 'download_exercise_file')
     web_browser_for_exfile  = settings_json('preferences', 'web_browser_for_exfile')
-    aria2_installed     = settings_json('preferences', 'aria2_installed')
+    aria2_installed         = settings_json('preferences', 'aria2_installed')
     download_time           = settings_json('preferences', 'download_time')
     redownload_course       = settings_json('preferences', 'redownload_course')
 except Exception as e:
