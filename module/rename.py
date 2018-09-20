@@ -14,7 +14,7 @@ def videos(path):
             if vid[-5] == ' ':
                 new_name = vid[:-5] + '.mp4'
                 os.rename(os.path.join(path, vid), os.path.join(path, new_name))
-                print('renamed >>> ' + new_name)
+                print('renamed >>>', new_name)
 
 
 def subtitles(path):
@@ -25,4 +25,4 @@ def subtitles(path):
             if sub[-8] == ' ':
                 new_name = sub[:-8] + '.en.srt'
                 os.rename(os.path.join(path, sub), os.path.join(path, new_name))
-                print('renamed >>> ' + new_name)
+                print('renamed >>> ', new_name)

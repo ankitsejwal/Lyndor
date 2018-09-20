@@ -79,7 +79,7 @@ def use_selenium(url, course_folder, driver):
 
     try:
         for exercise in exercises:
-                print('Downloading: ' +  exercise.text)
+                print(f"Downloading: {exercise.text}")
                 exercise.click()
     except Exception as e:
         sys.exit(e)
@@ -105,7 +105,7 @@ def use_selenium(url, course_folder, driver):
                     if os.path.getsize(folder) > 0:     # if file downloaded completely.
                         try:
                             shutil.move(exercise.text, course_folder)
-                            print('\nMoved to course folder: ' + exercise.text)
+                            print(f'\nMoved to course folder: {exercise.text}')
                         except:
                             print('\nMoving error: File already exists.')
                         
@@ -139,12 +139,13 @@ def use_aria2(url, course_folder, cookie_path, driver):
 
     for exercise in exercises:
         exercise_message = message.return_colored_message(Fore.LIGHTYELLOW_EX, exercise.text)
-        print("To be Downloaded: {}".format(exercise_message))
+        print(f"To be Downloaded: {exercise_message}")
+
 
     total_ex_files = len(exercise_file_urls)
     counter = 1
     for url in exercise_file_urls:
-        print(message.return_colored_message(Fore.LIGHTYELLOW_EX, "\nDownloading {} of {}".format(counter, total_ex_files)))
+        print(message.return_colored_message(Fore.LIGHTYELLOW_EX, f"\nDownloading {counter} of {total_ex_files}"))
         counter += 1
         os.system("aria2c --load-cookie='{}' {}".format(cookie_path, url))
     

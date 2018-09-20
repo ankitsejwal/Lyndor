@@ -95,7 +95,7 @@ def course(url, lynda_folder_path):
                     else:
                         sys.stdout.write(Fore.LIGHTRED_EX + "\n- oops!! that's not a valid choice, type Y or N: " + Fore.RESET)
     
-    print('\ncreating course folder at: {}'.format(current_course))
+    print(f'\ncreating course folder at: {current_course}')
     os.mkdir(current_course)
 
 def info_file(url, course_path):
@@ -204,25 +204,27 @@ def contentmd(url):
     chapter_count = 0
     video_count = 0
 
-    with open('CONTENT.md', 'a') as content_md:
-        bug = False
-        for li in ul_video:
+
+    content_md = io.open('CONTENT.md', mode="a", encoding="utf-8")
+
+    bug = False
+    for li in ul_video:
+        try:
+            chapter_name = u'\n\n## {}\n'.format(chapters[chapter_count].text)
+            content_md.writelines(chapter_name)
+        except Exception:
+            bug = True
+            break              
+        chapter_count += 1
+        group = li.find_all('a', class_='video-name')
+        for video in group:
+            video_count += 1
             try:
-                chapter_name = '\n\n## {}\n'.format(chapters[chapter_count].text)
-                content_md.writelines(chapter_name)
+                video_name = u"\n* {} - {}".format(str(video_count).zfill(2), video.text.strip())
+                content_md.writelines(video_name)
             except Exception:
                 bug = True
-                break              
-            chapter_count += 1
-            group = li.find_all('a', class_='video-name')
-            for video in group:
-                video_count += 1
-                try:
-                    video_name = "\n* {} - {}".format(str(video_count).zfill(2), video.text.strip())
-                    content_md.writelines(video_name)
-                except Exception:
-                    bug = True
-                    break
+                break
     if bug:
         print('🤕  There seems to be an error while writing to content.md, please report the bug on GitHub')
     else:
@@ -287,10 +289,8 @@ def aria2():
         with open('./aria2c/aria2c.zip', 'wb') as f:
             f.write(aria.content)
         print('\n>>> aria2c.zip has been downloaded inside "Lyndor/aria2c" folder')
-        print('>>> unzipping aria2c.zip')
         unzip('aria2c', 'aria2c.zip')
-        print(
-            '>>> aria2c.zip has been unzipped, copy its path and save to PATH variable.\n')
+        print('>>> aria2c.zip has been unzipped, copy its path and save to PATH variable.\n')
 
 
 def unzip(directory, zip_file):
@@ -334,8 +334,7 @@ def settings_json():
     json.dump(settings_dict, out_file, indent=4)
     out_file.close()
 
-    print('\n>>> Courses will be saved at -> ' +
-          read.settings_json('preferences', 'location') + '\n')
+    print(f"\n>>> Courses will be saved at -> {read.settings_json('preferences', 'location')} \n")
     print('-> settings.json file created at Lyndor/settings/static/js/settings.json\n')
 
 
@@ -344,8 +343,7 @@ def lynda_folder():
     path = read.settings_json('preferences', 'location')
     if not os.path.exists(path):
         os.makedirs(path)
-        print('-> Lynda folder created at: ' +
-              read.settings_json('preferences', 'location') + '\n')
+        print(f'-> Lynda folder created at: {path} \n')
     else:
         print('>>> Lynda folder already exists\n')
 
@@ -400,7 +398,7 @@ def webdriver():
         os.mkdir('webdriver')
     except:
         pass
-    print('\n-> Downloading web driver for ' + install.check_os())
+    print('\n-> Downloading web driver for', install.check_os())
 
     if install.check_os() == 'windows':
         chrome_url = 'https://chromedriver.storage.googleapis.com/2.35/chromedriver_win32.zip'

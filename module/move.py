@@ -25,13 +25,13 @@ def vid_srt_to_chapter(url, course_folder):
     video_count = 0
 
     total_videos = save.total_videos(url) 
-    print('\nVideos available: {}'.format(total_videos))
+    print(f'\nVideos available: {total_videos}' )
 
     downloaded_videos = 0
     for file in os.listdir(course_folder):
         if file.endswith('.mp4'):
             downloaded_videos += 1
-    print('Videos downloaded: {}\n'.format(downloaded_videos))
+    print(f'Videos downloaded: {downloaded_videos}\n')
 
     for li in ul_video:
         chapter_name = chapters[chapter_count].text
@@ -68,7 +68,7 @@ def vid_srt_to_chapter(url, course_folder):
         if total_videos > 99:
             digit = 3
 
-        print('🔰  Moving files inside: ' + str(chapter_name))
+        print(f'🔰  Moving files inside: {str(chapter_name)}')
         for video in group:
             video_count += 1
             
@@ -107,9 +107,9 @@ def vid_srt_to_chapter(url, course_folder):
             except:
                 moved_successfully = ""         # prevent successful message
                 try:
-                    print('🤕  File not found: ' + str(video_name))
+                    print(f"🤕  File not found: {str(video_name)}")
                 except UnicodeEncodeError:
-                    print('🤕  File not found: ' + (video_name).encode('utf-8'))
+                    print(f"🤕  File not found: {(video_name).encode('utf-8')}")
 
             try:
                 shutil.move(subtitle_name, chapter_name)
