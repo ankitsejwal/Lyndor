@@ -334,7 +334,7 @@ def settings_json():
     json.dump(settings_dict, out_file, indent=4)
     out_file.close()
 
-    # print(f'\n>>> Courses will be saved at -> {read.location} \n')
+    print(f'\n>>> Courses will be saved at -> {read.settings_json('preferences', 'location')} \n')
     print('-> settings.json file created at Lyndor/settings/static/js/settings.json\n')
 
 
@@ -343,7 +343,7 @@ def lynda_folder():
     path = read.settings_json('preferences', 'location')
     if not os.path.exists(path):
         os.makedirs(path)
-        print(f'-> Lynda folder created at: {read.location} \n')
+        print(f'-> Lynda folder created at: {path} \n')
     else:
         print('>>> Lynda folder already exists\n')
 
