@@ -89,16 +89,15 @@ def use_selenium(url, course_folder, driver):
     downloads_folder = install.get_path("Downloads")
     os.chdir(downloads_folder)
 
+    message.spinning_cursor()    
     while len(exercises) > 0:                           # until exercises[] gets empty
-        message.spinning_cursor()
+        sys.stdout.write('\033[F\033[F')
+        sys.stdout.flush()                              # Force Python to write data into terminal.
+        
         for folder in os.listdir(downloads_folder):
-
-            try: folder = folder.decode('utf-8')        # python 2.x
-            except AttributeError: pass                 # python 3.x
-
             sys.stdout.write("\033[K")                  # Clear to the end of line
-            sys.stdout.write("\rFinding Ex_file in Downloads folder ---> " + message.return_colored_message(Fore.LIGHTYELLOW_EX,folder))
-            sys.stdout.flush()                          # Force Python to write data into terminal.
+            sys.stdout.write(f"\rFinding Ex_file in Downloads folder --->  {message.return_colored_message(Fore.LIGHTYELLOW_EX, folder)}")
+            sys.stdout.flush()                          # Force Python to write data into terminal
 
             for exercise in exercises:
                 if folder == exercise.text:
@@ -115,7 +114,7 @@ def use_selenium(url, course_folder, driver):
             if(len(exercises) == 0):                    # if all exercises downloaded successfully
                 break                                   # break outer for-loop and stop scanning Downloads folder
 
-            time.sleep(0.02)                            # delay to print which file is being scanned
+            # time.sleep(0.02)                            # delay to print which file is being scanned
 
     driver.close()                                      # close web browser
 
