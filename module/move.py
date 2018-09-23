@@ -36,6 +36,10 @@ def vid_srt_to_chapter(url, course_folder):
     for li in ul_video:
         chapter_name = chapters[chapter_count].text
         
+        # handle empty named chapters
+        if len(chapter_name) == 0:
+            chapter_name = "Unnamed"
+        
         if chapter_name[1] == '.':
             chapter_name = str(chapter_count).zfill(2) + '. ' + chapter_name[3:]
         elif chapter_name[2] == '.':

@@ -165,6 +165,10 @@ def chapters(url, course_folder_path):
     
     for h in heading4:
         chapter = h.text
+        
+        # handle empty named chapters
+        if len(chapter) == 0:
+            chapter = "Unnamed"
     
         # Check for valid characters
         replacements = [
@@ -210,7 +214,13 @@ def contentmd(url):
     bug = False
     for li in ul_video:
         try:
-            chapter_name = u'\n\n## {}\n'.format(chapters[chapter_count].text)
+            chapter = chapters[chapter_count].text
+            
+            # handle empty named chapters
+            if len(chapter) == 0:
+                chapter = "Unnamed"
+            
+            chapter_name = u'\n\n## {}\n'.format(chapter)
             content_md.writelines(chapter_name)
         except Exception:
             bug = True

@@ -78,7 +78,7 @@ def carriage_return_animate_fast(line):
     ''' print running line over an existing line '''
     for char in line:
         sys.stdout.write(char)
-        time.sleep(0.004)
+        time.sleep(0.002)
         sys.stdout.flush()
     sys.stdout.write('\r')
     sys.stdout.write("\033[K")
