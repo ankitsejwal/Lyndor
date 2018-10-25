@@ -65,7 +65,7 @@ def install_dependencies():
     os.chdir(LYNDOR_PATH)
     print('lyndor path:', LYNDOR_PATH)
     requirements = os.path.join(LYNDOR_PATH, 'requirements.txt')
-    os.system('pip install -r ' + requirements)
+    os.system('pip3 install -r ' + requirements)
 
 
 if __name__ == '__main__':
