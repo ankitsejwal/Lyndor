@@ -41,7 +41,7 @@ def Operating_Systems():
 * Python is free to download [**python**](https://www.python.org/downloads/release/python-370/)
 * **NOTE:** Windows users must add python.exe to path
 
-![**Windows installer**](https://www.howtogeek.com/wp-content/uploads/2017/05/ximg_591a09e55df0e.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.Sy31NTwaIO.png)
+![**Windows installer**](./images/python-3.7-installation-wizard.png)
 
 ## Install Lyndor
 
