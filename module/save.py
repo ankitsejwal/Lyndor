@@ -219,6 +219,24 @@ def contentmd(url):
             # handle empty named chapters
             if len(chapter) == 0:
                 chapter = "Unnamed"
+
+            # Check for valid characters
+            replacements = [
+                ('[?]', ''),
+                ('[/]', '_'),
+                ('["]', "'"),
+                ('[:><\\|*]', ' -')
+            ]
+
+            for old, new in replacements:
+                chapter_title = re.sub(old, new, chapter)                
+
+            if chapter[1] == '.':
+                chapter_title = str(chapter_count).zfill(2) + '. ' + chapter[3:]
+            elif chapter[2] == '.':
+                chapter_title = str(chapter_count).zfill(2) + '. ' + chapter[4:]
+            else:
+                chapter_title = str(chapter_count).zfill(2) + '. ' + chapter
             
             chapter_name = u'\n\n## {}\n'.format(chapter)
             content_md.writelines(chapter_name)
@@ -227,11 +245,13 @@ def contentmd(url):
             break              
         chapter_count += 1
         group = li.find_all('a', class_='video-name')
+        # TODO: Make the video markdown option with a setting that shows up in the settings.py
         for video in group:
             video_count += 1
             try:
-                video_name = u"\n* {} - {}".format(str(video_count).zfill(2), video.text.strip())
-                content_md.writelines(video_name)
+                video_name = u"{} - {}".format(str(video_count).zfill(2), video.text.strip())
+                video_markdown = "\n* [" + video_name + "](" + chapter_title + "/" + video_name + ".mp4)"
+                content_md.writelines(video_markdown)
             except Exception:
                 bug = True
                 break
