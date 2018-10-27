@@ -191,7 +191,7 @@ def chapters(url, course_folder_path):
 
     
     for h in heading4:
-        chapter = format_chapter(h.text, chapter_no)    
+        chapter = format_chapter(h.text, chapter_no)
         chapter_no += 1
         message.print_line(chapter)
 
@@ -231,7 +231,10 @@ def contentmd(url):
             video_count += 1
             try:
                 video_name = u"{} - {}".format(str(video_count).zfill(2), video.text.strip())
-                video_markdown = "\n* [" + video_name + "](" + chapter + "/" + video_name + ".mp4)"
+                if read.markdown_links:
+                    video_markdown = "\n* [" + video_name + "](" + chapter + "/" + video_name + ".mp4)"
+                else:
+                    video_markdown = "\n* " + video_name
                 content_md.writelines(video_markdown)
             except Exception:
                 bug = True
@@ -330,6 +333,7 @@ def settings_json():
         },
         "preferences": {
             "location": install.set_path() + '/Lynda',
+            "markdown_links": False,
             "download_subtitles": False,
             "download_exercise_file": False,                # feature unavailable for organizational login
             "web_browser_for_exfile": "chrome",             # select chrome or firefox as a web browser
