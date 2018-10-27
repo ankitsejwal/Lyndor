@@ -226,7 +226,6 @@ def contentmd(url):
             break              
         chapter_count += 1
         group = li.find_all('a', class_='video-name')
-        # TODO: Make the video markdown option with a setting that shows up in the settings.py
         for video in group:
             video_count += 1
             try:
