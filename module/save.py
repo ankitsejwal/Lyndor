@@ -155,6 +155,8 @@ def info_file(url, course_path):
     message.print_line(message.INFO_FILE_CREATED)
 
 def format_chapter(chapter, chapter_count):
+    ''' format chapter text '''
+
     # handle empty named chapters
     if len(chapter) == 0:
         chapter = "Unnamed"
