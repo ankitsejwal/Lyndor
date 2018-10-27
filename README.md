@@ -162,7 +162,7 @@ Just edit your preferences and add your credentials here then simply hit Save bu
     },
     "preferences": {
         "location": "/path/to/folder/Lynda",
-        "markdown_links": false,                    // use markdown links for chapters in CONTENT.md
+        "markdown_links": true,                     // use markdown links for chapters in CONTENT.md
         "download_subtitles": true,                 // set false otherwise
         "download_exercise_file": true,             // set false otherwise
         "web_browser_for_exfile": "chrome",         // prefered web browser "chrome" or "firefox"
