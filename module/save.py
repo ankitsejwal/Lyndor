@@ -154,6 +154,33 @@ def info_file(url, course_path):
     # print message
     message.print_line(message.INFO_FILE_CREATED)
 
+def format_chapter(chapter, chapter_count):
+    ''' format chapter text '''
+
+    # handle empty named chapters
+    if len(chapter) == 0:
+        chapter = "Unnamed"
+
+    # Check for valid characters
+    replacements = [
+        ('[?]', ''),
+        ('[/]', '_'),
+        ('["]', "'"),
+        ('[:><\\|*]', ' -')
+    ]
+
+    for old, new in replacements:
+        chapter = re.sub(old, new, chapter)                
+
+    if chapter[1] == '.':
+        chapter = str(chapter_count).zfill(2) + '. ' + chapter[3:]
+    elif chapter[2] == '.':
+        chapter = str(chapter_count).zfill(2) + '. ' + chapter[4:]
+    else:
+        chapter = str(chapter_count).zfill(2) + '. ' + chapter
+
+    return chapter
+
 def chapters(url, course_folder_path):
     ''' create chapters folder '''
     soup = create_soup(url)
@@ -164,30 +191,7 @@ def chapters(url, course_folder_path):
 
     
     for h in heading4:
-        chapter = h.text
-        
-        # handle empty named chapters
-        if len(chapter) == 0:
-            chapter = "Unnamed"
-    
-        # Check for valid characters
-        replacements = [
-            ('[?]', ''),
-            ('[/]', '_'),
-            ('["]', "'"),
-            ('[:><\\|*]', ' -')
-        ]
-
-        for old, new in replacements:
-            chapter = re.sub(old, new, chapter)                
-
-        if chapter[1] == '.':
-            chapter = str(chapter_no).zfill(2) + '. ' + chapter[3:]
-        elif chapter[2] == '.':
-            chapter = str(chapter_no).zfill(2) + '. ' + chapter[4:]
-        else:
-            chapter = str(chapter_no).zfill(2) + '. ' + chapter
-        
+        chapter = format_chapter(h.text, chapter_no)
         chapter_no += 1
         message.print_line(chapter)
 
@@ -196,7 +200,7 @@ def chapters(url, course_folder_path):
         os.mkdir(new_chapter) # create folders (chapters)
             
     message.colored_message(Fore.LIGHTGREEN_EX, '\n✅  '+str(chapter_no)+' chapters created!!\n')
- 
+
 def contentmd(url):
     ''' write chapters and videos information to content.md '''
 
@@ -214,14 +218,9 @@ def contentmd(url):
     bug = False
     for li in ul_video:
         try:
-            chapter = chapters[chapter_count].text
-            
-            # handle empty named chapters
-            if len(chapter) == 0:
-                chapter = "Unnamed"
-            
-            chapter_name = u'\n\n## {}\n'.format(chapter)
-            content_md.writelines(chapter_name)
+            chapter = format_chapter(chapters[chapter_count].text, chapter_count) 
+            chapter_markdown = u'\n\n## {}\n'.format(chapter)
+            content_md.writelines(chapter_markdown)
         except Exception:
             bug = True
             break              
@@ -230,8 +229,12 @@ def contentmd(url):
         for video in group:
             video_count += 1
             try:
-                video_name = u"\n* {} - {}".format(str(video_count).zfill(2), video.text.strip())
-                content_md.writelines(video_name)
+                video_name = u"{} - {}".format(str(video_count).zfill(2), video.text.strip())
+                if read.markdown_links:
+                    video_markdown = "\n* [" + video_name + "](" + chapter + "/" + video_name + ".mp4)"
+                else:
+                    video_markdown = "\n* " + video_name
+                content_md.writelines(video_markdown)
             except Exception:
                 bug = True
                 break
@@ -329,6 +332,7 @@ def settings_json():
         },
         "preferences": {
             "location": install.set_path() + '/Lynda',
+            "markdown_links": False,
             "download_subtitles": False,
             "download_exercise_file": False,                # feature unavailable for organizational login
             "web_browser_for_exfile": "chrome",             # select chrome or firefox as a web browser

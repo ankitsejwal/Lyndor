@@ -40,6 +40,7 @@ try:
     # read preferences
     location                = settings_json('preferences', 'location')
     exfile_download_method  = settings_json('preferences', 'exfile_download_method')
+    markdown_links          = settings_json('preferences', 'markdown_links')
     download_subtitles      = settings_json('preferences', 'download_subtitles')
     download_exercise_file  = settings_json('preferences', 'download_exercise_file')
     web_browser_for_exfile  = settings_json('preferences', 'web_browser_for_exfile')

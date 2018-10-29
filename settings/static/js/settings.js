@@ -52,6 +52,14 @@ $(document).ready(function(){
         settingsJson.credentials.exfile_download_pref = "regular-login";
     })
 
+    // use markdown links for chapters preferences
+    $('#markdown-links-true').click(function(){
+        settingsJson.preferences.markdown_links = true;
+    })    
+    $('#markdown-links-false').click(function(){
+        settingsJson.preferences.markdown_links = false;
+    })
+
     // download subtitles preferences
     $('#download-subtitles-true').click(function(){
         settingsJson.preferences.download_subtitles = true;
@@ -141,6 +149,12 @@ if(settingsJson.credentials.exfile_download_pref == "regular-login")
     document.getElementById('exfile-regular-login').classList.add("active");
 else
     document.getElementById('exfile-library-login').classList.add("active");
+
+// Read markdown links for chapters state
+if(settingsJson.preferences.markdown_links == true)
+    document.getElementById('markdown-links-true').classList.add("active"); 
+else
+    document.getElementById('markdown-links-false').classList.add("active"); 
 
 // Read subtitles state
 if(settingsJson.preferences.download_subtitles == true)
