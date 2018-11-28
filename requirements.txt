@@ -18,7 +18,6 @@ pylint==1.9.3
 requests==2.18.4
 selenium==3.8.1
 singledispatch==3.4.0.3
-six==1.11.0
 urllib3==1.22
 Werkzeug==0.14.1
 wrapt==1.10.11

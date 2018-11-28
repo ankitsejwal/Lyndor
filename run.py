@@ -3,7 +3,7 @@
 
 ''' Lyndor runs from here - contains the main functions '''
 
-import sys, time, os, six
+import sys, time, os
 import module.message as message
 import module.save as save
 import module.cookies as cookies
@@ -23,7 +23,7 @@ def main():
     message.print_line('\r1. Paste course url or\n' +
     '2. Press enter for Bulk Download')
     
-    url = six.moves.input()
+    url = input()
     
     print('')
     start_time = time.time() #start time counter begins

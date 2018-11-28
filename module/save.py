@@ -9,7 +9,6 @@ import time
 import shutil
 import re
 import install
-import six
 from module import message, cookies, read
 try:
     from bs4 import BeautifulSoup
@@ -83,7 +82,7 @@ def course(url, lynda_folder_path):
                 sys.stdout.write(Fore.LIGHTBLUE_EX + QUESTION + Fore.RESET)
                 while answer != 'y':
                     # get user input
-                    answer = six.moves.input().lower()
+                    answer = input().lower()
 
                     if answer == 'y':
                         shutil.rmtree(current_course)
