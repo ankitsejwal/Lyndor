@@ -22,4 +22,5 @@ def update():
     json.dump(data, settings_file, indent=4)
     return home()
 
-app.run(port=5005, debug=True)
+if __name__ == "__main__":
+    app.run(port=5005)
