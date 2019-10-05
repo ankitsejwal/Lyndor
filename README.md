@@ -122,8 +122,9 @@ Note: **Windows** users can simply double click **install.bat** file to run inst
 ```
  
 ```bash
-#  open terminal/cmd navigate to this folder and run
-$  python settings.py 
+#  open terminal/cmd navigate to Lyndor folder and run
+$  flask run # or
+$  python settings/settings.py 
 
 #  This will run a local Flask web server (terminal output below):
 #  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
