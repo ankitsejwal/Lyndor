@@ -272,11 +272,7 @@ $ brew install aria2
 
 ## Reporting Issues
 
-* Each release of the program is well tested on MacOS, feedback and bug reporting for Windows and Linux operating system is needed and will be greatly appreciated.
-
-## Requesting Features
-
-* New features are being requested constantly, you are encouraged to ask for a new feature by creating a new issue. <img src="https://assets-cdn.github.com/favicon.ico" alt="octocat icon" width="18">
+* This repository is now no more supported. Please don't report any further issues. Thanks.
 
 ## Acknowledgement
 
